@@ -135,7 +135,7 @@ function CalendarPageImage({
           src={src}
           alt={alt}
           fill
-          sizes="(min-width: 960px) 520px, 90vw"
+          sizes="(min-width: 960px) 1040px, 90vw"
           className="calendar-image"
           priority={priority}
         />

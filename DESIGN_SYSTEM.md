@@ -66,6 +66,20 @@ Use **DM Sans** for all text.
 
 Font source: Google Fonts.
 
+### Project Name / Largest Heading
+
+Used for the project title at the top of a case study page, for example:
+
+* Community Gardens Forres
+
+Style:
+
+* Font: DM Sans
+* Size: `64px`
+* Weight: Black / `900`
+* Color: `#000000`
+* Community Gardens Forres project-specific accent color: `#75A723`
+
 ### H1 / Primary Heading
 
 Used for major section titles, for example:
@@ -78,9 +92,10 @@ Used for major section titles, for example:
 Style:
 
 * Font: DM Sans
-* Size: `30px`
+* Size: `40px`
 * Weight: Black / `900`
 * Color: `#000000`
+* Community Gardens Forres project-specific H1 accent color: `#75A723`
 
 ### H2 / Collapsible Section Heading
 
@@ -94,7 +109,7 @@ Used for subsection titles, for example:
 Style:
 
 * Font: DM Sans
-* Size: `20px`
+* Size: `34px`
 * Weight: ExtraBold / `800`
 * Color: `#000000`
 
@@ -105,7 +120,7 @@ Some H2 headings should be collapsible accordion headers.
 Style:
 
 * Font: DM Sans
-* Size: `15px`
+* Size: `30px`
 * Weight: Black / `900`
 * Color: `#000000`
 
@@ -114,8 +129,8 @@ Style:
 Style:
 
 * Font: DM Sans
-* Size: `12px`
-* Weight: Medium / `500`
+* Size: `28px`
+* Weight: Regular / `400`
 * Color: `#000000`
 * Line height should be comfortable and readable
 

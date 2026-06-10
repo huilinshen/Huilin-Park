@@ -201,18 +201,18 @@ a {
 }
 
 .calendar-copy h2 {
-  color: #63a81f;
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 500;
+  color: #75a723;
+  font-size: 40px;
+  font-weight: 900;
   letter-spacing: 0;
-  line-height: 1.05;
+  line-height: 1.1;
 }
 
 .calendar-copy p {
-  color: #202018;
-  font-size: 0.98rem;
-  font-weight: 500;
-  line-height: 1.45;
+  color: #000000;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.35;
 }
 
 .calendar-stage {
@@ -223,7 +223,7 @@ a {
 
 .calendar-flipbook {
   position: relative;
-  width: min(100%, 520px);
+  width: min(100%, 1040px);
   aspect-ratio: 1190 / 1684;
   border: 0;
   background: transparent;
@@ -553,7 +553,7 @@ a {
 
 .calendar-controls {
   display: flex;
-  width: min(100%, 520px);
+  width: min(100%, 1040px);
   align-items: center;
   justify-content: space-between;
   color: #5c5749;

@@ -33,12 +33,8 @@ export default function Home() {
               Playable UIUX portfolio
             </p>
             <h1 className="text-4xl font-medium leading-[1.05] md:text-6xl">
-              Huilin Park grows with every design story.
+              Huilin Park
             </h1>
-            <p className="mt-4 max-w-xs text-base leading-7 text-[#535044] md:text-lg">
-              Click a ride to open a case study. Add your Figma exports and
-              swap each ride with a Blender GLB model when it is ready.
-            </p>
           </div>
 
           <aside className="absolute bottom-5 right-5 z-10 grid w-[min(330px,calc(100%-2.5rem))] gap-2 rounded-lg border border-[#ded2b3] bg-[#fffaf0]/92 p-3 shadow-[0_6px_0_#d7c99f] md:bottom-8 md:right-8">

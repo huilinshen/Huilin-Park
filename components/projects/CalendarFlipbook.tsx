@@ -62,7 +62,7 @@ export function CalendarFlipbook() {
   return (
     <section className="calendar-section" aria-labelledby="calendar-title">
       <div className="calendar-copy">
-        <h2 id="calendar-title">Gardening Calendar</h2>
+        <h2 id="calendar-title">GARDENING CALENDAR</h2>
         <p>
           Calendars related to the Forres community garden.
         </p>
@@ -143,3 +143,4 @@ function CalendarPageImage({
     </div>
   );
 }
+

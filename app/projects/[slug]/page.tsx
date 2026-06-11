@@ -59,59 +59,98 @@ export default async function ProjectPage({
 
         {project.details ? (
           <>
-            <header className="grid gap-10 py-8 md:grid-cols-[0.92fr_1.08fr] md:gap-16 md:py-14">
-              <div className="grid min-h-[360px] content-between gap-8">
+            {isCommunityGardens ? (
+              <header className="grid gap-10 py-8 md:py-14">
                 <div className="grid gap-8">
-                  <h1
-                    className={`max-w-3xl leading-tight ${
-                      isCommunityGardens
-                        ? "text-[48px] font-black text-[#75A723] md:text-[64px]"
-                        : "text-4xl font-medium md:text-6xl"
-                    }`}
-                  >
-                    {project.title} Forres
+                  <h1 className="max-w-5xl text-[48px] font-black leading-tight text-[#75A723] md:text-[64px]">
+                    Community Gardens Forres
                   </h1>
-                  <div
-                    className={`grid gap-5 ${
-                      isCommunityGardens
-                        ? "text-[28px] font-normal leading-normal text-black"
-                        : "text-xl leading-relaxed text-[#202018]"
-                    }`}
-                  >
-                    <p>{project.details.workType}</p>
-                    <p>{project.details.dateRange}</p>
-                  </div>
+                  <dl className="grid gap-y-3 text-[20px] font-normal leading-normal text-neutral-500 md:grid-cols-[90px_auto_1fr] md:gap-x-4">
+                    <dt>Duration</dt>
+                    <dd className="hidden md:block">|</dd>
+                    <dd>Jun-Aug 2024</dd>
+                    <dt>Role</dt>
+                    <dd className="hidden md:block">|</dd>
+                    <dd>Individual Master&apos;s Graduation Project</dd>
+                    <dt>Focus</dt>
+                    <dd className="hidden md:block">|</dd>
+                    <dd>UX Research · Stakeholder Mapping · Community Engagement</dd>
+                  </dl>
                 </div>
 
-                {project.details.stakeholder ? (
-                  <p
-                    className={`max-w-xl italic ${
-                      isCommunityGardens
-                        ? "text-[28px] font-normal leading-normal text-black"
-                        : "text-xl leading-relaxed text-[#202018]"
-                    }`}
-                  >
-                    Stakeholders: {project.details.stakeholder.label}
-                    <br />
-                    <Link href={project.details.stakeholder.url}>
-                      ({project.details.stakeholder.url})
-                    </Link>
+                <section className="grid max-w-7xl gap-2 text-[28px] font-normal leading-normal text-black">
+                  <h2 className="text-[30px] font-black leading-tight text-black">Overview</h2>
+                  <p>
+                    A UX project that helps community gardens attract young volunteers and address long-term funding and
+                    labour challenges.
                   </p>
-                ) : null}
-              </div>
+                </section>
 
-              <div
-                className={`grid content-center gap-6 ${
-                  isCommunityGardens
-                    ? "text-[28px] font-normal leading-normal text-black"
-                    : "text-xl leading-9 text-[#202018]"
-                }`}
-              >
-                {project.details.overview.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            </header>
+                <div className="border-t border-[#75A723]" />
+
+                <section className="grid gap-10 text-[28px] font-normal leading-normal text-black md:grid-cols-3 md:gap-20">
+                  <div className="grid content-start gap-3">
+                    <h2 className="text-[30px] font-black leading-tight text-black">Challenge</h2>
+                    <p>Lack of funding, volunteers, and youth engagement.</p>
+                  </div>
+                  <div className="grid content-start gap-3">
+                    <h2 className="text-[30px] font-black leading-tight text-black">Goal</h2>
+                    <p>Bring more young people into community gardening.</p>
+                  </div>
+                  <div className="grid content-start gap-3">
+                    <h2 className="text-[30px] font-black leading-tight text-black">Impact</h2>
+                    <p>More volunteers, stronger communities, and a more sustainable future.</p>
+                  </div>
+                </section>
+
+                <div className="border-t border-[#75A723]" />
+
+                <section className="grid gap-3 text-[28px] font-normal leading-normal text-black">
+                  <h2 className="text-[30px] font-black leading-tight text-black">Solution</h2>
+                  <div>
+                    <p>
+                      A multi-touchpoint experience designed to make gardening more accessible and engaging for young
+                      people:
+                    </p>
+                    <ul className="mt-2 list-disc pl-8">
+                      <li>Home Gardening Toolkit</li>
+                      <li>Redesigned Community Signage</li>
+                      <li>AR Gardening Experience</li>
+                    </ul>
+                  </div>
+                </section>
+              </header>
+            ) : (
+              <header className="grid gap-10 py-8 md:grid-cols-[0.92fr_1.08fr] md:gap-16 md:py-14">
+                <div className="grid min-h-[360px] content-between gap-8">
+                  <div className="grid gap-8">
+                    <h1 className="max-w-3xl text-4xl font-medium leading-tight md:text-6xl">
+                      {project.title} Forres
+                    </h1>
+                    <div className="grid gap-5 text-xl leading-relaxed text-[#202018]">
+                      <p>{project.details.workType}</p>
+                      <p>{project.details.dateRange}</p>
+                    </div>
+                  </div>
+
+                  {project.details.stakeholder ? (
+                    <p className="max-w-xl text-xl italic leading-relaxed text-[#202018]">
+                      Stakeholders: {project.details.stakeholder.label}
+                      <br />
+                      <Link href={project.details.stakeholder.url}>
+                        ({project.details.stakeholder.url})
+                      </Link>
+                    </p>
+                  ) : null}
+                </div>
+
+                <div className="grid content-center gap-6 text-xl leading-9 text-[#202018]">
+                  {project.details.overview.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </header>
+            )}
 
             <section className="overflow-hidden rounded-lg border border-[#e3d6b5] bg-white shadow-[0_6px_0_#eadfca]">
               <Image
@@ -154,7 +193,7 @@ export default async function ProjectPage({
                     <div className="grid gap-8 pb-10 pt-10 md:-mt-8 md:grid-cols-[1fr_auto] md:items-start">
                       <div className="grid gap-5">
                         <div className="grid gap-4 pt-12">
-                          <h2 className="text-[40px] font-black leading-tight text-[#75A723]">Community Garden Map</h2>
+                          <h2 className="text-[40px] font-black leading-tight text-[#75A723]">COMMUNITY GARDEN MAP</h2>
                           <div className="grid gap-2">
                             <h3 className="text-[30px] font-black leading-tight text-black">A Map</h3>
                             <p className="max-w-5xl text-[28px] font-normal leading-normal text-black">
@@ -222,6 +261,62 @@ export default async function ProjectPage({
                           />
                         </div>
                       </section>
+                    </div>
+                    <section className="grid gap-5 pt-16" aria-labelledby="ar-gardening-market-title">
+                      <div className="grid gap-2">
+                        <h2
+                          id="ar-gardening-market-title"
+                          className="text-[40px] font-black uppercase leading-tight text-[#75A723]"
+                        >
+                          AR Gardening Market
+                        </h2>
+                        <p className="text-[28px] font-normal leading-normal text-black">
+                          <strong className="font-black">Youtube link:</strong>{" "}
+                          <em>https://youtu.be/mA_cTKQcZcg</em>
+                        </p>
+                      </div>
+                      <Image
+                        src="/projects/community-gardens/outputs/ar-gardening-market.png"
+                        alt="AR gardening market poster and augmented garden scene collage"
+                        width={1614}
+                        height={898}
+                        className="h-auto w-full"
+                      />
+                      <div className="grid gap-x-12 gap-y-2 text-[28px] font-normal leading-normal text-black md:w-fit md:grid-cols-2">
+                        <div className="grid gap-2">
+                          <p>☀️ Saturday, June 7th 2025</p>
+                          <p>⏰ 10:00 AM - 1:00 PM</p>
+                        </div>
+                        <div className="grid gap-2">
+                          <p>📍 Grant Park, Forres</p>
+                          <p>💰 FREE to everyone</p>
+                        </div>
+                      </div>
+                    </section>
+                    <section className="grid gap-5 pt-16" aria-labelledby="storyboard-title">
+                      <h2
+                        id="storyboard-title"
+                        className="text-[40px] font-black uppercase leading-tight text-[#75A723]"
+                      >
+                        Storyboard
+                      </h2>
+                      <Image
+                        src="/projects/community-gardens/outputs/storyboard.png"
+                        alt="Storyboard showing the community garden journey from scanning QR codes to joining the market"
+                        width={1638}
+                        height={1028}
+                        className="h-auto w-full"
+                      />
+                    </section>
+                    <div
+                      className="grid grid-cols-[1fr_auto_1fr] items-center gap-10 py-16 text-[#75A723]"
+                      aria-label="Research and design process divider"
+                    >
+                      <span className="border-t-2 border-dashed border-[#75A723]" />
+                      <p className="text-center text-[28px] font-normal leading-normal">
+                        Research &amp; Design Process
+                      </p>
+                      <span className="border-t-2 border-dashed border-[#75A723]" />
                     </div>
                   </div>
                 </section>
@@ -310,3 +405,4 @@ export default async function ProjectPage({
     </main>
   );
 }
+

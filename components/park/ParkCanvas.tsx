@@ -4,7 +4,11 @@ import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { ParkScene } from "@/components/park/ParkScene";
 
-export function ParkCanvas() {
+export function ParkCanvas({
+  onHoverDestination,
+}: {
+  onHoverDestination?: (title: string | null) => void;
+}) {
   return (
     <Canvas
       camera={{ position: [4.8, 4.2, 6.2], fov: 42 }}
@@ -22,7 +26,7 @@ export function ParkCanvas() {
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
       />
-      <ParkScene />
+      <ParkScene onHoverDestination={onHoverDestination} />
       <Environment preset="city" />
       <OrbitControls
         enablePan={false}

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import type { Group } from "three";
 import type { ParkDestination } from "@/data/projects";
@@ -109,19 +108,6 @@ export function IceCreamTruck({
       <Wheel x={-0.42} />
       <Wheel x={0.43} />
       <IceCream hovered={hovered} />
-
-      <Text
-        color="#202018"
-        fontSize={0.12}
-        fontWeight={500}
-        maxWidth={0.62}
-        textAlign="center"
-        anchorX="center"
-        anchorY="middle"
-        position={[0.02, 0.31, -0.435]}
-      >
-        ABOUT
-      </Text>
     </group>
   );
 }

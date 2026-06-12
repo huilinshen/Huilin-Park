@@ -34,7 +34,11 @@ function Path() {
   );
 }
 
-export function ParkScene() {
+export function ParkScene({
+  onHoverDestination,
+}: {
+  onHoverDestination?: (title: string | null) => void;
+}) {
   return (
     <group>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]}>
@@ -44,7 +48,7 @@ export function ParkScene() {
       <Path />
 
       {parkDestinations.map((destination) => (
-        <Booth key={destination.id} destination={destination} />
+        <Booth key={destination.id} destination={destination} onHoverDestination={onHoverDestination} />
       ))}
 
       <Tree position={[-3.15, 0, -1.5]} />

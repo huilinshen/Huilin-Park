@@ -45,12 +45,22 @@ export default async function ProjectPage({
   }
 
   const isCommunityGardens = project.slug === "community-gardens";
+  const communityProjectTitleClass =
+    "max-w-5xl text-[38px] font-black leading-tight text-[#75A723] md:text-[52px] xl:text-[64px]";
+  const communityBodyClass =
+    "text-[18px] font-normal leading-relaxed text-black md:text-[22px] xl:text-[28px]";
+  const communityMetaClass =
+    "text-[16px] font-normal leading-relaxed text-neutral-500 md:text-[18px] xl:text-[20px]";
+  const communityH1Class =
+    "text-[28px] font-black uppercase leading-tight text-[#75A723] md:text-[34px] xl:text-[40px]";
+  const communityH3Class =
+    "text-[22px] font-black leading-tight text-black md:text-[26px] xl:text-[30px]";
 
   return (
     <main className={`min-h-screen ${isCommunityGardens ? "bg-white text-black" : "bg-[#fffaf0] text-[#202018]"}`}>
       <article
-        className={`mx-auto grid gap-12 px-5 py-8 md:py-12 ${
-          isCommunityGardens ? "max-w-[calc(100vw-4rem)] md:px-8" : "max-w-6xl md:px-8"
+        className={`mx-auto grid w-full gap-12 px-5 py-8 md:px-8 md:py-12 lg:px-10 xl:px-12 ${
+          isCommunityGardens ? "max-w-[1440px]" : "max-w-6xl"
         }`}
       >
         <Link className="inline-flex w-fit items-center gap-2 font-medium text-[#5c5749]" href="/">
@@ -62,10 +72,10 @@ export default async function ProjectPage({
             {isCommunityGardens ? (
               <header className="grid gap-10 py-8 md:py-14">
                 <div className="grid gap-8">
-                  <h1 className="max-w-5xl text-[48px] font-black leading-tight text-[#75A723] md:text-[64px]">
+                  <h1 className={communityProjectTitleClass}>
                     Community Gardens Forres
                   </h1>
-                  <dl className="grid gap-y-3 text-[20px] font-normal leading-normal text-neutral-500 md:grid-cols-[90px_auto_1fr] md:gap-x-4">
+                  <dl className={`grid gap-y-3 md:grid-cols-[90px_auto_1fr] md:gap-x-4 ${communityMetaClass}`}>
                     <dt>Duration</dt>
                     <dd className="hidden md:block">|</dd>
                     <dd>Jun-Aug 2024</dd>
@@ -78,8 +88,8 @@ export default async function ProjectPage({
                   </dl>
                 </div>
 
-                <section className="grid max-w-7xl gap-2 text-[28px] font-normal leading-normal text-black">
-                  <h2 className="text-[30px] font-black leading-tight text-black">Overview</h2>
+                <section className={`grid max-w-5xl gap-2 ${communityBodyClass}`}>
+                  <h2 className={communityH3Class}>Overview</h2>
                   <p>
                     A UX project that helps community gardens attract young volunteers and address long-term funding and
                     labour challenges.
@@ -88,25 +98,25 @@ export default async function ProjectPage({
 
                 <div className="border-t border-[#75A723]" />
 
-                <section className="grid gap-10 text-[28px] font-normal leading-normal text-black md:grid-cols-3 md:gap-20">
+                <section className={`grid gap-10 md:grid-cols-3 md:gap-20 ${communityBodyClass}`}>
                   <div className="grid content-start gap-3">
-                    <h2 className="text-[30px] font-black leading-tight text-black">Challenge</h2>
+                    <h2 className={communityH3Class}>Challenge</h2>
                     <p>Lack of funding, volunteers, and youth engagement.</p>
                   </div>
                   <div className="grid content-start gap-3">
-                    <h2 className="text-[30px] font-black leading-tight text-black">Goal</h2>
+                    <h2 className={communityH3Class}>Goal</h2>
                     <p>Bring more young people into community gardening.</p>
                   </div>
                   <div className="grid content-start gap-3">
-                    <h2 className="text-[30px] font-black leading-tight text-black">Impact</h2>
+                    <h2 className={communityH3Class}>Impact</h2>
                     <p>More volunteers, stronger communities, and a more sustainable future.</p>
                   </div>
                 </section>
 
                 <div className="border-t border-[#75A723]" />
 
-                <section className="grid gap-3 text-[28px] font-normal leading-normal text-black">
-                  <h2 className="text-[30px] font-black leading-tight text-black">Solution</h2>
+                <section className={`grid gap-3 ${communityBodyClass}`}>
+                  <h2 className={communityH3Class}>Solution</h2>
                   <div>
                     <p>
                       A multi-touchpoint experience designed to make gardening more accessible and engaging for young
@@ -176,7 +186,7 @@ export default async function ProjectPage({
                       height={1190}
                       className="h-auto w-full"
                     />
-                    <p className="text-left text-[28px] font-normal leading-normal text-black">Map Front</p>
+                    <p className={`text-left ${communityBodyClass}`}>Map Front</p>
                     <Image
                       src="/projects/community-gardens/outputs/map-back.png"
                       alt="Community garden map back"
@@ -185,18 +195,18 @@ export default async function ProjectPage({
                       className="mt-8 h-auto w-full"
                     />
                     <div className="grid gap-2 pt-3 md:grid-cols-3">
-                      <p className="text-left text-[28px] font-normal leading-normal text-black">Map Back</p>
-                      <p className="text-left text-[28px] font-normal leading-normal text-black">
+                      <p className={`text-left ${communityBodyClass}`}>Map Back</p>
+                      <p className={`text-left ${communityBodyClass}`}>
                         8-panel fold, pocket-sized when folded
                       </p>
                     </div>
                     <div className="grid gap-8 pb-10 pt-10 md:-mt-8 md:grid-cols-[1fr_auto] md:items-start">
                       <div className="grid gap-5">
                         <div className="grid gap-4 pt-12">
-                          <h2 className="text-[40px] font-black leading-tight text-[#75A723]">COMMUNITY GARDEN MAP</h2>
+                          <h2 className={communityH1Class}>COMMUNITY GARDEN MAP</h2>
                           <div className="grid gap-2">
-                            <h3 className="text-[30px] font-black leading-tight text-black">A Map</h3>
-                            <p className="max-w-5xl text-[28px] font-normal leading-normal text-black">
+                            <h3 className={communityH3Class}>A Map</h3>
+                            <p className={`max-w-5xl ${communityBodyClass}`}>
                               on the theme of Forres community garden, which shows the general location and gives the
                               contact information of the community garden.
                             </p>
@@ -208,7 +218,7 @@ export default async function ProjectPage({
                         alt="Folded physical community garden map"
                         width={521}
                         height={463}
-                        className="h-auto w-full justify-self-end md:w-[34vw] md:max-w-[760px] md:min-w-[560px]"
+                        className="h-auto w-full justify-self-end md:w-[34vw] md:min-w-[420px] md:max-w-[560px] xl:max-w-[640px]"
                       />
                     </div>
                     <div className="grid gap-14 pt-10 md:grid-cols-2 md:gap-x-12 md:gap-y-10">
@@ -223,10 +233,10 @@ export default async function ProjectPage({
                           />
                         </div>
                         <div className="grid gap-4">
-                          <h2 className="text-[40px] font-black uppercase leading-tight text-[#75A723]">
+                          <h2 className={communityH1Class}>
                             Street Signs
                           </h2>
-                          <div className="grid max-w-3xl gap-6 text-[28px] font-normal leading-normal text-black">
+                          <div className={`grid max-w-3xl gap-6 ${communityBodyClass}`}>
                             <p>
                               let passers-by to learn about the plant and information about related community gardens
                             </p>
@@ -247,8 +257,8 @@ export default async function ProjectPage({
                         </div>
                         <div className="grid gap-8 md:grid-cols-[0.9fr_1fr] md:items-start">
                           <div className="grid gap-4">
-                            <h2 className="text-[40px] font-black uppercase leading-tight text-[#75A723]">Seed Bags</h2>
-                            <p className="max-w-2xl text-[28px] font-normal leading-normal text-black">
+                            <h2 className={communityH1Class}>Seed Bags</h2>
+                            <p className={`max-w-2xl ${communityBodyClass}`}>
                               Scan the QR code on the back to learn the growing instructions for that plant.
                             </p>
                           </div>
@@ -266,11 +276,11 @@ export default async function ProjectPage({
                       <div className="grid gap-2">
                         <h2
                           id="ar-gardening-market-title"
-                          className="text-[40px] font-black uppercase leading-tight text-[#75A723]"
+                          className={communityH1Class}
                         >
                           AR Gardening Market
                         </h2>
-                        <p className="text-[28px] font-normal leading-normal text-black">
+                        <p className={communityBodyClass}>
                           <strong className="font-black">Youtube link:</strong>{" "}
                           <em>https://youtu.be/mA_cTKQcZcg</em>
                         </p>
@@ -282,7 +292,7 @@ export default async function ProjectPage({
                         height={898}
                         className="h-auto w-full"
                       />
-                      <div className="grid gap-x-12 gap-y-2 text-[28px] font-normal leading-normal text-black md:w-fit md:grid-cols-2">
+                      <div className={`grid gap-x-12 gap-y-2 md:w-fit md:grid-cols-2 ${communityBodyClass}`}>
                         <div className="grid gap-2">
                           <p>☀️ Saturday, June 7th 2025</p>
                           <p>⏰ 10:00 AM - 1:00 PM</p>
@@ -296,7 +306,7 @@ export default async function ProjectPage({
                     <section className="grid gap-5 pt-16" aria-labelledby="storyboard-title">
                       <h2
                         id="storyboard-title"
-                        className="text-[40px] font-black uppercase leading-tight text-[#75A723]"
+                        className={communityH1Class}
                       >
                         Storyboard
                       </h2>
@@ -313,7 +323,7 @@ export default async function ProjectPage({
                       aria-label="Research and design process divider"
                     >
                       <span className="border-t-2 border-dashed border-[#75A723]" />
-                      <p className="text-center text-[28px] font-normal leading-normal">
+                      <p className="text-center text-[18px] font-normal leading-relaxed md:text-[22px] xl:text-[28px]">
                         Research &amp; Design Process
                       </p>
                       <span className="border-t-2 border-dashed border-[#75A723]" />

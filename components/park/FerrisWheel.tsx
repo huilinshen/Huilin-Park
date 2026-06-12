@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useRef } from "react";
-import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import type { Group } from "three";
 import type { ParkDestination } from "@/data/projects";
@@ -97,19 +96,6 @@ export function FerrisWheel({ destination }: { destination: ParkDestination }) {
           <meshStandardMaterial color={destination.accent} roughness={0.5} />
         </mesh>
       </group>
-
-      <Text
-        color="#33291f"
-        fontSize={0.12}
-        fontWeight={500}
-        maxWidth={0.88}
-        textAlign="center"
-        anchorX="center"
-        anchorY="middle"
-        position={[0, 0.25, -0.47]}
-      >
-        GENERATIVE UI
-      </Text>
     </group>
   );
 }

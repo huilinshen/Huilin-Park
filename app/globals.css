@@ -180,16 +180,18 @@ a {
 
 .calendar-section {
   display: grid;
-  min-height: 720px;
+  min-height: auto;
   gap: 2.5rem;
   align-items: center;
   border-top: 1px solid #e3d6b5;
-  padding: 4rem 0;
+  padding: 3rem 0;
 }
 
 @media (min-width: 960px) {
   .calendar-section {
     grid-template-columns: 0.43fr 0.57fr;
+    min-height: 720px;
+    padding: 4rem 0;
   }
 }
 
@@ -202,7 +204,7 @@ a {
 
 .calendar-copy h2 {
   color: #75a723;
-  font-size: 40px;
+  font-size: clamp(1.75rem, 2.4vw, 2.5rem);
   font-weight: 900;
   letter-spacing: 0;
   line-height: 1.1;
@@ -210,7 +212,7 @@ a {
 
 .calendar-copy p {
   color: #000000;
-  font-size: 28px;
+  font-size: clamp(1.125rem, 1.55vw, 1.75rem);
   font-weight: 400;
   line-height: 1.35;
 }
@@ -224,6 +226,7 @@ a {
 .calendar-flipbook {
   position: relative;
   width: min(100%, 1040px);
+  max-width: 100%;
   aspect-ratio: 1190 / 1684;
   border: 0;
   background: transparent;
@@ -554,6 +557,7 @@ a {
 .calendar-controls {
   display: flex;
   width: min(100%, 1040px);
+  max-width: 100%;
   align-items: center;
   justify-content: space-between;
   color: #5c5749;

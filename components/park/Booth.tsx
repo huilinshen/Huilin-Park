@@ -2,34 +2,54 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Text, useCursor } from "@react-three/drei";
+import { Billboard, Text, useCursor } from "@react-three/drei";
 import type { ParkDestination } from "@/data/projects";
 import { DestinationModel } from "@/components/park/DestinationModel";
 import { FerrisWheel } from "@/components/park/FerrisWheel";
 import { IceCreamTruck } from "@/components/park/IceCreamTruck";
 import { TulipRide } from "@/components/park/TulipRide";
 
-export function Booth({ destination }: { destination: ParkDestination }) {
+function getHomepageHoverTitle(destination: ParkDestination) {
+  if (destination.landmark === "ferris-wheel") {
+    return "Huawei Generative Watch Face";
+  }
+
+  if (destination.landmark === "tulip") {
+    return "Community Garden Forres";
+  }
+
+  if (destination.landmark === "ice-cream-truck") {
+    return "About Me";
+  }
+
+  if (destination.id === "project-03") {
+    return "IFS";
+  }
+
+  return destination.title;
+}
+
+export function Booth({
+  destination,
+  onHoverDestination,
+}: {
+  destination: ParkDestination;
+  onHoverDestination?: (title: string | null) => void;
+}) {
   const router = useRouter();
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
   const isFerrisWheel = destination.landmark === "ferris-wheel";
   const isTulip = destination.landmark === "tulip";
   const isIceCreamTruck = destination.landmark === "ice-cream-truck";
-  const labelPosition: [number, number, number] = isFerrisWheel
-    ? [0, 1.66, -0.105]
-    : isTulip
-      ? [0, 1.2, -0.105]
-      : isIceCreamTruck
-        ? [0, 1.05, -0.105]
-        : [0, 0.88, -0.105];
+  const hoverTitle = getHomepageHoverTitle(destination);
   const hoverLabelPosition: [number, number, number] = isFerrisWheel
-    ? [0, 1.92, 0]
+    ? [0, 2.35, 0]
     : isTulip
-      ? [0, 1.5, 0]
+      ? [0, 1.9, 0]
       : isIceCreamTruck
-        ? [0, 1.42, 0]
-        : [0, 1.28, 0];
+        ? [0, 1.55, 0]
+        : [0, 1.45, 0];
 
   const openDestination = () => {
     if (destination.href.startsWith("mailto:")) {
@@ -47,8 +67,12 @@ export function Booth({ destination }: { destination: ParkDestination }) {
         onPointerEnter={(event) => {
           event.stopPropagation();
           setHovered(true);
+          onHoverDestination?.(hoverTitle);
         }}
-        onPointerLeave={() => setHovered(false)}
+        onPointerLeave={() => {
+          setHovered(false);
+          onHoverDestination?.(null);
+        }}
         scale={hovered ? 1.06 : 1}
       >
         {destination.modelPath ? (
@@ -79,31 +103,22 @@ export function Booth({ destination }: { destination: ParkDestination }) {
         )}
       </group>
 
-      <Text
-        color="#33291f"
-        fontSize={0.14}
-        fontWeight={800}
-        maxWidth={0.82}
-        textAlign="center"
-        anchorX="center"
-        anchorY="middle"
-        position={labelPosition}
-      >
-        {destination.label}
-      </Text>
-
       {hovered ? (
-        <Text
-          color="#33291f"
-          fontSize={0.11}
-          maxWidth={1.4}
-          textAlign="center"
-          anchorX="center"
-          anchorY="middle"
-          position={hoverLabelPosition}
-        >
-          {destination.title}
-        </Text>
+        <Billboard position={hoverLabelPosition}>
+          <Text
+            color="#202018"
+            fontSize={0.14}
+            fontWeight={800}
+            maxWidth={2.15}
+            outlineColor="#fffaf0"
+            outlineWidth={0.012}
+            textAlign="center"
+            anchorX="center"
+            anchorY="middle"
+          >
+            {hoverTitle}
+          </Text>
+        </Billboard>
       ) : null}
     </group>
   );

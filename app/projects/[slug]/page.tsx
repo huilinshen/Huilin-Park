@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 import { ArrowLeft, ExternalLink, Sparkles } from "lucide-react";
 import { getProjectBySlug, projects } from "@/data/projects";
 import { CalendarFlipbook } from "@/components/projects/CalendarFlipbook";
+import { CaseStudySubAccordion } from "@/components/projects/CaseStudySubAccordion";
+import { ResearchProcessAccordion } from "@/components/projects/ResearchProcessAccordion";
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -318,16 +320,6 @@ export default async function ProjectPage({
                         className="h-auto w-full"
                       />
                     </section>
-                    <div
-                      className="grid grid-cols-[1fr_auto_1fr] items-center gap-10 py-16 text-[#75A723]"
-                      aria-label="Research and design process divider"
-                    >
-                      <span className="border-t-2 border-dashed border-[#75A723]" />
-                      <p className="text-center text-[18px] font-normal leading-relaxed md:text-[22px] xl:text-[28px]">
-                        Research &amp; Design Process
-                      </p>
-                      <span className="border-t-2 border-dashed border-[#75A723]" />
-                    </div>
                   </div>
                 </section>
               </>
@@ -394,19 +386,205 @@ export default async function ProjectPage({
           </>
         )}
 
-        <section className="grid gap-5">
-          {project.sections.map((section) => (
-            <section
-              key={section.title}
-              className="grid gap-4 rounded-lg border border-[#e3d6b5] bg-white p-5 shadow-[0_4px_0_#eadfca] md:grid-cols-[0.34fr_1fr] md:p-7"
-            >
-              <h2 className="text-2xl font-medium">{section.title}</h2>
-              <p className="leading-8 text-[#5c5749]">
-                {section.body}
-              </p>
-            </section>
-          ))}
-        </section>
+        {isCommunityGardens ? (
+          <ResearchProcessAccordion>
+            <div className="grid gap-16">
+              <section className="w-full bg-white" aria-label="Research overview">
+                <Image
+                  src="/projects/community-gardens/outputs/research-bg.png?v=2"
+                  alt="Community garden research overview for Forres Friends of Woods and Fields"
+                  width={1684}
+                  height={1152}
+                  sizes="(min-width: 1440px) 1440px, 100vw"
+                  unoptimized
+                  className="h-auto w-full"
+                />
+              </section>
+
+              <CaseStudySubAccordion title="Stage1 Desk Research">
+                <section
+                  className="grid gap-16 bg-white text-[14px] font-normal leading-normal text-black md:text-[16px] xl:text-[18px]"
+                  aria-label="Stage 1 desk research"
+                >
+                  <section className="grid max-w-5xl gap-5">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      About Forres
+                    </h3>
+                    <div className="grid gap-5">
+                      <p>
+                        Forres is a small town in northeastern Scotland, near the coast of the Moray Firth, known for
+                        its beautiful scenery and nicknamed the &quot;flower of Scotland&quot;.
+                      </p>
+                      <p>
+                        It has won a number of awards for its proliferation of floral displays, including Scotland in
+                        Bloom and Keep Scotland Beautiful, not to mention the Queen&apos;s Award for Voluntary Service for
+                        the teams who plant some 20,000 flowers each year. (Thackray, 2024)
+                      </p>
+                      <div className="grid gap-2">
+                        <p>Meanwhile, Forres has a number of community gardens</p>
+                        <ul className="list-disc pl-6">
+                          <li>Forres in Bloom</li>
+                          <li>Forres Friends of Woods and Fields</li>
+                          <li>Transition Town Forres</li>
+                          <li>Forres Community Garden and Allotments</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="grid gap-5">
+                    <div className="grid gap-3">
+                      <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                        Field Research
+                      </h3>
+                      <p>These are all gardening and growing I found in Forres</p>
+                    </div>
+                    <Image
+                      src="/projects/community-gardens/outputs/field-research.png?v=1"
+                      alt="Field research strip showing gardens and floral displays in Forres"
+                      width={1558}
+                      height={168}
+                      sizes="(min-width: 1440px) 1440px, 100vw"
+                      unoptimized
+                      className="h-auto w-full"
+                    />
+                    <div className="grid gap-6 md:grid-cols-5 md:gap-5">
+                      <p>
+                        <strong>Community Gardens</strong>
+                        <br />
+                        Forres Friends &amp; Transition Town Forres
+                      </p>
+                      <p>
+                        <strong>Grant Park</strong>
+                        <br />
+                        peacock, ladybird or butterfly-shaped creations
+                      </p>
+                      <p>
+                        <strong>High Street</strong>
+                        <br />
+                        hanging baskets decorating &amp; flowers beds
+                      </p>
+                      <p>
+                        <strong>Roadside</strong>
+                        <br />
+                        flowers beds
+                      </p>
+                      <p>
+                        <strong>Residents&apos; Gardens</strong>
+                        <br />
+                        Magnolia &amp; Apple Trees
+                      </p>
+                    </div>
+                  </section>
+
+                  <section className="grid gap-3">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Gardening Trends
+                    </h3>
+                    <p>
+                      Through the desktop research, I learnt that gardening has been used as a form of healing and a
+                      way to <strong>socialise</strong>, especially after the epidemic, the need for mental health and
+                      socialising is stronger, and <strong>more and more people</strong> are into and starting to learn
+                      to garden.
+                    </p>
+                    <ul className="grid gap-6 pt-3">
+                      <li className="grid gap-1">
+                        <p className="font-black">
+                          Gardens functioned as therapeutic landscapes during and after COVID-19
+                        </p>
+                        <p>
+                        Gardens have long been considered as refuges into which we retreat to{" "}
+                        <strong>escape various struggles and challenges.</strong> There is positive potential for
+                        therapeutic garden landscapes beyond COVID-19. (Marsh et al, 2021)
+                        </p>
+                      </li>
+                      <li className="grid gap-1">
+                        <p className="font-black">
+                          High levels of knowledge and interest in gardening among young people in the UK
+                        </p>
+                        <p>
+                        As a hobby, gardening is seen positively. <strong>72%</strong> of millennials have already
+                        helped with gardening, <strong>79%</strong> have grown a plant and 75% enjoy growing plants.
+                        (Evelegh, 2016)
+                        </p>
+                      </li>
+                      <li className="grid gap-1">
+                        <p className="font-black">
+                          Global trends in the growth of consumer demand for organic food
+                        </p>
+                        <p>
+                        A gradual, yet, extensive growth has been witnessed worldwide in{" "}
+                        <strong>demand for organic food</strong> (Sultan et al, 2020) with global sales posited to have
+                        crossed USD <strong>90 billion</strong> in the past twenty years. (Willer et al, 2020)
+                        </p>
+                      </li>
+                    </ul>
+                  </section>
+                </section>
+              </CaseStudySubAccordion>
+
+              <CaseStudySubAccordion title="Stage2 Interview with Stakeholder" defaultOpen>
+                <section
+                  className="grid gap-8 bg-white text-[14px] font-normal leading-normal text-black md:text-[16px] xl:text-[18px]"
+                  aria-label="Stage 2 interview with stakeholder"
+                >
+                  <Image
+                    src="/projects/community-gardens/outputs/forres-friends-introduction.png?v=1"
+                    alt="Forres Friends of Woods and Fields introduction over a site boundary map"
+                    width={1684}
+                    height={1214}
+                    sizes="(min-width: 1440px) 1440px, 100vw"
+                    unoptimized
+                    className="h-auto w-full"
+                  />
+
+                  <p className="max-w-5xl">
+                    After contacting Nick, the founder of Forres Friend, by email, I went to Forres Friend on 15 June
+                    for a 40-minute interview and participated in a 3-hour gardening session on the same day.
+                  </p>
+
+                  <div className="grid gap-8 lg:grid-cols-[1.55fr_0.75fr] lg:items-start">
+                    <Image
+                      src="/projects/community-gardens/outputs/participatory-observation.png?v=1"
+                      alt="Participatory observation collage showing weekly gardening events and open day festival"
+                      width={1230}
+                      height={692}
+                      sizes="(min-width: 1024px) 65vw, 100vw"
+                      unoptimized
+                      className="h-auto w-full"
+                    />
+                    <div className="grid gap-5">
+                      <p>
+                        Every Wednesday and every other Saturday, Forres Friends of Woods and Fields is hosting an event
+                        at Sanquhar Woods &amp; Chapleton Fields from 10am to 1pm with founder Nick organising and
+                        guiding volunteers in organic gardening.
+                      </p>
+                      <p>
+                        In addition to the weekly gardening events, Forres Friends has organised an Open Day Festival to
+                        celebrate a beautiful year and abundance of harvest for two years in a row. Around 250 people
+                        attended an open day focused on the work of a local environmental charity in 2023.
+                      </p>
+                    </div>
+                  </div>
+                </section>
+              </CaseStudySubAccordion>
+            </div>
+          </ResearchProcessAccordion>
+        ) : (
+          <section className="grid gap-5">
+            {project.sections.map((section) => (
+              <section
+                key={section.title}
+                className="grid gap-4 rounded-lg border border-[#e3d6b5] bg-white p-5 shadow-[0_4px_0_#eadfca] md:grid-cols-[0.34fr_1fr] md:p-7"
+              >
+                <h2 className="text-2xl font-medium">{section.title}</h2>
+                <p className="leading-8 text-[#5c5749]">
+                  {section.body}
+                </p>
+              </section>
+            ))}
+          </section>
+        )}
 
         <Link className="inline-flex w-fit items-center gap-2 rounded-full bg-[#202018] px-5 py-3 font-medium text-white" href="/">
           Open the 3D park <ExternalLink size={18} />

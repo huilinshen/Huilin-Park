@@ -525,47 +525,995 @@ export default async function ProjectPage({
 
               <CaseStudySubAccordion title="Stage2 Interview with Stakeholder" defaultOpen>
                 <section
-                  className="grid gap-8 bg-white text-[14px] font-normal leading-normal text-black md:text-[16px] xl:text-[18px]"
+                  className="grid gap-16 bg-white text-[14px] font-normal leading-normal text-black md:text-[16px] xl:text-[18px]"
                   aria-label="Stage 2 interview with stakeholder"
                 >
+                  <section className="grid gap-8">
+                    <Image
+                      src="/projects/community-gardens/outputs/forres-friends-introduction.png?v=1"
+                      alt="Forres Friends of Woods and Fields introduction over a site boundary map"
+                      width={1684}
+                      height={1214}
+                      sizes="(min-width: 1440px) 1440px, 100vw"
+                      unoptimized
+                      className="h-auto w-full"
+                    />
+
+                    <p className="max-w-5xl">
+                      After contacting Nick, the founder of Forres Friend, by email, I went to Forres Friend on 15 June
+                      for a 40-minute interview and participated in a 3-hour gardening session on the same day.
+                    </p>
+
+                    <div className="grid gap-8 lg:grid-cols-[1.55fr_0.75fr] lg:items-start">
+                      <Image
+                        src="/projects/community-gardens/outputs/participatory-observation.png?v=1"
+                        alt="Participatory observation collage showing weekly gardening events and open day festival"
+                        width={1230}
+                        height={692}
+                        sizes="(min-width: 1024px) 65vw, 100vw"
+                        unoptimized
+                        className="h-auto w-full"
+                      />
+                      <div className="grid gap-5">
+                        <p>
+                          Every Wednesday and every other Saturday, Forres Friends of Woods and Fields is hosting an
+                          event at Sanquhar Woods &amp; Chapleton Fields from 10am to 1pm with founder Nick organising
+                          and guiding volunteers in organic gardening.
+                        </p>
+                        <p>
+                          In addition to the weekly gardening events, Forres Friends has organised an Open Day Festival
+                          to celebrate a beautiful year and abundance of harvest for two years in a row. Around 250
+                          people attended an open day focused on the work of a local environmental charity in 2023.
+                        </p>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="grid gap-5">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Participatory Observation
+                    </h3>
+                    <Image
+                      src="/projects/community-gardens/outputs/participatory-observation-storyboard.png?v=1"
+                      alt="Participatory observation storyboard mapping time, pains, gains and mood during a gardening session"
+                      width={1614}
+                      height={1037}
+                      sizes="(min-width: 1440px) 1440px, 100vw"
+                      unoptimized
+                      className="h-auto w-full"
+                    />
+                  </section>
+
+                  <section className="grid gap-5">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Findings
+                    </h3>
+                    <div className="grid gap-5">
+                      <div className="grid gap-2">
+                        <p className="font-black">
+                          1. People are increasingly disconnected from the land and its environmental challenges.
+                        </p>
+                        <div className="grid gap-1 border-l-4 border-neutral-300 pl-3 text-neutral-500">
+                          <p>&apos;It&apos;s not just saying farmers must do this, it&apos;s also the public.&apos;</p>
+                          <p>
+                            &apos;She didn&apos;t know that&apos;s where peas came from. They come from a supermarket in a
+                            bag that&apos;s frozen.&apos;
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grid gap-2">
+                        <p className="font-black">2. Organic food is costly, but growers are not fairly rewarded.</p>
+                        <div className="border-l-4 border-neutral-300 pl-3 text-neutral-500">
+                          <p>
+                            &apos;There are organic producers, but they find it difficult because they have to charge a
+                            higher price.&apos;
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grid gap-2">
+                        <p className="font-black">
+                          3. Limited publicity and poor location visibility make the organisation difficult for
+                          newcomers to discover and access.
+                        </p>
+                        <div className="border-l-4 border-neutral-300 pl-3 text-neutral-500">
+                          <p>&apos;Would like to have more young people join in&apos;</p>
+                        </div>
+                      </div>
+
+                      <div className="grid gap-2">
+                        <p className="font-black">
+                          4. Volunteers share not only their harvests, but also their lives.
+                        </p>
+                        <div className="border-l-4 border-neutral-300 pl-3 text-neutral-500">
+                          <p>&apos;Try the cheese I brought back from Poland last month.&apos;</p>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </section>
+              </CaseStudySubAccordion>
+
+              <CaseStudySubAccordion title="Stage3 Participatory Workshop">
+                <section
+                  className="grid gap-16 bg-white text-[14px] font-normal leading-normal text-black md:text-[16px] xl:text-[18px]"
+                  aria-label="Stage 3 participatory workshop"
+                >
                   <Image
-                    src="/projects/community-gardens/outputs/forres-friends-introduction.png?v=1"
-                    alt="Forres Friends of Woods and Fields introduction over a site boundary map"
+                    src="/projects/community-gardens/outputs/participatory-workshop-bg.png?v=1"
+                    alt="Participatory workshop overview with workshop purpose and background photo"
                     width={1684}
-                    height={1214}
+                    height={1220}
                     sizes="(min-width: 1440px) 1440px, 100vw"
                     unoptimized
                     className="h-auto w-full"
                   />
 
-                  <p className="max-w-5xl">
-                    After contacting Nick, the founder of Forres Friend, by email, I went to Forres Friend on 15 June
-                    for a 40-minute interview and participated in a 3-hour gardening session on the same day.
-                  </p>
-
-                  <div className="grid gap-8 lg:grid-cols-[1.55fr_0.75fr] lg:items-start">
-                    <Image
-                      src="/projects/community-gardens/outputs/participatory-observation.png?v=1"
-                      alt="Participatory observation collage showing weekly gardening events and open day festival"
-                      width={1230}
-                      height={692}
-                      sizes="(min-width: 1024px) 65vw, 100vw"
-                      unoptimized
-                      className="h-auto w-full"
-                    />
+                  <section className="grid gap-8">
                     <div className="grid gap-5">
-                      <p>
-                        Every Wednesday and every other Saturday, Forres Friends of Woods and Fields is hosting an event
-                        at Sanquhar Woods &amp; Chapleton Fields from 10am to 1pm with founder Nick organising and
-                        guiding volunteers in organic gardening.
-                      </p>
-                      <p>
-                        In addition to the weekly gardening events, Forres Friends has organised an Open Day Festival to
-                        celebrate a beautiful year and abundance of harvest for two years in a row. Around 250 people
-                        attended an open day focused on the work of a local environmental charity in 2023.
+                      <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                        Part 1 - Questionnaire
+                      </h3>
+                      <p className="max-w-2xl">
+                        A questionnaire containing multiple-choice and short-answer questions about their gardening
+                        background and basic concepts of organic growing.
                       </p>
                     </div>
-                  </div>
+
+                    <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-start">
+                      <Image
+                        src="/projects/community-gardens/outputs/questionnaire.png?v=1"
+                        alt="Completed workshop questionnaire sheets with participant summary"
+                        width={674}
+                        height={540}
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        unoptimized
+                        className="h-auto w-full max-w-[674px]"
+                      />
+
+                      <div className="grid gap-14">
+                        <section className="grid gap-3">
+                          <p className="font-black text-[#C99354]">
+                            4 Participants
+                            <br />
+                            with Over 5 Years of Gardening Experience
+                          </p>
+                          <div className="grid gap-1">
+                            <p>
+                              <strong className="text-[#C99354]">Crops Grown:</strong> Vegetables and herbs
+                            </p>
+                            <p>
+                              <strong className="text-[#C99354]">Weekly Gardening Time:</strong> More than 7 hours
+                            </p>
+                            <p>
+                              <strong className="text-[#C99354]">Purpose:</strong>
+                            </p>
+                            <ol className="list-decimal pl-6">
+                              <li>Protect the environment</li>
+                              <li>Meet new friends</li>
+                              <li>Connect with the land and people</li>
+                              <li>Mental health benefits</li>
+                            </ol>
+                            <p>
+                              <strong className="text-[#C99354]">Challenges:</strong>
+                            </p>
+                            <ol className="list-decimal pl-6">
+                              <li>Planning year-round harvests</li>
+                              <li>Not having enough time</li>
+                              <li>Physical limitations</li>
+                              <li>Bad weather</li>
+                            </ol>
+                            <p>
+                              <strong className="text-[#C99354]">Needs:</strong>
+                            </p>
+                            <ol className="list-decimal pl-6">
+                              <li>Access to farmers&apos; markets</li>
+                              <li>Engaging young people in gardening</li>
+                            </ol>
+                            <p>
+                              <strong className="text-[#C99354]">Other Information:</strong> Volunteers at more than one
+                              farm
+                            </p>
+                          </div>
+                        </section>
+
+                        <section className="grid gap-3">
+                          <p className="font-black text-[#86A9B6]">
+                            3 Participants
+                            <br />
+                            with Less Than 3 Years of Gardening Experience
+                          </p>
+                          <div className="grid gap-1">
+                            <p>
+                              <strong className="text-[#86A9B6]">Crops Grown:</strong> Vegetables and flowers
+                            </p>
+                            <p>
+                              <strong className="text-[#86A9B6]">Weekly Gardening Time:</strong> 1-3 hours
+                            </p>
+                            <p>
+                              <strong className="text-[#86A9B6]">Purpose:</strong>
+                            </p>
+                            <ol className="list-decimal pl-6">
+                              <li>Personal interest</li>
+                              <li>Protect the environment</li>
+                              <li>Mental health benefits</li>
+                            </ol>
+                            <p>
+                              <strong className="text-[#86A9B6]">Challenges:</strong>
+                            </p>
+                            <ol className="list-decimal pl-6">
+                              <li>Lack of gardening knowledge</li>
+                              <li>Bad weather</li>
+                            </ol>
+                            <p>
+                              <strong className="text-[#86A9B6]">Needs:</strong>
+                            </p>
+                            <ol className="list-decimal pl-6">
+                              <li>Skill training</li>
+                              <li>Community garden</li>
+                              <li>Workshops to learn gardening knowledge</li>
+                            </ol>
+                            <p>
+                              <strong className="text-[#86A9B6]">Other Information:</strong> Growing food for food banks
+                            </p>
+                          </div>
+                        </section>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="grid gap-8">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Part 2 - Ideal Garden Design
+                    </h3>
+
+                    <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-start">
+                      <Image
+                        src="/projects/community-gardens/outputs/ideal-garden-design.png?v=1"
+                        alt="Ideal garden design workshop sheets and plant cards"
+                        width={766}
+                        height={952}
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        unoptimized
+                        className="h-auto w-full max-w-[766px]"
+                      />
+
+                      <div className="grid gap-14">
+                        <section className="grid gap-8">
+                          <div className="grid gap-2">
+                            <p className="font-black text-neutral-500">Food sources</p>
+                            <p>
+                              Only one participant chose to grow flowers, while the other four tended to grow more
+                              vegetables
+                            </p>
+                          </div>
+
+                          <div className="grid gap-2">
+                            <p className="font-black text-neutral-500">Socialising and sharing</p>
+                            <p>Grow fruits for people to pick</p>
+                          </div>
+
+                          <div className="grid gap-2">
+                            <p className="font-black text-neutral-500">Experienced in growing vegetables</p>
+                            <p>Zoned gardening</p>
+                            <p>Plant carrots and tomatoes in the warm room</p>
+                          </div>
+                        </section>
+
+                        <section className="grid gap-3">
+                          <h3 className="text-[20px] font-black leading-tight text-[#75A723] md:text-[22px] xl:text-[24px]">
+                            Insights from Part 1&amp;2
+                          </h3>
+                          <ol className="list-decimal pl-6">
+                            <li>Older people don&apos;t have enough energy for planting.</li>
+                            <li>
+                              There are too few learning opportunities for young people interested in gardening.
+                            </li>
+                            <li>People value the social aspect of gardening.</li>
+                            <li>People are more willing to grow vegetables than flowers.</li>
+                          </ol>
+                        </section>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="grid gap-8">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Part 3 - Challenges of Forres Friends Discussion
+                    </h3>
+
+                    <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-start">
+                      <Image
+                        src="/projects/community-gardens/outputs/challenges-discussion.png?v=1"
+                        alt="Challenges discussion workshop map with challenge categories"
+                        width={928}
+                        height={664}
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        unoptimized
+                        className="h-auto w-full max-w-[928px]"
+                      />
+
+                      <section className="grid gap-8">
+                        <h3 className="text-[20px] font-black uppercase leading-tight text-black md:text-[22px] xl:text-[24px]">
+                          Insights
+                        </h3>
+
+                        <p>
+                          For participants in the Community Gardens, &quot;organic&quot; is not a certificate from a
+                          certification body, but a reciprocal relationship between consumers and farmers{" "}
+                          <strong className="text-[#75A723]">
+                            based on the values of knowledge, trust, support and sharing.
+                          </strong>
+                        </p>
+
+                        <div className="grid gap-8">
+                          <div className="grid gap-3 md:grid-cols-[44px_1fr]">
+                            <div className="flex h-10 w-10 items-center justify-center text-[#75A723]" aria-hidden="true">
+                              <span className="h-6 w-2 rounded-full bg-current" />
+                              <span className="mx-1 h-8 w-2 rounded-full bg-current" />
+                              <span className="h-6 w-2 rounded-full bg-current" />
+                            </div>
+                            <p>
+                              The public has little knowledge of organic growing, and there is a lack of avenues for
+                              gardening learning, and it is{" "}
+                              <strong className="text-[#75A723]">
+                                difficult to start a gardening hobby
+                              </strong>{" "}
+                              without having friends around who are gardening experts.
+                            </p>
+                          </div>
+
+                          <div className="grid gap-3 md:grid-cols-[44px_1fr]">
+                            <div className="flex h-10 w-10 items-center justify-center gap-1 text-[#75A723]" aria-hidden="true">
+                              <span className="h-7 w-2 rounded-b-full bg-current" />
+                              <span className="h-5 w-3 rounded-t-full bg-current" />
+                              <span className="h-7 w-2 rounded-b-full bg-current" />
+                            </div>
+                            <p>
+                              Sharing among the volunteers is not only about the process and results of their labour,
+                              but also about many other things in their lives. For example, how their children and pets
+                              are doing, what&apos;s new in the community, how to cook delicious food, etc.{" "}
+                              <strong className="text-[#75A723]">
+                                The members have a strong bond with each other and the group is stable.
+                              </strong>
+                            </p>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </section>
+
+                  <section className="grid gap-3">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Opportunity From Participatory Workshop
+                    </h3>
+                    <p className="max-w-6xl">
+                      By increasing publicity channels, we can make more people, especially young people, aware of
+                      community gardens like Forres Friends. This will encourage them to participate in gardening,
+                      assist the elderly, and learn gardening skills, thereby practicing sustainable gardening in their
+                      daily lives.
+                    </p>
+                  </section>
+                </section>
+              </CaseStudySubAccordion>
+
+              <CaseStudySubAccordion title="Stage4 Target Users">
+                <section
+                  aria-label="Stage 4 target users"
+                  className="grid gap-16 bg-white text-[14px] font-normal leading-relaxed text-black md:text-[16px] xl:text-[18px]"
+                >
+                  <section className="grid gap-8">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Interview
+                    </h3>
+                    <div className="grid gap-10 lg:grid-cols-[0.95fr_0.85fr] lg:items-start">
+                      <div className="grid gap-5">
+                        <div>
+                          <p className="font-black">Mackenzie &amp; Cruickshank</p>
+                          <p>Garden centre, 1 West Rd, Forres IV36 2GU</p>
+                        </div>
+                        <Image
+                          src="/projects/community-gardens/outputs/target-users-interview.png?v=1"
+                          alt="Interview field photos at Mackenzie and Cruickshank garden centre."
+                          width={758}
+                          height={641}
+                          className="h-auto w-full"
+                          unoptimized
+                        />
+                        <div className="grid gap-4">
+                          <p>I interviewed 11 people and these are their age &amp; gender</p>
+                          <div className="grid gap-4 text-[13px] md:grid-cols-3 md:text-[15px] xl:text-[16px]">
+                            <div className="grid gap-2">
+                              <p>&gt;20 years</p>
+                              <div aria-label="One female participant" className="flex gap-1 text-[24px] leading-none text-[#ff74a8]">
+                                <span>♀</span>
+                              </div>
+                            </div>
+                            <div className="grid gap-2">
+                              <p>20-30 years</p>
+                              <div aria-label="Four participants" className="flex gap-1 text-[24px] leading-none">
+                                <span className="text-[#5ecbe7]">♂</span>
+                                <span className="text-[#5ecbe7]">♂</span>
+                                <span className="text-[#ff74a8]">♀</span>
+                                <span className="text-[#ff74a8]">♀</span>
+                              </div>
+                            </div>
+                            <div className="grid gap-2">
+                              <p>30-40 years</p>
+                              <div aria-label="Six participants" className="flex gap-1 text-[24px] leading-none">
+                                <span className="text-[#5ecbe7]">♂</span>
+                                <span className="text-[#5ecbe7]">♂</span>
+                                <span className="text-[#ff74a8]">♀</span>
+                                <span className="text-[#ff74a8]">♀</span>
+                                <span className="text-[#ff74a8]">♀</span>
+                                <span className="text-[#ff74a8]">♀</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="grid gap-6 lg:pt-10">
+                        <p className="max-w-xl font-black">
+                          To find out the extent of young people&apos;s awareness and interest in gardening
+                        </p>
+                        <div className="grid gap-4">
+                          <h4 className="text-[20px] font-black text-[#75A723] md:text-[24px] xl:text-[26px]">
+                            Findings
+                          </h4>
+                          <div className="grid gap-5">
+                            <div>
+                              <p>ways to learn gardening</p>
+                              <ul className="list-disc pl-6">
+                                <li>family members</li>
+                                <li>community activities</li>
+                                <li>neighbors and friends</li>
+                                <li>self-learning through practice</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <p>purposes of gardening</p>
+                              <ul className="list-disc pl-6">
+                                <li>helping elderly family members</li>
+                                <li>obtaining healthy food</li>
+                                <li>keeping my garden tidy</li>
+                                <li>interest and hobby</li>
+                                <li>stress relief</li>
+                                <li>environmental protection</li>
+                                <li>socializing and making friends</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <p>difficulties encountered in gardening</p>
+                              <ul className="list-disc pl-6">
+                                <li>don&apos;t have time</li>
+                                <li>don&apos;t have chance to learn</li>
+                                <li>don&apos;t have garden now</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <p>interest in community gardens</p>
+                              <ul className="list-disc pl-6">
+                                <li>aware, but not participated</li>
+                                <li>
+                                  unaware, <span className="text-[#75A723]">not very interested</span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="grid gap-8">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Persona
+                    </h3>
+                    <Image
+                      src="/projects/community-gardens/outputs/target-users-persona.png?v=1"
+                      alt="Persona sketch for Kate, a 26 year old support worker living in Forres."
+                      width={2884}
+                      height={1400}
+                      className="h-auto w-full"
+                      unoptimized
+                    />
+                    <div className="grid gap-8 md:grid-cols-2">
+                      <div>
+                        <h4 className="font-black text-[#75A723]">Pain Points</h4>
+                        <ul className="list-disc pl-6">
+                          <li>Busy with work, limited time</li>
+                          <li>Lack of professional gardening knowledge</li>
+                          <li>No personal garden</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-black text-[#75A723]">Needs</h4>
+                        <ul className="list-disc pl-6">
+                          <li>Seeds and tools</li>
+                          <li>Professional guidance</li>
+                          <li>Meeting new friends</li>
+                          <li>Large plot of land for growing various crops</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <p className="bg-[#dce6cf] px-6 py-5 text-center font-black">
+                      Have a little interest and understanding of gardening and would like someone to guide and learn from each other
+                    </p>
+                  </section>
+
+                  <section className="grid gap-8">
+                    <div className="grid gap-3">
+                      <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                        Case Study
+                      </h3>
+                      <p className="max-w-6xl">
+                        I went to Mackenzie &amp; Cruickshank, Tesco and the hardware shop on the high street to research
+                        the home gardening products that can be bought in Forres. At the end of July I went to Edinburgh
+                        and went to two of the largest farmers markets to do field research.
+                      </p>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[980px] border-collapse text-left align-top">
+                        <thead>
+                          <tr className="border-b border-dashed border-neutral-300">
+                            <th className="w-[56px] p-4" />
+                            <th className="w-1/4 p-4 font-black">Gardening Toolkits For Kids</th>
+                            <th className="w-1/4 p-4 font-black">Seeds</th>
+                            <th className="w-1/4 p-4 font-black">Grant Park Street Sign</th>
+                            <th className="w-1/4 p-4 font-black">
+                              Edinburgh farmers&apos; market &amp; Edinburgh Grassmarket
+                            </th>
+                          </tr>
+                          <tr className="border-b border-dashed border-neutral-300">
+                            <th className="p-4" />
+                            <td className="p-4">
+                              <Image
+                                src="/projects/community-gardens/outputs/target-users-case-study-1.png?v=1"
+                                alt="Gardening toolkit for kids with pot, instruction sheet and shop display"
+                                width={368}
+                                height={192}
+                                className="h-auto w-full"
+                                unoptimized
+                              />
+                            </td>
+                            <td className="p-4">
+                              <Image
+                                src="/projects/community-gardens/outputs/target-users-case-study-2.png?v=1"
+                                alt="Seed packets and vegetable calendar research photos"
+                                width={368}
+                                height={192}
+                                className="h-auto w-full"
+                                unoptimized
+                              />
+                            </td>
+                            <td className="p-4">
+                              <Image
+                                src="/projects/community-gardens/outputs/target-users-case-study-3.png?v=1"
+                                alt="Grant Park street sign and flower planter photos"
+                                width={368}
+                                height={192}
+                                className="h-auto w-full"
+                                unoptimized
+                              />
+                            </td>
+                            <td className="p-4">
+                              <Image
+                                src="/projects/community-gardens/outputs/target-users-case-study-4.png?v=1"
+                                alt="Edinburgh farmers market and Grassmarket field research photos"
+                                width={368}
+                                height={192}
+                                className="h-auto w-full"
+                                unoptimized
+                              />
+                            </td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="border-b border-dashed border-neutral-300">
+                            <th className="bg-[#dce6cf] p-4 align-top font-normal">pros</th>
+                            <td className="border-r border-dashed border-neutral-300 p-4 align-top">
+                              <ul className="list-disc pl-6">
+                                <li>
+                                  Fully equipped with tools, including seeds, flower trays, fertiliser, stickers and
+                                  guidance notes, so children can follow the instructions for planting
+                                </li>
+                                <li>Provides stickers and quizzes to make it interesting</li>
+                              </ul>
+                            </td>
+                            <td className="border-r border-dashed border-neutral-300 p-4 align-top">
+                              <ul className="list-disc pl-6">
+                                <li>easy to buy</li>
+                                <li>including instructions</li>
+                              </ul>
+                            </td>
+                            <td className="border-r border-dashed border-neutral-300 p-4 align-top">
+                              <ul className="list-disc pl-6">
+                                <li>Waterproof, sturdy and eye-catching</li>
+                              </ul>
+                            </td>
+                            <td className="p-4 align-top">
+                              <ul className="list-disc pl-6">
+                                <li>Support for local farmers</li>
+                                <li>
+                                  Fresh food, ingredients and handicrafts are available for purchase, with a wide range
+                                  of products.
+                                </li>
+                                <li>Lots of publicity and access to all major social media outlets</li>
+                                <li>Good location, easy to find, high foot traffic</li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th className="bg-[#f1d9c9] p-4 align-top font-normal">cons</th>
+                            <td className="border-r border-dashed border-neutral-300 p-4 align-top">
+                              <ul className="list-disc pl-6">
+                                <li>Variety limited</li>
+                                <li>Vases are disposable, poor quality and not environmentally friendly</li>
+                                <li>
+                                  Instruction is too simple, only for one type of plant, difficult to cultivate long
+                                  term interest.
+                                </li>
+                                <li>A bit childish for adults, weak learning</li>
+                              </ul>
+                            </td>
+                            <td className="border-r border-dashed border-neutral-300 p-4 align-top">
+                              <ul className="list-disc pl-6">
+                                <li>Unattractive</li>
+                                <li>Purely functional</li>
+                              </ul>
+                            </td>
+                            <td className="border-r border-dashed border-neutral-300 p-4 align-top">
+                              <ul className="list-disc pl-6">
+                                <li>No contact details</li>
+                                <li>Little information</li>
+                              </ul>
+                            </td>
+                            <td className="p-4 align-top">
+                              <ul className="list-disc pl-6">
+                                <li>Same as other markets, no special highlights</li>
+                                <li>Not much interaction, just browsing and shopping</li>
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <p className="bg-[#dce6cf] px-8 py-6 font-normal">
+                      There are actually <strong>many ways</strong> that people can learn about gardening and community
+                      gardens, but the existing <strong>beginner gardening products/services</strong> are too weakly
+                      appealing and the touchpoints are <strong>not connected to each other</strong>
+                    </p>
+                  </section>
+                </section>
+              </CaseStudySubAccordion>
+
+              <CaseStudySubAccordion title="Stage5 Ideation">
+                <section
+                  aria-label="Stage 5 ideation"
+                  className="grid gap-16 bg-white text-[14px] font-normal leading-relaxed text-black md:text-[16px] xl:text-[18px]"
+                >
+                  <section className="grid gap-8">
+                    <Image
+                      src="/projects/community-gardens/outputs/affinity-mapping.png?v=1"
+                      alt="Affinity mapping wall with clustered sticky notes for touch points, ways of learning, publicity and pain points."
+                      width={1684}
+                      height={658}
+                      sizes="(min-width: 1440px) 1440px, 100vw"
+                      className="h-auto w-full"
+                      unoptimized
+                    />
+
+                    <section className="grid gap-5">
+                      <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                        Affinity Mapping
+                      </h3>
+                      <p className="max-w-6xl">
+                        I used affinity mapping to list all the insights from stakeholder interviews, engagement
+                        workshops, and interviews with young people to come up with the design opportunity.
+                      </p>
+                    </section>
+
+                    <section className="grid gap-5">
+                      <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                        How Might We
+                      </h3>
+                      <p className="max-w-6xl">
+                        Design a <strong className="text-[#75A723]">home gardening experience</strong> for{" "}
+                        <strong className="text-[#75A723]">beginners</strong> connected to the Forres Community Garden,
+                        helping them learn gardening independently or through guided volunteering, while supporting the
+                        garden&apos;s outreach and recruitment goals.
+                      </p>
+                    </section>
+
+                    <section className="grid gap-8">
+                      <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                        Ideation
+                      </h3>
+
+                      <div className="grid gap-8">
+                        <div className="grid items-start gap-5 lg:grid-cols-[1fr_auto_1fr]">
+                          <div className="grid gap-5">
+                            <p className="bg-[#75A723] px-5 py-3 text-center font-black text-white">
+                              Home Gardening Experience
+                            </p>
+                            <div className="grid gap-3">
+                              <p className="font-black">For gardening enthusiasts</p>
+                              <ul className="list-disc pl-6">
+                                <li>learning professional gardening knowledge</li>
+                                <li>socialising, meeting new friends</li>
+                                <li>easy to get</li>
+                                <li>Integration into life without taking up extra time</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          <p className="self-start text-center text-[34px] font-black leading-none text-[#75A723] md:text-[42px]">
+                            +
+                          </p>
+
+                          <div className="grid gap-5">
+                            <p className="bg-[#75A723] px-5 py-3 text-center font-black text-white">
+                              Connecting Touchpoints Together
+                            </p>
+                            <div className="grid gap-3">
+                              <p className="font-black">For community garden organisations</p>
+                              <ul className="list-disc pl-6">
+                                <li>Increased public understanding of organic growing</li>
+                                <li>more volunteers and labour</li>
+                                <li>socialising, sharing food, help and love</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mx-auto h-16 w-14 bg-[#75A723] [clip-path:polygon(0_0,100%_0,100%_70%,50%_100%,0_70%)]" />
+
+                        <div className="grid gap-6 lg:grid-cols-2">
+                          <article className="relative grid gap-6 border-4 border-dashed border-neutral-400 p-6">
+                            <div className="grid gap-5 sm:grid-cols-[64px_1fr]">
+                              <Image
+                                src="/projects/community-gardens/outputs/concept-1-icon.png?v=1"
+                                alt="Phone icon for app concept"
+                                width={104}
+                                height={126}
+                                className="h-auto w-12"
+                                unoptimized
+                              />
+                              <div className="grid gap-2">
+                                <p className="font-black">Concept 1</p>
+                                <p>An App includes gardening guidance and connected with community garden websites</p>
+                              </div>
+                            </div>
+
+                            <div className="grid gap-3 sm:grid-cols-[72px_1fr]">
+                              <p>Pros</p>
+                              <p>easy to use for young people</p>
+                              <p>Cons</p>
+                              <ul className="border-t border-dashed border-neutral-300 pt-3">
+                                <li>Difficult to promote</li>
+                                <li>Difficult to engage</li>
+                                <li>There are more authoritative competitors</li>
+                                <li>No one can build and maintain an app over time</li>
+                              </ul>
+                            </div>
+
+                            <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-400 text-[28px] leading-none text-neutral-400">
+                              ×
+                            </span>
+                          </article>
+
+                          <article className="relative grid gap-6 border-4 border-dashed border-[#75A723] p-6">
+                            <div className="grid gap-5 sm:grid-cols-[64px_1fr]">
+                              <Image
+                                src="/projects/community-gardens/outputs/concept-2-icon.png?v=1"
+                                alt="Toolkit icon for physical toolkit concept"
+                                width={124}
+                                height={124}
+                                className="h-auto w-12"
+                                unoptimized
+                              />
+                              <div className="grid gap-2">
+                                <p className="font-black">Concept 2</p>
+                                <p>
+                                  A toolkit includes gardening map, calendar, seeds, gardening guidance and connected
+                                  with community garden websites
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="grid gap-3 sm:grid-cols-[72px_1fr]">
+                              <p>Pros</p>
+                              <p>
+                                Easier for people to actually start gardening
+                                <br />
+                                Organisations have volunteers who are good at drawing who can design
+                              </p>
+                              <p>Cons</p>
+                              <ul className="border-t border-dashed border-neutral-300 pt-3">
+                                <li>Paper is easy to mass produce</li>
+                                <li>can be bought and promote more easily</li>
+                                <li>Low price</li>
+                              </ul>
+                            </div>
+
+                            <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#75A723] text-[28px] leading-none text-[#75A723]">
+                              ✓
+                            </span>
+                          </article>
+                        </div>
+                      </div>
+                    </section>
+                  </section>
+                </section>
+              </CaseStudySubAccordion>
+
+              <CaseStudySubAccordion title="Stage6 Delivery">
+                <section
+                  aria-label="Stage 6 delivery"
+                  className="grid gap-16 bg-white text-[14px] font-normal leading-relaxed text-black md:text-[16px] xl:text-[18px]"
+                >
+                  <section className="grid gap-5">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Overview
+                    </h3>
+                    <div className="grid gap-1">
+                      <p className="font-black">
+                        Home gardening toolkits and community garden service for young people (13-29 years old)
+                      </p>
+                      <p className="italic">
+                        *according to the definitions given by Office for National Statistics, UK government
+                      </p>
+                    </div>
+                  </section>
+
+                  <section className="grid gap-6">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Workflow
+                    </h3>
+                    <div className="grid gap-5 lg:grid-cols-3">
+                      {[
+                        "Interested in gardening",
+                        "Shop for gardening toolkits",
+                        "Follow toolkits guide home gardening",
+                        "Follow the map to get basic information about community garden.",
+                        "Follow the calendar to learn about community garden's special events.",
+                        "Street signs on flower beds to increase the publicity of community gardens.",
+                        "Participate in community garden's special events.",
+                        "Become a volunteer after learning about community garden",
+                        "becoming more experienced in gardening",
+                      ].map((step, index) => (
+                        <div
+                          key={step}
+                          className="relative min-h-[112px] border-2 border-dashed border-[#75A723] p-5 pr-12 text-[18px] leading-tight md:text-[22px] xl:text-[26px]"
+                        >
+                          <p>{step}</p>
+                          <span className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#75A723] text-[16px] font-black leading-none text-white">
+                            {index + 1}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section className="grid gap-6">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Touchpoints
+                    </h3>
+                    <div className="grid gap-6 lg:grid-cols-3">
+                      <section className="grid gap-6">
+                        <h4 className="bg-[#dce6cf] px-4 py-2 text-center font-black uppercase">
+                          Physical
+                        </h4>
+                        <div className="grid grid-cols-2 gap-6">
+                          {[
+                            {
+                              label: "Toolkits",
+                              src: "/projects/community-gardens/outputs/touchpoint-toolkits.png?v=1",
+                              width: 64,
+                              height: 64,
+                            },
+                            {
+                              label: "Map",
+                              src: "/projects/community-gardens/outputs/touchpoint-map.png?v=1",
+                              width: 64,
+                              height: 64,
+                            },
+                            {
+                              label: "Street Sign",
+                              src: "/projects/community-gardens/outputs/touchpoint-street-sign.png?v=1",
+                              width: 64,
+                              height: 64,
+                            },
+                            {
+                              label: "Calendar",
+                              src: "/projects/community-gardens/outputs/touchpoint-calendar.png?v=1",
+                              width: 64,
+                              height: 64,
+                            },
+                            {
+                              label: "Seeds",
+                              src: "/projects/community-gardens/outputs/touchpoint-seeds.png?v=1",
+                              width: 64,
+                              height: 64,
+                            },
+                          ].map((touchpoint) => (
+                            <div key={touchpoint.label} className="grid justify-items-center gap-3 text-center">
+                              <Image
+                                src={touchpoint.src}
+                                alt={`${touchpoint.label} touchpoint icon`}
+                                width={touchpoint.width}
+                                height={touchpoint.height}
+                                className="h-16 w-16 object-contain"
+                                unoptimized
+                              />
+                              <p>{touchpoint.label}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+
+                      <section className="grid gap-6">
+                        <h4 className="bg-[#dce6cf] px-4 py-2 text-center font-black uppercase">
+                          Digital
+                        </h4>
+                        <div className="grid gap-6">
+                          <div className="grid grid-cols-[72px_1fr] items-center gap-4">
+                            <Image
+                              src="/projects/community-gardens/outputs/touchpoint-ar-games.png?v=1"
+                              alt="AR games in special event touchpoint icon"
+                              width={64}
+                              height={64}
+                              className="h-16 w-16 object-contain"
+                              unoptimized
+                            />
+                            <p>
+                              AR games in
+                              <br />
+                              special event
+                            </p>
+                          </div>
+                        </div>
+                      </section>
+
+                      <section className="grid gap-6">
+                        <h4 className="bg-[#dce6cf] px-4 py-2 text-center font-black uppercase">
+                          People
+                        </h4>
+                        <div className="grid gap-6">
+                          {[
+                            {
+                              label: "Community Garden Organizations",
+                              src: "/projects/community-gardens/outputs/touchpoint-community-garden-organizations.png?v=1",
+                            },
+                            {
+                              label: "Volunteers",
+                              src: "/projects/community-gardens/outputs/touchpoint-volunteers.png?v=1",
+                            },
+                            {
+                              label: "Shop Assistant",
+                              src: "/projects/community-gardens/outputs/touchpoint-shop-assistant.png?v=1",
+                            },
+                          ].map((touchpoint) => (
+                            <div key={touchpoint.label} className="grid grid-cols-[72px_1fr] items-center gap-4">
+                              <Image
+                                src={touchpoint.src}
+                                alt={`${touchpoint.label} touchpoint icon`}
+                                width={64}
+                                height={64}
+                                className="h-16 w-16 object-contain"
+                                unoptimized
+                              />
+                              <p>{touchpoint.label}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+                    </div>
+                  </section>
                 </section>
               </CaseStudySubAccordion>
             </div>

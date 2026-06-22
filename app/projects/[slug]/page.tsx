@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowLeft, ExternalLink, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Home, Sparkles } from "lucide-react";
 import { getProjectBySlug, projects } from "@/data/projects";
 import { CalendarFlipbook } from "@/components/projects/CalendarFlipbook";
 import { CaseStudySubAccordion } from "@/components/projects/CaseStudySubAccordion";
@@ -46,6 +46,9 @@ export default async function ProjectPage({
     notFound();
   }
 
+  const projectIndex = projects.findIndex((item) => item.slug === project.slug);
+  const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
+  const nextProject = projects[(projectIndex + 1) % projects.length];
   const isCommunityGardens = project.slug === "community-gardens";
   const communityProjectTitleClass =
     "max-w-5xl text-[38px] font-black leading-tight text-[#75A723] md:text-[52px] xl:text-[64px]";
@@ -65,8 +68,15 @@ export default async function ProjectPage({
           isCommunityGardens ? "max-w-[1440px]" : "max-w-6xl"
         }`}
       >
-        <Link className="inline-flex w-fit items-center gap-2 font-medium text-[#5c5749]" href="/">
-          <ArrowLeft size={18} /> Back to park
+        <Link
+          className="group inline-flex min-h-16 w-fit items-center justify-self-start gap-4 text-[18px] font-black text-black/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]"
+          href="/"
+          aria-label="Back to Huilin Park"
+        >
+          <Home size={48} strokeWidth={1.8} />
+          <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">
+            Back to Huilin Park
+          </span>
         </Link>
 
         {project.details ? (
@@ -523,7 +533,7 @@ export default async function ProjectPage({
                 </section>
               </CaseStudySubAccordion>
 
-              <CaseStudySubAccordion title="Stage2 Interview with Stakeholder" defaultOpen>
+              <CaseStudySubAccordion title="Stage2 Interview with Stakeholder">
                 <section
                   className="grid gap-16 bg-white text-[14px] font-normal leading-normal text-black md:text-[16px] xl:text-[18px]"
                   aria-label="Stage 2 interview with stakeholder"
@@ -1351,7 +1361,7 @@ export default async function ProjectPage({
                 </section>
               </CaseStudySubAccordion>
 
-              <CaseStudySubAccordion title="Stage6 Delivery">
+              <CaseStudySubAccordion title="Stage6 Delivery" defaultOpen>
                 <section
                   aria-label="Stage 6 delivery"
                   className="grid gap-16 bg-white text-[14px] font-normal leading-relaxed text-black md:text-[16px] xl:text-[18px]"
@@ -1361,7 +1371,7 @@ export default async function ProjectPage({
                       Overview
                     </h3>
                     <div className="grid gap-1">
-                      <p className="font-black">
+                      <p className="text-[18px] font-black leading-tight md:text-[22px] xl:text-[26px]">
                         Home gardening toolkits and community garden service for young people (13-29 years old)
                       </p>
                       <p className="italic">
@@ -1401,66 +1411,106 @@ export default async function ProjectPage({
 
                   <section className="grid gap-6">
                     <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      Service Blueprint
+                    </h3>
+                    <Image
+                      src="/projects/community-gardens/outputs/service-blueprint.png?v=1"
+                      alt="Service blueprint showing phases, evidence, customer actions, interactions and support process for the community garden toolkit service."
+                      width={1684}
+                      height={966}
+                      sizes="(min-width: 1440px) 1440px, 100vw"
+                      className="h-auto w-full"
+                      unoptimized
+                    />
+                  </section>
+
+                  <section className="grid gap-6">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
                       Touchpoints
                     </h3>
                     <div className="grid gap-6 lg:grid-cols-3">
-                      <section className="grid gap-6">
-                        <h4 className="bg-[#dce6cf] px-4 py-2 text-center font-black uppercase">
+                      <section className="grid grid-rows-[auto_1fr] gap-6">
+                        <h4 className="flex min-h-9 items-center justify-center bg-[#dce6cf] px-4 py-2 text-center font-black uppercase">
                           Physical
                         </h4>
-                        <div className="grid grid-cols-2 gap-6">
-                          {[
-                            {
-                              label: "Toolkits",
-                              src: "/projects/community-gardens/outputs/touchpoint-toolkits.png?v=1",
-                              width: 64,
-                              height: 64,
-                            },
-                            {
-                              label: "Map",
-                              src: "/projects/community-gardens/outputs/touchpoint-map.png?v=1",
-                              width: 64,
-                              height: 64,
-                            },
-                            {
-                              label: "Street Sign",
-                              src: "/projects/community-gardens/outputs/touchpoint-street-sign.png?v=1",
-                              width: 64,
-                              height: 64,
-                            },
-                            {
-                              label: "Calendar",
-                              src: "/projects/community-gardens/outputs/touchpoint-calendar.png?v=1",
-                              width: 64,
-                              height: 64,
-                            },
-                            {
-                              label: "Seeds",
-                              src: "/projects/community-gardens/outputs/touchpoint-seeds.png?v=1",
-                              width: 64,
-                              height: 64,
-                            },
-                          ].map((touchpoint) => (
-                            <div key={touchpoint.label} className="grid justify-items-center gap-3 text-center">
+                        <div className="grid gap-8 sm:grid-cols-[120px_1fr] sm:items-start">
+                          <div className="grid justify-items-center gap-10">
+                            <div className="grid justify-items-center gap-3 text-center">
                               <Image
-                                src={touchpoint.src}
-                                alt={`${touchpoint.label} touchpoint icon`}
-                                width={touchpoint.width}
-                                height={touchpoint.height}
+                                src="/projects/community-gardens/outputs/touchpoint-toolkits.png?v=1"
+                                alt="Toolkits touchpoint icon"
+                                width={64}
+                                height={64}
                                 className="h-16 w-16 object-contain"
                                 unoptimized
                               />
-                              <p>{touchpoint.label}</p>
+                              <p>Toolkits</p>
                             </div>
-                          ))}
+                            <div className="grid justify-items-center gap-3 text-center">
+                              <Image
+                                src="/projects/community-gardens/outputs/touchpoint-street-sign.png?v=1"
+                                alt="Street Sign touchpoint icon"
+                                width={64}
+                                height={64}
+                                className="h-16 w-16 object-contain"
+                                unoptimized
+                              />
+                              <p>Street Sign</p>
+                            </div>
+                          </div>
+
+                          <div className="relative grid gap-4 pl-0 sm:pl-12">
+                            <span
+                              aria-hidden="true"
+                              className="absolute left-4 top-8 hidden h-[132px] border-l-2 border-dashed border-[#75A723] sm:block"
+                            />
+                            <span
+                              aria-hidden="true"
+                              className="absolute left-[-72px] top-8 hidden w-[88px] border-t-2 border-dashed border-[#75A723] sm:block"
+                            />
+                            <span
+                              aria-hidden="true"
+                              className="absolute left-4 top-[92px] hidden w-8 border-t-2 border-dashed border-[#75A723] sm:block"
+                            />
+                            <span
+                              aria-hidden="true"
+                              className="absolute left-4 top-[160px] hidden w-8 border-t-2 border-dashed border-[#75A723] sm:block"
+                            />
+                            {[
+                              {
+                                label: "Map",
+                                src: "/projects/community-gardens/outputs/touchpoint-map.png?v=1",
+                              },
+                              {
+                                label: "Calendar",
+                                src: "/projects/community-gardens/outputs/touchpoint-calendar.png?v=1",
+                              },
+                              {
+                                label: "Seeds",
+                                src: "/projects/community-gardens/outputs/touchpoint-seeds.png?v=1",
+                              },
+                            ].map((touchpoint) => (
+                              <div key={touchpoint.label} className="grid grid-cols-[64px_1fr] items-center gap-4">
+                                <Image
+                                  src={touchpoint.src}
+                                  alt={`${touchpoint.label} touchpoint icon`}
+                                  width={64}
+                                  height={64}
+                                  className="h-16 w-16 object-contain"
+                                  unoptimized
+                                />
+                                <p>{touchpoint.label}</p>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </section>
 
-                      <section className="grid gap-6">
-                        <h4 className="bg-[#dce6cf] px-4 py-2 text-center font-black uppercase">
+                      <section className="grid grid-rows-[auto_1fr] gap-6">
+                        <h4 className="flex min-h-9 items-center justify-center bg-[#dce6cf] px-4 py-2 text-center font-black uppercase">
                           Digital
                         </h4>
-                        <div className="grid gap-6">
+                        <div className="grid content-start gap-6">
                           <div className="grid grid-cols-[72px_1fr] items-center gap-4">
                             <Image
                               src="/projects/community-gardens/outputs/touchpoint-ar-games.png?v=1"
@@ -1479,11 +1529,11 @@ export default async function ProjectPage({
                         </div>
                       </section>
 
-                      <section className="grid gap-6">
-                        <h4 className="bg-[#dce6cf] px-4 py-2 text-center font-black uppercase">
+                      <section className="grid grid-rows-[auto_1fr] gap-6">
+                        <h4 className="flex min-h-9 items-center justify-center bg-[#dce6cf] px-4 py-2 text-center font-black uppercase">
                           People
                         </h4>
-                        <div className="grid gap-6">
+                        <div className="grid content-start gap-6">
                           {[
                             {
                               label: "Community Garden Organizations",
@@ -1514,8 +1564,223 @@ export default async function ProjectPage({
                       </section>
                     </div>
                   </section>
+
+                  <section className="grid gap-6">
+                    <h3 className="text-[24px] font-black leading-tight text-[#75A723] md:text-[28px] xl:text-[30px]">
+                      User Testing And Iteration
+                    </h3>
+                    <div className="grid gap-8 lg:grid-cols-[0.56fr_0.44fr] lg:items-start">
+                      <Image
+                        src="/projects/community-gardens/outputs/user-testing-gardening-toolkits.png?v=1"
+                        alt="Participants testing the gardening calendar, map and seed bag toolkit."
+                        width={908}
+                        height={934}
+                        sizes="(min-width: 1440px) 760px, (min-width: 1024px) 56vw, 100vw"
+                        className="h-auto w-full"
+                        unoptimized
+                      />
+
+                      <div className="grid gap-6">
+                        <h4 className="font-black">1. Gardening Toolkits</h4>
+
+                        <div className="grid gap-4 text-[14px] leading-snug md:text-[16px] xl:text-[18px]">
+                          <p className="w-fit rounded-full border-2 border-dashed border-[#75A723] px-4 py-2">
+                            I like the drawings and I would buy this map
+                          </p>
+                          <p className="ml-auto w-fit max-w-[90%] rounded-full border-2 border-dashed border-[#75A723] px-4 py-2">
+                            I wish the calendars had more guidance, like instructions or something
+                          </p>
+                          <p className="w-fit rounded-full border-2 border-dashed border-[#f2a54a] px-4 py-2">
+                            The paper quality of these calendars is comfortable to touch
+                          </p>
+                          <p className="ml-auto w-fit max-w-[90%] rounded-full border-2 border-dashed border-[#e6696b] px-4 py-2">
+                            The QR code tutorial for the seed packet was detailed and the packaging appealed to me
+                          </p>
+                        </div>
+
+                        <p>
+                          I invited three GSA students and two young passers-by at Forres Station to participate in the test individually.
+                        </p>
+
+                        <div className="grid gap-5 sm:grid-cols-2">
+                          <div>
+                            <p className="font-black text-[#777777]">A</p>
+                            <p>
+                              male
+                              <br />
+                              25 year old
+                              <br />
+                              Spanish
+                              <br />
+                              Frontend engineer
+                            </p>
+                          </div>
+                          <div>
+                            <p className="font-black text-[#777777]">N</p>
+                            <p>
+                              male
+                              <br />
+                              24 years old
+                              <br />
+                              Nigerian
+                              <br />
+                              working staff in Tesco
+                            </p>
+                          </div>
+                        </div>
+
+                        <p>
+                          All five of them commented that they liked the style of the toolkits, and one of them wanted the toolkit to be more instructive, so I added soil, sunlight, and irrigation suggestions specific to the month on the back of the calendar. A sheet of instructions was included explaining the connections between the map, the calendar, the seed packets, and how this toolkit relates to the Forres community garden.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-8 lg:grid-cols-[0.56fr_0.44fr] lg:items-start">
+                      <Image
+                        src="/projects/community-gardens/outputs/user-testing-street-sign.png?v=1"
+                        alt="Street sign material iteration from acrylic to wood with waterproof coating, tested beside a rose bed."
+                        width={904}
+                        height={482}
+                        sizes="(min-width: 1440px) 760px, (min-width: 1024px) 56vw, 100vw"
+                        className="h-auto w-full"
+                        unoptimized
+                      />
+
+                      <div className="grid gap-5">
+                        <div>
+                          <h4 className="font-black">2. Street Sign</h4>
+                          <p className="mt-3 text-[#777777]">
+                            Classmate C
+                            <br />
+                            Interaction Design
+                          </p>
+                        </div>
+
+                        <p>
+                          Since workshop could not do metalwork, I chose acrylic first for waterproofness, but after testing with my classmate C, the QR code was laser engraved on the acrylic board with a blurred pattern, and with the material itself being highly reflective, the user needed to look for an angle in order to scan it out.
+                        </p>
+
+                        <p className="font-black">
+                          So, I changed the street sign to wood and brushed two layers of waterproof coating as an iteration.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-8 lg:grid-cols-[0.56fr_0.44fr] lg:items-start">
+                      <Image
+                        src="/projects/community-gardens/outputs/user-testing-ar-game.png?v=1"
+                        alt="AR gardening game user testing with an iPad and Reality Composer scene."
+                        width={908}
+                        height={516}
+                        sizes="(min-width: 1440px) 760px, (min-width: 1024px) 56vw, 100vw"
+                        className="h-auto w-full"
+                        unoptimized
+                      />
+
+                      <div className="grid gap-5">
+                        <div>
+                          <h4 className="font-black">3. AR Game</h4>
+                          <div className="mt-3 grid gap-4 text-[#777777] sm:grid-cols-2">
+                            <p>
+                              Classmate C
+                              <br />
+                              Interaction Design
+                            </p>
+                            <p>
+                              Classmate K
+                              <br />
+                              Environment Design
+                            </p>
+                          </div>
+                        </div>
+
+                        <p>
+                          The two students commented that the AR effect added a lot of fun to Forres street, and said they were looking forward to seeing more models, encouraging me to explore more possibilities and themes.
+                        </p>
+
+                        <p>
+                          During our user testing, a passing teenager saw our iPad screen and took the initiative to ask us what we were doing, expressing interest and like for this AR effect and thinking it was awesome and cool.
+                        </p>
+                      </div>
+                    </div>
+                  </section>
                 </section>
               </CaseStudySubAccordion>
+
+              <CaseStudySubAccordion title="REFERENCE">
+                <section
+                  aria-label="References and appendix"
+                  className="grid gap-16 bg-white text-[14px] font-normal leading-relaxed text-black md:text-[16px] xl:text-[18px]"
+                >
+                  <section className="grid gap-6">
+                    <h3 className="text-[24px] font-black leading-tight md:text-[28px] xl:text-[30px]">
+                      References
+                    </h3>
+                    <div className="grid gap-4">
+                      <p>
+                        Blanco, H. and Lal, R., 2023. Restoration and Management of Degraded Soils. In: *Soil Conservation and Management*. Springer, Cham. Available at: https://doi.org/10.1007/978-3-031-30341-8_14.
+                      </p>
+                      <p>
+                        Evelegh, R., 2016. Big up Monty D: what young people think about gardening. *The Guardian*, [online] 22 September. Available at: https://www.theguardian.com/lifeandstyle/gardening-blog/2016/sep/22/big-up-monty-d-what-young-people-think-about-gardening.
+                      </p>
+                      <p>
+                        Kinema, 2024. Six Inches of Soil Event. [online] Available at: https://kinema.com/events/six-inches-of-soil-iyaqcj/tickets.
+                      </p>
+                      <p>
+                        Marsh, P., Diekmann, L.O., Egerer, M., Lin, B., Ossola, A. and Kingsley, J., 2021. Where birds felt louder: The garden as a refuge during COVID-19. *Wellbeing, Space and Society*, 2, p.100055. https://doi.org/10.1016/j.wss.2021.100055.
+                      </p>
+                      <p>
+                        Paz-Ferreiro, J., Gascó, G., Méndez, A. and Reichman, S.M., 2018. Soil Pollution and Remediation. *International Journal of Environmental Research and Public Health*, 15(8), p.1657. Available at: https://doi.org/10.3390/ijerph15081657.
+                      </p>
+                      <p>
+                        Produce Green Foundation, 2024. Community Supported Agriculture (CSA). [online] Available at: https://pcd.org.hk/csa/gb/csa01.html.
+                      </p>
+                      <p>
+                        Saggau, P., Busche, F., Brunotte, J., Duttmann, R. and Kuhwald, M., 2024. Soil loss due to crop harvesting in highly mechanized agriculture: A case study of sugar beet harvest in northern Germany. *Soil and Tillage Research*, 242, 106144. https://doi.org/10.1016/j.still.2024.106144.
+                      </p>
+                      <p>
+                        Scotland&apos;s Environment Web, 2024. Risk Maps. [online] Available at: https://soils.environment.gov.scot/maps/risk-maps/.
+                      </p>
+                      <p>
+                        Sultan, P., Tarafder, T., Pearson, D. and Henryks, J., 2020. Intention-behaviour gap and perceived behavioural control-behaviour gap in theory of planned behaviour: Moderating roles of communication, satisfaction and trust in organic food consumption. *Food Quality and Preference*, 81, 103838. https://doi.org/10.1016/j.foodqual.2019.103838.
+                      </p>
+                      <p>
+                        Tandon, A., Dhir, A., Kaur, P., Kushwah, S. and Salo, J., 2020. Why do people buy organic food? The moderating role of environmental concerns and trust. *Journal of Retailing and Consumer Services*, 57, 102247. https://doi.org/10.1016/j.jretconser.2020.102247.
+                      </p>
+                      <p>
+                        Willer, H., Trávníček, J. and Schlatter, S., 2024. *The World of Organic Agriculture. Statistics and Emerging Trends 2024*.
+                      </p>
+                    </div>
+                  </section>
+
+                  <section className="grid gap-6">
+                    <h3 className="text-[24px] font-black leading-tight md:text-[28px] xl:text-[30px]">
+                      Appendix
+                    </h3>
+                    <Image
+                      src="/projects/community-gardens/outputs/appendix.png?v=1"
+                      alt="Appendix documents including consent forms and participant information sheets."
+                      width={1630}
+                      height={573}
+                      sizes="(min-width: 1440px) 1440px, 100vw"
+                      className="h-auto w-full"
+                      unoptimized
+                    />
+                  </section>
+                </section>
+              </CaseStudySubAccordion>
+
+              <section className="flex justify-center pt-4">
+                <Image
+                  src="/projects/community-gardens/outputs/graduation-display.png?v=1"
+                  alt="Huilin Shen presenting the Community Gardens Forres graduation display."
+                  width={424}
+                  height={394}
+                  sizes="(min-width: 768px) 360px, 68vw"
+                  className="h-auto w-[68vw] max-w-[360px]"
+                  unoptimized
+                />
+              </section>
             </div>
           </ResearchProcessAccordion>
         ) : (
@@ -1534,9 +1799,59 @@ export default async function ProjectPage({
           </section>
         )}
 
-        <Link className="inline-flex w-fit items-center gap-2 rounded-full bg-[#202018] px-5 py-3 font-medium text-white" href="/">
-          Open the 3D park <ExternalLink size={18} />
-        </Link>
+        <footer className="grid gap-24 pt-32 md:gap-32 md:pt-48">
+          <div className="flex items-start justify-center" aria-hidden="true">
+            <div className="flex w-full items-start justify-center">
+              <span className="mt-2 h-px flex-1 border-t-2 border-dotted border-[#b8b0a2]" />
+              {["#F7D6E8", "#f48bb1", "#BFD1C7", "#E8D9A7", "#D9A183", "#AFCAD0", "#AEA7CC"].map((color) => (
+                <span
+                  key={color}
+                  className="mx-3 h-12 w-9 rounded-b-full md:mx-4"
+                  style={{
+                    backgroundColor: color,
+                    clipPath: "polygon(0 0, 100% 0, 50% 100%)",
+                  }}
+                />
+              ))}
+              <span className="mt-2 h-px flex-1 border-t-2 border-dotted border-[#b8b0a2]" />
+            </div>
+          </div>
+
+          <nav className="grid grid-cols-3 items-center gap-6">
+            <Link
+              href={previousProject.href}
+              aria-label="Previous Project"
+              className="group inline-flex min-h-16 items-center justify-self-start gap-4 text-center text-[18px] font-black text-black/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]"
+            >
+              <ArrowLeft size={48} strokeWidth={1.8} />
+              <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[260px] group-hover:opacity-100 group-focus-visible:max-w-[260px] group-focus-visible:opacity-100">
+                Previous Project
+              </span>
+            </Link>
+
+            <Link
+              href="/"
+              aria-label="Back to Huilin Park"
+              className="group inline-flex min-h-16 items-center justify-self-center gap-4 text-center text-[18px] font-black text-black/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]"
+            >
+              <Home size={48} strokeWidth={1.8} />
+              <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">
+                Back to Huilin Park
+              </span>
+            </Link>
+
+            <Link
+              href={nextProject.href}
+              aria-label="Next Project"
+              className="group inline-flex min-h-16 items-center justify-self-end gap-4 text-center text-[18px] font-black text-black/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]"
+            >
+              <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[220px] group-hover:opacity-100 group-focus-visible:max-w-[220px] group-focus-visible:opacity-100">
+                Next Project
+              </span>
+              <ArrowRight size={48} strokeWidth={1.8} />
+            </Link>
+          </nav>
+        </footer>
       </article>
     </main>
   );

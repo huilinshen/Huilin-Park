@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight, Home, Sparkles } from "lucide-react";
 import { getProjectBySlug, projects } from "@/data/projects";
+import { BodyClockCaseStudy } from "@/components/projects/BodyClockCaseStudy";
 import { CalendarFlipbook } from "@/components/projects/CalendarFlipbook";
 import { CaseStudySubAccordion } from "@/components/projects/CaseStudySubAccordion";
 import { ResearchProcessAccordion } from "@/components/projects/ResearchProcessAccordion";
@@ -49,6 +50,7 @@ export default async function ProjectPage({
   const projectIndex = projects.findIndex((item) => item.slug === project.slug);
   const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
   const nextProject = projects[(projectIndex + 1) % projects.length];
+  const isBodyClock = project.slug === "generative-watch-face";
   const isCommunityGardens = project.slug === "community-gardens";
   const communityProjectTitleClass =
     "max-w-5xl text-[38px] font-black leading-tight text-[#75A723] md:text-[52px] xl:text-[64px]";
@@ -60,6 +62,64 @@ export default async function ProjectPage({
     "text-[28px] font-black uppercase leading-tight text-[#75A723] md:text-[34px] xl:text-[40px]";
   const communityH3Class =
     "text-[22px] font-black leading-tight text-black md:text-[26px] xl:text-[30px]";
+
+  if (isBodyClock) {
+    return (
+      <main className="min-h-screen bg-[#050609] text-white">
+        <article className="mx-auto grid w-full gap-0 px-0 py-8">
+          <Link
+            className="group z-50 ml-5 inline-flex min-h-16 w-fit items-center justify-self-start gap-4 text-[18px] font-black text-white/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-white focus-visible:text-white md:ml-8 md:text-[22px] lg:ml-10 xl:ml-12 xl:text-[28px]"
+            href="/"
+            aria-label="Back to Huilin Park"
+          >
+            <Home size={48} strokeWidth={1.8} />
+            <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">
+              Back to Huilin Park
+            </span>
+          </Link>
+
+          <BodyClockCaseStudy />
+
+          <footer className="mx-auto grid w-full max-w-[1440px] gap-24 bg-[#02040a] px-5 pb-16 pt-40 md:px-8 md:pb-20 md:pt-56 lg:px-10 xl:px-12">
+            <nav className="grid grid-cols-3 items-center gap-6">
+              <Link
+                href={previousProject.href}
+                aria-label="Previous Project"
+                className="group inline-flex min-h-16 items-center justify-self-start gap-4 text-center text-[18px] font-black text-white/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-white focus-visible:text-white md:text-[22px] xl:text-[28px]"
+              >
+                <ArrowLeft size={48} strokeWidth={1.8} />
+                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[260px] group-hover:opacity-100 group-focus-visible:max-w-[260px] group-focus-visible:opacity-100">
+                  Previous Project
+                </span>
+              </Link>
+
+              <Link
+                href="/"
+                aria-label="Back to Huilin Park"
+                className="group inline-flex min-h-16 items-center justify-self-center gap-4 text-center text-[18px] font-black text-white/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-white focus-visible:text-white md:text-[22px] xl:text-[28px]"
+              >
+                <Home size={48} strokeWidth={1.8} />
+                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">
+                  Back to Huilin Park
+                </span>
+              </Link>
+
+              <Link
+                href={nextProject.href}
+                aria-label="Next Project"
+                className="group inline-flex min-h-16 items-center justify-self-end gap-4 text-center text-[18px] font-black text-white/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-white focus-visible:text-white md:text-[22px] xl:text-[28px]"
+              >
+                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[220px] group-hover:opacity-100 group-focus-visible:max-w-[220px] group-focus-visible:opacity-100">
+                  Next Project
+                </span>
+                <ArrowRight size={48} strokeWidth={1.8} />
+              </Link>
+            </nav>
+          </footer>
+        </article>
+      </main>
+    );
+  }
 
   return (
     <main className={`min-h-screen ${isCommunityGardens ? "bg-white text-black" : "bg-[#fffaf0] text-[#202018]"}`}>

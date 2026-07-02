@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   ChevronDown,
@@ -20,37 +21,37 @@ const chapters = [
 const principles = [
   {
     title: "Intent-first",
-    body: "The interface begins with what the user wants to achieve, then reduces the watch face to the smallest useful next action.",
+    body: "Start from what the user wants to achieve, then translate intent into goals and bite-sized tasks.",
     tone: "from-emerald-300 via-cyan-300 to-violet-300",
-    accent: "#34f5a6",
+    accent: "#FFFFFF",
   },
   {
     title: "Glanceable",
-    body: "Every generated state has to survive a two-second wrist glance without asking the user to decode decoration.",
+    body: "Surface only the most relevant action for the moment, so the experience can be understood in seconds.",
     tone: "from-amber-200 via-lime-200 to-cyan-200",
-    accent: "#f6c45f",
+    accent: "#34f5a6",
   },
   {
-    title: "Adaptive not chaotic",
-    body: "The face changes with context, but stable zones preserve time, priority and health cues.",
+    title: "Generative",
+    body: "Train the IFS model to translate intent into goal-specific interfaces, assembled from reusable components and governed by design-system rules.",
     tone: "from-purple-300 via-sky-300 to-emerald-200",
     accent: "#9b7cff",
   },
   {
     title: "User control",
-    body: "Users can lock modules, review AI suggestions, and decide when a generated task becomes active.",
+    body: "Use automation to reduce planning effort, while keeping users able to accept, adjust, defer or override every action.",
     tone: "from-pink-300 via-amber-200 to-lime-200",
     accent: "#ff7fb8",
   },
   {
     title: "Biological time",
-    body: "Chronobiology informs colour, density and pacing so the interface feels aligned with energy across the day.",
+    body: "Treat time as a living context, using energy, focus and recovery states to guide when actions should appear.",
     tone: "from-orange-200 via-rose-300 to-indigo-300",
     accent: "#ff9d4d",
   },
   {
     title: "Visible AI state",
-    body: "The watch shows when it is listening, inferring, waiting for confirmation, or acting.",
+    body: "Make the system's understanding visible, so users can tell when it is listening, processing, confident or confused.",
     tone: "from-teal-200 via-violet-300 to-amber-200",
     accent: "#74d6ff",
   },
@@ -344,46 +345,20 @@ function HeroClock() {
     { label: "10am presentation", className: "left-[3%] top-[27%] text-emerald-300" },
     { label: "Uber to meeting", className: "right-[6%] top-[23%] text-emerald-300" },
     { label: "Breathing guide", className: "bottom-[20%] left-[7%] text-violet-300" },
-    { label: "Bake pecan pie", className: "bottom-[25%] right-[11%] text-amber-300" },
+    { label: "Reply to WhatsApp messages", className: "bottom-[25%] right-[7%] text-amber-300" },
   ];
 
   return (
     <div className="relative mx-auto aspect-square w-[min(78vw,520px)] md:w-[520px]">
-      <div className="absolute inset-0 rounded-full border border-emerald-300/12 bg-[radial-gradient(circle,rgba(52,211,153,0.14),transparent_58%)] shadow-[0_0_140px_rgba(45,212,191,0.12)]" />
-      <div className="absolute inset-[9%] rounded-full border border-amber-300/12" />
-      <div className="absolute inset-[2%] rounded-full border border-white/[0.035]" />
-
-      {Array.from({ length: 32 }).map((_, index) => (
-        <span
-          key={index}
-          className={`absolute left-1/2 top-1/2 block origin-[0_0] ${
-            index % 8 === 0 ? "h-5 w-px bg-amber-300/55" : index % 4 === 0 ? "h-3 w-px bg-emerald-300/35" : "h-1.5 w-px bg-white/10"
-          }`}
-          style={{
-            transform: `rotate(${index * 11.25}deg) translateY(calc(min(39vw, 246px) * -1))`,
-          }}
+      <div className="absolute inset-0 overflow-hidden rounded-full shadow-[0_0_110px_rgba(105,214,151,0.22)]">
+        <Image
+          src="/projects/generative-watch-face/body-clock-hero-watch.svg"
+          alt="Body Clock watch face"
+          fill
+          priority
+          sizes="(max-width: 768px) 78vw, 448px"
+          className="rounded-full object-contain"
         />
-      ))}
-
-      <div className="absolute left-1/2 top-1/2 aspect-square w-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-indigo-300/10 bg-[#060716]/88 shadow-[inset_0_0_44px_rgba(120,96,255,0.2),0_0_70px_rgba(16,185,129,0.18)]">
-        {Array.from({ length: 12 }).map((_, index) => (
-          <span
-            key={index}
-            className={`absolute left-1/2 top-1/2 block origin-[0_0] rounded-full ${
-              index % 3 === 0 ? "h-5 w-0.5 bg-emerald-300" : "h-4 w-0.5 bg-emerald-300/75"
-            }`}
-            style={{
-              transform: `rotate(${index * 30}deg) translateY(calc(min(22.5vw, 132px) * -1))`,
-            }}
-          />
-        ))}
-
-        <div className="absolute left-1/2 top-1/2 h-1 w-[29%] origin-left -translate-y-1/2 rotate-[-20deg] rounded-full bg-white/80 shadow-[0_0_18px_rgba(255,255,255,0.34)]" />
-        <div className="absolute left-1/2 top-1/2 h-1 w-[34%] origin-left -translate-y-1/2 rotate-[-18deg] rounded-full bg-emerald-300 shadow-[0_0_24px_rgba(52,211,153,0.72)]" />
-        <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-300 shadow-[0_0_22px_rgba(52,211,153,0.9)]" />
-        <p className="absolute inset-x-0 bottom-[24%] text-center font-mono text-[26px] font-semibold tracking-[0.18em] text-white/82 md:text-[31px]">
-          02:12
-        </p>
       </div>
 
       {bubbles.map((bubble) => (
@@ -406,11 +381,23 @@ function PrincipleWatch({
   label: string;
   accent: string;
 }) {
+  const principleWatchImages: Record<string, string> = {
+    "Intent-first": "/projects/generative-watch-face/principles/principle-01-intent-first.png",
+    Glanceable: "/projects/generative-watch-face/principles/principle-02-glanceable.png",
+    Generative: "/projects/generative-watch-face/principles/principle-03-generative.png",
+    "User control": "/projects/generative-watch-face/principles/principle-04-user-control.png",
+    "Biological time": "/projects/generative-watch-face/principles/principle-05-biological-time.png",
+    "Visible AI state": "/projects/generative-watch-face/principles/principle-06-visible-ai-state.png",
+  };
+  const watchImageSrc = principleWatchImages[label];
+
   return (
     <div className="relative mx-auto grid justify-items-center gap-8">
       <div
         className="pointer-events-none absolute top-1/2 h-[420px] w-[420px] -translate-y-[58%] rounded-full blur-3xl transition duration-500 md:h-[560px] md:w-[560px]"
-        style={{ backgroundColor: `${accent}22` }}
+        style={{
+          background: `radial-gradient(circle, rgba(255,255,255,0.08) 0%, ${accent}12 42%, transparent 70%)`,
+        }}
       />
 
       <div className="relative aspect-square w-[min(78vw,430px)] md:w-[430px]">
@@ -422,78 +409,31 @@ function PrincipleWatch({
           <circle
             cx="250"
             cy="250"
-            r="232"
+            r="226"
             fill="none"
             stroke={accent}
-            strokeDasharray="3 10"
-            strokeOpacity="0.34"
+            strokeOpacity="0.2"
             strokeWidth="1"
             className="transition duration-500"
           />
-          <circle cx="250" cy="250" r="198" fill="none" stroke={accent} strokeOpacity="0.13" />
-          {Array.from({ length: 60 }).map((_, index) => {
-            const isMajor = index % 5 === 0;
-            const angle = (index * 6 * Math.PI) / 180;
-            const outer = 218;
-            const inner = isMajor ? 202 : 211;
-            const x1 = 250 + Math.sin(angle) * inner;
-            const y1 = 250 - Math.cos(angle) * inner;
-            const x2 = 250 + Math.sin(angle) * outer;
-            const y2 = 250 - Math.cos(angle) * outer;
-
-            return (
-              <line
-                key={index}
-                x1={x1}
-                y1={y1}
-                x2={x2}
-                y2={y2}
-                stroke={accent}
-                strokeOpacity={isMajor ? "0.72" : "0.24"}
-                strokeWidth={isMajor ? "2" : "1"}
-                strokeLinecap="round"
-                className="transition duration-500"
-              />
-            );
-          })}
+          <circle cx="250" cy="250" r="198" fill="none" stroke={accent} strokeOpacity="0.1" strokeWidth="1" />
         </svg>
 
+        {/* Outer rings stay separate from the swappable watch face content below. */}
         <div
-          className="absolute inset-[16%] rounded-full bg-[#050715] shadow-[inset_0_0_46px_rgba(120,96,255,0.16)] transition duration-500"
+          className="absolute inset-[8%] overflow-hidden rounded-full bg-[#050715] shadow-[inset_0_0_46px_rgba(120,96,255,0.16)] transition duration-500"
           style={{
             border: `1px solid ${accent}33`,
             boxShadow: `inset 0 0 46px rgba(120,96,255,0.16), 0 0 80px ${accent}30`,
           }}
         >
-          {Array.from({ length: 12 }).map((_, index) => {
-            const angle = index * 30;
-            return (
-              <span
-                key={index}
-                className="absolute left-1/2 top-1/2 block h-5 w-0.5 origin-[0_0] rounded-full transition duration-500"
-                style={{
-                  backgroundColor: accent,
-                  opacity: index % 3 === 0 ? 0.92 : 0.58,
-                  transform: `rotate(${angle}deg) translateY(-134px)`,
-                }}
-              />
-            );
-          })}
-          <div
-            className="absolute left-1/2 top-1/2 h-1 w-[32%] origin-left -translate-y-1/2 rotate-[-18deg] rounded-full transition duration-500"
-            style={{
-              backgroundColor: accent,
-              boxShadow: `0 0 24px ${accent}`,
-            }}
+          <Image
+            src={watchImageSrc}
+            alt={`${label} watch face`}
+            fill
+            sizes="(max-width: 768px) 64vw, 362px"
+            className="object-contain"
           />
-          <div className="absolute left-1/2 top-1/2 h-1 w-[26%] origin-left -translate-y-1/2 rotate-[-22deg] rounded-full bg-white/70" />
-          <div
-            className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full transition duration-500"
-            style={{ backgroundColor: accent, boxShadow: `0 0 22px ${accent}` }}
-          />
-          <p className="absolute inset-x-0 bottom-[24%] text-center font-mono text-[30px] font-semibold tracking-[0.18em] text-white/82">
-            02:12
-          </p>
         </div>
       </div>
 
@@ -851,6 +791,8 @@ export function BodyClockCaseStudy() {
             {[
               "Huawei Watch · HarmonyOS",
               "Intent-first AI System",
+              "AI-native Design",
+              "Scalable Design System",
               "Internal buy-in from China HMI HQ & ERI",
             ].map((chip) => (
               <span key={chip} className="rounded-full border border-white/10 bg-white/[0.025] px-5 py-3 font-mono text-[15px] font-semibold tracking-[0.02em] text-white/42 backdrop-blur md:text-[17px]">
@@ -878,50 +820,106 @@ export function BodyClockCaseStudy() {
       <section id="brief" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.015),transparent_34%,rgba(0,0,0,0.18))]" />
         <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-16">
-          <div className="grid gap-6">
+          <div className="grid gap-5">
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.34em] text-white/25">
               The Brief
             </p>
-            <h2 className="max-w-[980px] text-[48px] font-normal leading-[0.98] tracking-[-0.055em] text-white md:text-[72px] lg:text-[82px]">
-              Three unresolved problems.
-            </h2>
           </div>
 
-          <div className="grid gap-12 md:grid-cols-3 md:gap-8 lg:gap-14">
-            {[
-              {
-                number: "01",
-                tone: "text-emerald-300",
-                title: "The watch couldn't remain a phone accessory.",
-                body: "Smartwatches in 2023 were largely notification mirrors. To justify the form factor, the watch needed to originate value — not just relay it from a paired device.",
-              },
-              {
-                number: "02",
-                tone: "text-violet-300",
-                title: "The wrist gives users only seconds of attention.",
-                body: "The average wrist-raise interaction lasts 2.1 seconds. Every design decision had to resolve against this constraint. No scrolling. No multi-step navigation. No reading.",
-              },
-              {
-                number: "03",
-                tone: "text-amber-300",
-                title: "An invisible AI pipeline needed to become legible.",
-                body: "Huawei's IFS parsed goals into tasks silently. Users felt acted upon without understanding why. The design challenge: make AI visible without making it verbose.",
-              },
-            ].map((item) => (
-              <article key={item.number} className="grid content-start gap-7 border-t border-white/[0.08] pt-8">
-                <p className={`font-mono text-[13px] font-semibold tracking-[0.16em] ${item.tone}`}>
-                  {item.number}
-                </p>
-                <div className="grid gap-5">
-                  <h3 className="text-[25px] font-normal leading-snug tracking-[-0.025em] text-white md:text-[29px]">
-                    {item.title}
-                  </h3>
-                  <p className="text-[17px] leading-relaxed text-white/42 md:text-[18px]">
-                    {item.body}
+          <div className="grid gap-20">
+            <div className="grid gap-14 lg:gap-16">
+              {[
+                {
+                  label: "Brief 01",
+                  title: "Business Context",
+                  body: [
+                    "Huawei's smartwatch business remained one of its strongest consumer products despite increasing limitations across its smartphone ecosystem. This created a strategic opportunity: instead of positioning the watch as a companion device, could it become an AI-native product in its own right?",
+                    "The project explored how local AI could transform the smartwatch from a passive notification surface into an intelligent, standalone experience, establishing a new direction for future HarmonyOS wearables.",
+                  ],
+                },
+                {
+                  label: "Brief 02",
+                  title: "Product Vision",
+                  body: [
+                    "Body Clock is an AI-powered watch face built on Huawei's Intent-first System (IFS).",
+                    "Rather than asking users to navigate apps or manually manage schedules, the system starts from user intent, translates it into goals, breaks goals into actionable tasks, and surfaces the right interaction at the right moment.",
+                    "The watch face became the visible layer of this AI architecture—making complex reasoning feel calm, glanceable and trustworthy on one of the smallest consumer interfaces.",
+                  ],
+                },
+                {
+                  label: "Brief 03",
+                  title: "My Role",
+                  body: [
+                    "As the UX Designer, I translated a novel AI operating model into a production-ready wearable experience.",
+                    "Working closely with AI engineers, researchers and product stakeholders, I designed the interaction framework, watch interface and AI-native design patterns that enabled complex goal-based interactions to feel intuitive, predictable and scalable on constrained hardware.",
+                  ],
+                },
+              ].map((item) => (
+                <article key={item.title} className="grid max-w-[900px] gap-5 border-t border-white/[0.08] pt-8">
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.32em] text-white/25">
+                    {item.label}
                   </p>
-                </div>
-              </article>
-            ))}
+                  <div className="grid gap-5">
+                    <h2 className="text-[34px] font-normal leading-none tracking-[-0.04em] text-white md:text-[46px]">
+                      {item.title}
+                    </h2>
+                    <div className="grid max-w-[820px] gap-4 text-[17px] leading-relaxed text-white/44 md:text-[19px]">
+                      {item.body.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="grid gap-10">
+              <div className="grid max-w-[820px] gap-4">
+                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.34em] text-white/25">
+                  Brief 04
+                </p>
+                <h2 className="text-[42px] font-normal leading-none tracking-[-0.05em] text-white md:text-[62px]">
+                  Design Challenges
+                </h2>
+              </div>
+
+              <div className="grid gap-12 md:grid-cols-3 md:gap-8 lg:gap-14">
+                {[
+                  {
+                    number: "01",
+                    tone: "text-emerald-300",
+                    title: "From Companion to First-class Citizen",
+                    body: "The smartwatch could no longer rely on the smartphone to create value. Instead of mirroring notifications, it needed to become an intelligent product capable of understanding user goals and acting independently.",
+                  },
+                  {
+                    number: "02",
+                    tone: "text-violet-300",
+                    title: "Designing AI for a 2-second Interaction",
+                    body: "A smartwatch offers only seconds of attention, limited screen space and constrained on-device compute. Every interaction had to communicate meaningful AI assistance without adding cognitive load or visual clutter.",
+                  },
+                  {
+                    number: "03",
+                    tone: "text-amber-300",
+                    title: "Making AI Explainable",
+                    body: "The Intent-first System could reason through goals, context and tasks behind the scenes, but its decision-making remained invisible to users. The challenge was to make AI understandable and trustworthy without exposing unnecessary complexity.",
+                  },
+                ].map((item) => (
+                  <article key={item.number} className="grid content-start gap-7 border-t border-white/[0.08] pt-8">
+                    <p className={`font-mono text-[13px] font-semibold tracking-[0.16em] ${item.tone}`}>
+                      {item.number}
+                    </p>
+                    <div className="grid gap-5">
+                      <h3 className="text-[25px] font-normal leading-snug tracking-[-0.025em] text-white md:text-[29px]">
+                        {item.title}
+                      </h3>
+                      <p className="text-[17px] leading-relaxed text-white/42 md:text-[18px]">
+                        {item.body}
+                      </p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -938,7 +936,7 @@ export function BodyClockCaseStudy() {
               Design Principles
             </p>
             <h2 className="text-[48px] font-normal leading-[0.98] tracking-[-0.055em] text-white md:text-[72px] lg:text-[82px]">
-              Six rules for an AI-native watch face.
+              Six Principles for an AI-native watch face
             </h2>
           </div>
 
@@ -950,6 +948,12 @@ export function BodyClockCaseStudy() {
             <div className="order-2 grid lg:order-1">
               {principles.map((principle, index) => {
                 const isActive = principleIndex === index;
+                const chipBackground =
+                  principle.title === "Intent-first"
+                    ? "#FFFFFF"
+                    : principle.title === "Glanceable"
+                      ? "#34f5a6"
+                      : principle.accent;
 
                 return (
                   <button
@@ -992,7 +996,7 @@ export function BodyClockCaseStudy() {
                       <span
                         className="mt-2 hidden h-2.5 w-2.5 rounded-full transition duration-500 md:block"
                         style={{
-                          backgroundColor: principle.accent,
+                          backgroundColor: chipBackground,
                           opacity: isActive ? 1 : 0.18,
                           boxShadow: isActive ? `0 0 24px ${principle.accent}` : "none",
                         }}

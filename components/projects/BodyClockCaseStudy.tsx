@@ -1,20 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ChevronDown,
-  Route,
-  Sparkles,
-  Workflow,
 } from "lucide-react";
 
 const chapters = [
+  ["Hero", "hero"],
+  ["Project Film", "project-film"],
   ["Brief", "brief"],
   ["Principles", "principles"],
+  ["Architecture", "architecture"],
   ["Workflow", "workflow"],
-  ["Day Orbit", "journey"],
-  ["Lab", "lab"],
+  ["CUJ", "ujp"],
+  ["Iteration", "iteration"],
   ["Impact", "impact"],
 ];
 
@@ -54,6 +54,37 @@ const principles = [
     body: "Make the system's understanding visible, so users can tell when it is listening, processing, confident or confused.",
     tone: "from-teal-200 via-violet-300 to-amber-200",
     accent: "#74d6ff",
+  },
+];
+
+const architectureStages = [
+  {
+    number: "01",
+    title: "Understand",
+    body: "Interpret intent, context, feasibility and safety before taking action.",
+    accent: "52,245,166",
+    highlight: { left: "3.5%", top: "15%", width: "43%", height: "22%" },
+  },
+  {
+    number: "02",
+    title: "Plan",
+    body: "Translate intent into a structured goal and break it into executable tasks.",
+    accent: "155,124,255",
+    highlight: { left: "24%", top: "35%", width: "28%", height: "18%" },
+  },
+  {
+    number: "03",
+    title: "Coordinate",
+    body: "Use scheduling, memory and context to adapt execution as conditions change.",
+    accent: "116,214,255",
+    highlight: { left: "51%", top: "4%", width: "30%", height: "54%" },
+  },
+  {
+    number: "04",
+    title: "Execute",
+    body: "Coordinate tools and services while surfacing only the next relevant interaction.",
+    accent: "246,196,95",
+    highlight: { left: "42%", top: "55%", width: "38%", height: "37%" },
   },
 ];
 
@@ -148,6 +179,45 @@ const journey = [
     value: "20",
     label: "recap",
   },
+];
+
+const orbitTickLines = [
+  { x1: 50, y1: 9.5, x2: 50, y2: 6.2, major: true },
+  { x1: 60.922, y1: 9.238, x2: 61.336, y2: 7.692, major: false },
+  { x1: 71.1, y1: 13.454, x2: 71.9, y2: 12.068, major: false },
+  { x1: 79.84, y1: 20.16, x2: 80.971, y2: 19.029, major: false },
+  { x1: 86.546, y1: 28.9, x2: 87.932, y2: 28.1, major: false },
+  { x1: 90.762, y1: 39.078, x2: 92.308, y2: 38.664, major: false },
+  { x1: 90.5, y1: 50, x2: 93.8, y2: 50, major: true },
+  { x1: 90.762, y1: 60.922, x2: 92.308, y2: 61.336, major: false },
+  { x1: 86.546, y1: 71.1, x2: 87.932, y2: 71.9, major: false },
+  { x1: 79.84, y1: 79.84, x2: 80.971, y2: 80.971, major: false },
+  { x1: 71.1, y1: 86.546, x2: 71.9, y2: 87.932, major: false },
+  { x1: 60.922, y1: 90.762, x2: 61.336, y2: 92.308, major: false },
+  { x1: 50, y1: 90.5, x2: 50, y2: 93.8, major: true },
+  { x1: 39.078, y1: 90.762, x2: 38.664, y2: 92.308, major: false },
+  { x1: 28.9, y1: 86.546, x2: 28.1, y2: 87.932, major: false },
+  { x1: 20.16, y1: 79.84, x2: 19.029, y2: 80.971, major: false },
+  { x1: 13.454, y1: 71.1, x2: 12.068, y2: 71.9, major: false },
+  { x1: 9.238, y1: 60.922, x2: 7.692, y2: 61.336, major: false },
+  { x1: 9.5, y1: 50, x2: 6.2, y2: 50, major: true },
+  { x1: 9.238, y1: 39.078, x2: 7.692, y2: 38.664, major: false },
+  { x1: 13.454, y1: 28.9, x2: 12.068, y2: 28.1, major: false },
+  { x1: 20.16, y1: 20.16, x2: 19.029, y2: 19.029, major: false },
+  { x1: 28.9, y1: 13.454, x2: 28.1, y2: 12.068, major: false },
+  { x1: 39.078, y1: 9.238, x2: 38.664, y2: 7.692, major: false },
+];
+
+const journeyOrbitPositions = [
+  { left: 93, top: 50 },
+  { left: 91.535, top: 61.129 },
+  { left: 87.239, top: 71.5 },
+  { left: 71.5, top: 87.239 },
+  { left: 50, top: 93 },
+  { left: 38.871, top: 91.535 },
+  { left: 19.594, top: 80.406 },
+  { left: 7, top: 50 },
+  { left: 28.5, top: 12.761 },
 ];
 
 const challenges = [
@@ -448,71 +518,144 @@ function PrincipleWatch({
 }
 
 function WorkflowLoopAnimation() {
-  const steps = [
+  const systemSteps = [
     {
       title: "Intent",
-      label: "Natural request",
-      body: "Get me to my next meeting with Uber.",
       accent: "#34f5a6",
-      Icon: Sparkles,
     },
     {
       title: "Goal",
-      label: "AI interprets outcome",
-      body: "Arrive on time with the least cognitive load.",
       accent: "#9b7cff",
-      Icon: Route,
     },
     {
       title: "Task",
-      label: "Watch-sized actions",
-      body: "Calendar, route, Uber booking and ETA monitoring.",
       accent: "#f6c45f",
-      Icon: Workflow,
+    },
+    {
+      title: "Next Goal",
+      accent: "#74d6ff",
+    },
+  ];
+
+  const journeyStages = [
+    {
+      title: "Intent Input",
+      body: "Express a natural request.",
+      accent: "#34f5a6",
+      imageSrc: "/projects/generative-watch-face/workflow/intent-input.png",
+    },
+    {
+      title: "User Confirmation",
+      body: "Confirm the interpreted goal.",
+      accent: "#9b7cff",
+      imageSrc: "/projects/generative-watch-face/workflow/user-confirmation.png",
+    },
+    {
+      title: "AI Planning",
+      body: "Break the goal into actionable tasks.",
+      accent: "#d8cc62",
+      imageSrc: "/projects/generative-watch-face/workflow/ai-planning.png",
+    },
+    {
+      title: "Live Execution",
+      body: "Surface the next relevant action.",
+      accent: "#f6c45f",
+      imageSrc: "/projects/generative-watch-face/workflow/live-execution.png",
+    },
+    {
+      title: "Goal Completion",
+      body: "Complete the goal with clear feedback.",
+      accent: "#ff9d4d",
+      imageSrc: "/projects/generative-watch-face/workflow/goal-completion.png",
+    },
+    {
+      title: "Next Best Action",
+      body: "Continue with what matters next.",
+      accent: "#74d6ff",
+      imageSrc: "/projects/generative-watch-face/workflow/next-best-action.png",
     },
   ];
 
   return (
-    <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-20">
-      <div className="grid">
-        {steps.map(({ title, label, body, accent, Icon }, index) => (
-          <div
-            key={title}
-            className="workflow-loop-step grid gap-4 border-t py-7 transition duration-500 md:grid-cols-[68px_1fr]"
-            style={{ animationDelay: `${index * 3}s`, ["--active-color" as string]: accent }}
-          >
-            <span className="font-mono text-[13px] font-semibold tracking-[0.18em]" style={{ color: accent }}>
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <div className="grid gap-3">
-              <div className="flex items-center gap-4">
-                <Icon size={24} strokeWidth={1.35} style={{ color: accent }} />
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-white/28">
-                  {label}
-                </p>
-              </div>
-              <h3 className="text-[30px] font-normal leading-tight tracking-[-0.04em] text-white md:text-[42px]">
+    <div className="grid gap-3 border-y border-white/[0.08] py-4">
+      <div className="grid w-full grid-cols-1 gap-2.5">
+        <div className="lg:col-span-6">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-white/28">
+            System model
+          </p>
+        </div>
+
+        <div className="grid w-full justify-self-stretch gap-3 lg:w-[calc(100%+60px)] lg:grid-cols-6">
+          {systemSteps.map(({ title, accent }, index) => (
+            <div
+              key={title}
+              className={`grid gap-1.5 ${
+                index === 0
+                  ? "lg:col-span-1 lg:col-start-1"
+                  : index === 1
+                    ? "lg:col-span-1 lg:col-start-2"
+                    : index === 2
+                      ? "lg:col-span-3 lg:col-start-3"
+                      : "lg:col-span-1 lg:col-start-6"
+              }`}
+            >
+              <p
+                className="font-mono text-[10px] font-semibold tracking-[0.2em]"
+                style={{ color: accent }}
+              >
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <h3 className="text-[25px] font-normal leading-none tracking-[-0.045em] text-white md:text-[30px]">
                 {title}
               </h3>
-              <p className="max-w-[620px] text-[17px] leading-relaxed text-white/52 md:text-[19px]">
-                {body}
-              </p>
+              <span
+                className="mt-1 hidden h-px w-full opacity-35 lg:block"
+                style={{ backgroundColor: accent }}
+              />
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      <div className="relative mx-auto aspect-square w-full max-w-[420px]">
-        <div className="workflow-loop-glow absolute inset-[-22%] rounded-full blur-3xl" />
-        <div className="absolute inset-0 rounded-full border border-white/10 bg-[#050715] shadow-[inset_0_0_54px_rgba(255,255,255,0.04)]">
-          <div className="absolute inset-8 rounded-full border border-emerald-300/20" />
-          <div className="absolute inset-20 rounded-full border border-violet-300/20" />
-          <div className="absolute inset-32 rounded-full border border-amber-300/20" />
-          <div className="workflow-loop-hand absolute left-1/2 top-1/2 h-1 w-[34%] origin-left -translate-y-1/2 rounded-full bg-emerald-300 shadow-[0_0_22px_rgba(52,245,166,0.75)]" />
-          <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_0_22px_rgba(255,255,255,0.8)]" />
-          <p className="workflow-loop-watch-label absolute inset-x-0 bottom-[27%] text-center font-mono text-[24px] font-semibold tracking-[0.18em] text-white/80">
-            INTENT
+      <div className="grid gap-3">
+        <div className="grid gap-2.5">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-white/28">
+            Experience flow
           </p>
+          <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-6 lg:gap-4">
+            <div className="pointer-events-none absolute left-[7%] right-[7%] top-[92px] hidden h-px bg-white/10 lg:block" />
+
+            {journeyStages.map(({ title, body, accent, imageSrc }, index) => (
+              <div key={title} className="group relative grid gap-3">
+                <div className="flex min-h-[32px] items-start justify-between gap-3">
+                  <p className="text-[16px] leading-tight tracking-[-0.02em] text-white/86">
+                    {title}
+                  </p>
+                  {index < journeyStages.length - 1 ? (
+                    <span className="hidden font-mono text-[18px] leading-none text-white/30 lg:block">&rarr;</span>
+                  ) : null}
+                </div>
+
+                <div className="relative z-10 mx-auto grid aspect-square w-[130px] place-items-center xl:w-[146px]">
+                  <div
+                    className="absolute inset-[-1px] rounded-full opacity-28 blur-xl transition duration-500 group-hover:opacity-52"
+                    style={{ backgroundColor: accent }}
+                  />
+                  <Image
+                    src={imageSrc}
+                    alt={`${title} watch screen`}
+                    fill
+                    sizes="(max-width: 1279px) 130px, 146px"
+                    className="object-contain"
+                  />
+                </div>
+
+                <p className="max-w-[180px] text-center text-[14px] leading-snug text-white/52 lg:text-left">
+                  {body}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -535,14 +678,7 @@ function DayOrbit({
       <div className="absolute inset-[4%] rounded-full border border-dashed border-white/[0.035]" />
       <svg className="absolute inset-[6%] h-[88%] w-[88%]" viewBox="0 0 100 100" aria-hidden="true">
         <circle cx="50" cy="50" r="43" fill="none" stroke="rgba(246,196,95,0.28)" strokeWidth="0.42" />
-        {Array.from({ length: 24 }).map((_, index) => {
-          const angle = (index * 15 - 90) * (Math.PI / 180);
-          const inner = index % 6 === 0 ? 40.5 : 42.2;
-          const outer = 43.8;
-          const x1 = 50 + Math.cos(angle) * inner;
-          const y1 = 50 + Math.sin(angle) * inner;
-          const x2 = 50 + Math.cos(angle) * outer;
-          const y2 = 50 + Math.sin(angle) * outer;
+        {orbitTickLines.map(({ x1, y1, x2, y2, major }, index) => {
           return (
             <line
               key={index}
@@ -550,8 +686,8 @@ function DayOrbit({
               y1={y1}
               x2={x2}
               y2={y2}
-              stroke={index % 6 === 0 ? "rgba(246,196,95,0.62)" : "rgba(255,255,255,0.12)"}
-              strokeWidth={index % 6 === 0 ? "0.55" : "0.25"}
+              stroke={major ? "rgba(246,196,95,0.62)" : "rgba(255,255,255,0.12)"}
+              strokeWidth={major ? "0.55" : "0.25"}
             />
           );
         })}
@@ -583,10 +719,7 @@ function DayOrbit({
       </div>
 
       {journey.map((item, index) => {
-        const hour = Number(item.time.split(":")[0]);
-        const angle = (hour * 15 - 90) * (Math.PI / 180);
-        const x = 50 + Math.cos(angle) * 43;
-        const y = 50 + Math.sin(angle) * 43;
+        const position = journeyOrbitPositions[index];
         const isActive = journeyIndex === index;
 
         return (
@@ -596,8 +729,8 @@ function DayOrbit({
             onClick={() => onSelect(index)}
             className="absolute grid h-10 w-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full transition duration-300"
             style={{
-              left: `${x}%`,
-              top: `${y}%`,
+              left: `${position.left}%`,
+              top: `${position.top}%`,
               backgroundColor: isActive ? `${item.accent}36` : "rgba(255,255,255,0.06)",
               boxShadow: isActive ? `0 0 34px ${item.accent}55` : "none",
             }}
@@ -662,10 +795,12 @@ function JourneyDetail({ activeJourney }: { activeJourney: (typeof journey)[numb
 }
 
 export function BodyClockCaseStudy() {
+  const projectFilmVideoRef = useRef<HTMLVideoElement | null>(null);
   const [principleIndex, setPrincipleIndex] = useState(0);
   const [journeyIndex, setJourneyIndex] = useState(2);
-  const [activeChapter, setActiveChapter] = useState("brief");
+  const [activeChapter, setActiveChapter] = useState("hero");
   const [activeChallengeIndex, setActiveChallengeIndex] = useState<number | null>(null);
+  const [activeArchitectureIndex, setActiveArchitectureIndex] = useState(0);
   const activePrinciple = principles[principleIndex];
   const activeJourney = journey[journeyIndex];
 
@@ -695,6 +830,35 @@ export function BodyClockCaseStudy() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const video = projectFilmVideoRef.current;
+    const section = document.getElementById("project-film");
+
+    if (!video || !section) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) {
+          return;
+        }
+
+        video.muted = true;
+        video.play().catch(() => {
+          // Browser autoplay policies can still reject play in edge cases.
+        });
+      },
+      {
+        threshold: 0.38,
+      },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="body-clock-page bg-[#050609] text-white">
       <style>{`
@@ -706,75 +870,19 @@ export function BodyClockCaseStudy() {
           0%, 100% { transform: translateY(0); opacity: 0.35; }
           50% { transform: translateY(6px); opacity: 0.8; }
         }
-        @keyframes workflowLoopStep {
-          0%, 30% {
-            opacity: 1;
-            border-color: color-mix(in srgb, var(--active-color) 75%, transparent);
-            text-shadow: 0 0 24px color-mix(in srgb, var(--active-color) 32%, transparent);
-          }
-          37%, 100% {
-            opacity: 0.34;
-            border-color: rgba(255,255,255,0.08);
-            text-shadow: none;
-          }
-        }
-        @keyframes workflowLoopGlow {
-          0%, 28% { background: rgba(52,245,166,0.22); }
-          33%, 61% { background: rgba(155,124,255,0.22); }
-          66%, 94% { background: rgba(246,196,95,0.2); }
-          100% { background: rgba(52,245,166,0.22); }
-        }
-        @keyframes workflowLoopHand {
-          0%, 28% {
-            transform: translateY(-50%) rotate(-22deg);
-            background: #34f5a6;
-            box-shadow: 0 0 22px rgba(52,245,166,0.75);
-          }
-          33%, 61% {
-            transform: translateY(-50%) rotate(20deg);
-            background: #9b7cff;
-            box-shadow: 0 0 22px rgba(155,124,255,0.75);
-          }
-          66%, 94% {
-            transform: translateY(-50%) rotate(72deg);
-            background: #f6c45f;
-            box-shadow: 0 0 22px rgba(246,196,95,0.72);
-          }
-          100% {
-            transform: translateY(-50%) rotate(-22deg);
-            background: #34f5a6;
-            box-shadow: 0 0 22px rgba(52,245,166,0.75);
-          }
-        }
-        @keyframes workflowLoopDot {
-          0%, 20% {
-            background: rgba(255,255,255,0.9);
-            box-shadow: 0 0 20px rgba(255,255,255,0.42);
-            transform: scale(1.25);
-          }
-          28%, 100% {
-            background: rgba(255,255,255,0.26);
-            box-shadow: none;
-            transform: scale(1);
-          }
-        }
         .body-clock-reveal { animation: bodyClockReveal 720ms ease-out both; }
         .body-clock-scroll { animation: bodyClockScroll 1.8s ease-in-out infinite; }
-        .workflow-loop-step { animation: workflowLoopStep 9s ease-in-out infinite; }
-        .workflow-loop-glow { animation: workflowLoopGlow 9s ease-in-out infinite; }
-        .workflow-loop-hand { animation: workflowLoopHand 9s ease-in-out infinite; }
-        .workflow-loop-dot { animation: workflowLoopDot 9s ease-in-out infinite; }
       `}</style>
 
-      <nav className="sticky top-4 z-40 mx-auto flex w-[calc(100%-2rem)] max-w-[520px] items-center justify-center gap-1 rounded-full border border-white/10 bg-black/45 p-1 backdrop-blur-xl">
+      <nav className="sticky top-4 z-40 mx-auto flex w-max max-w-[calc(100%-2rem)] items-center justify-center gap-1.5 overflow-x-auto rounded-full border border-white/10 bg-black/45 p-1 backdrop-blur-xl">
         {chapters.map(([label, id]) => (
           <a
             key={id}
             href={`#${id}`}
-            className={`rounded-full px-3 py-2 font-mono text-[11px] font-semibold tracking-[0.08em] transition md:px-4 ${
+            className={`shrink-0 whitespace-nowrap rounded-full px-2 py-2 font-mono text-[9px] font-semibold tracking-[0.02em] transition md:text-[10px] ${
               activeChapter === id
-                ? "bg-emerald-400/14 text-emerald-300 shadow-[0_0_22px_rgba(16,185,129,0.12)]"
-                : "text-white/38 hover:bg-emerald-400/12 hover:text-emerald-300"
+                ? "bg-white/[0.08] text-white shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+                : "text-white/38 hover:bg-white/[0.06] hover:text-white/72"
             }`}
           >
             {label}
@@ -814,6 +922,26 @@ export function BodyClockCaseStudy() {
             Scroll
             <span className="text-[18px] leading-none">⌄</span>
           </a>
+        </div>
+      </section>
+
+      <section id="project-film" className="relative overflow-hidden bg-[#02040a] px-5 py-20 text-white md:px-10 lg:py-24">
+        <div className="relative z-10 mx-auto grid w-full max-w-[1280px]">
+          <div className="mx-auto grid w-full max-w-[1080px] gap-3">
+            <video
+              ref={projectFilmVideoRef}
+              className="aspect-video w-full bg-black object-contain"
+              src="/projects/generative-watch-face/body-clock-video.mp4"
+              title="A one-minute introduction to Body Clock — an AI-powered watch face that turns user intent into contextual action."
+              muted
+              playsInline
+              controls
+              preload="metadata"
+            />
+            <p className="text-[15px] leading-relaxed text-white/42 md:text-[17px]">
+              A one-minute introduction to Body Clock — an AI-powered watch face that turns user intent into contextual action.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -1010,22 +1138,121 @@ export function BodyClockCaseStudy() {
         </div>
       </section>
 
-      <section id="workflow" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_46%,rgba(52,245,166,0.08),transparent_28%)]" />
-        <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-16">
-          <div className="grid max-w-[980px] gap-6">
+      <section id="architecture" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(116,214,255,0.07),transparent_34%),radial-gradient(circle_at_28%_64%,rgba(52,245,166,0.055),transparent_30%)]" />
+        <div className="relative z-10 mx-auto grid w-full max-w-[1280px] items-start gap-14 xl:grid-cols-[minmax(340px,0.35fr)_minmax(0,0.65fr)] xl:gap-14">
+          <div className="grid gap-10">
+            <div className="grid gap-6">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.34em] text-white/25">
+                Architecture
+              </p>
+              <div className="grid gap-5">
+                <h2 className="text-[44px] font-normal leading-[0.98] tracking-[-0.055em] text-white md:text-[64px]">
+                  Intent-first AI Pipeline
+                </h2>
+                <p className="max-w-none text-[17px] leading-relaxed text-white/46 md:text-[19px]">
+                  Behind every interaction is a lightweight, intent-first pipeline that reasons before it responds.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid">
+              {architectureStages.map((stage, index) => {
+                const isActive = activeArchitectureIndex === index;
+
+                return (
+                <article
+                  key={stage.number}
+                  data-architecture-stage
+                  role="button"
+                  tabIndex={0}
+                  onMouseEnter={() => setActiveArchitectureIndex(index)}
+                  onFocus={() => setActiveArchitectureIndex(index)}
+                  onClick={() => setActiveArchitectureIndex(index)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setActiveArchitectureIndex(index);
+                    }
+                  }}
+                  className="grid cursor-pointer gap-4 border-t py-6 outline-none transition duration-500 md:grid-cols-[58px_1fr] md:gap-5"
+                  style={{
+                    borderColor: isActive ? `rgba(${stage.accent},0.34)` : "rgba(255,255,255,0.08)",
+                    opacity: isActive ? 1 : 0.52,
+                  }}
+                >
+                  <p
+                    className="font-mono text-[12px] font-semibold tracking-[0.18em] transition duration-500"
+                    style={{ color: isActive ? `rgb(${stage.accent})` : "#34f5a6" }}
+                  >
+                    {stage.number}
+                  </p>
+                  <div className="grid gap-2">
+                    <h3 className="text-[24px] font-normal leading-tight tracking-[-0.03em] text-white transition duration-500 md:text-[28px]">
+                      {stage.title}
+                    </h3>
+                    <p className="text-[16px] leading-relaxed text-white/44 transition duration-500 md:text-[17px]">
+                      {stage.body}
+                    </p>
+                  </div>
+                </article>
+                );
+              })}
+            </div>
+
+            <p className="max-w-none border-t border-white/[0.08] pt-7 text-[19px] font-medium leading-relaxed tracking-[-0.02em] text-white/68 md:text-[22px]">
+              Complexity stays in the system. Only the next relevant action reaches the wrist.
+            </p>
+          </div>
+
+          <div className="relative w-full max-w-[620px] justify-self-start overflow-hidden border-y border-white/[0.08] py-4 xl:mt-[303px] xl:max-w-none xl:justify-self-stretch">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(116,214,255,0.10),transparent_48%)]" />
+            <div className="relative aspect-[8924/7714] w-full overflow-hidden bg-white">
+              <Image
+                src="/projects/generative-watch-face/architecture/ifs-pipeline.jpg"
+                alt="IFS Pipeline overview"
+                fill
+                sizes="(max-width: 1023px) calc(100vw - 40px), 65vw"
+                className="object-contain brightness-[0.78] transition duration-700"
+              />
+              {architectureStages.map((stage, index) => {
+                const isActive = activeArchitectureIndex === index;
+
+                return (
+                  <div
+                    key={stage.number}
+                    className="pointer-events-none absolute rounded-[18px] transition duration-700"
+                    style={{
+                      ...stage.highlight,
+                      opacity: isActive ? 1 : 0,
+                      backgroundColor: `rgba(${stage.accent},0.18)`,
+                      border: `1px solid rgba(${stage.accent},0.42)`,
+                      boxShadow: `0 0 36px rgba(${stage.accent},0.22), inset 0 0 22px rgba(${stage.accent},0.10)`,
+                    }}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflow" className="relative overflow-hidden bg-[#02040a] px-5 py-20 text-white md:px-10 lg:py-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_28%_38%,rgba(52,245,166,0.08),transparent_30%),radial-gradient(circle_at_78%_62%,rgba(116,214,255,0.06),transparent_34%)]" />
+        <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-5">
+          <div className="grid max-w-[1040px] gap-2">
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.34em] text-white/25">
               Workflow
             </p>
-            <h2 className="whitespace-nowrap text-[38px] font-normal leading-[0.98] tracking-[-0.055em] text-white md:text-[64px] lg:text-[82px]">
-              Intent becomes a goal, then tasks.
+            <h2 className="text-[38px] font-normal leading-[0.98] tracking-[-0.055em] text-white md:text-[64px] lg:text-[82px]">
+              From intent to action.
             </h2>
           </div>
           <WorkflowLoopAnimation />
         </div>
       </section>
 
-      <section id="journey" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
+      <section id="ujp" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_52%,rgba(52,245,166,0.08),transparent_34%),radial-gradient(circle_at_72%_48%,rgba(155,124,255,0.06),transparent_32%)]" />
         <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-16">
           <div className="grid max-w-[900px] gap-6">
@@ -1061,7 +1288,7 @@ export function BodyClockCaseStudy() {
         </div>
       </section>
 
-      <section id="lab" className="relative overflow-hidden bg-[#02040a] px-5 py-28 text-white md:px-10 lg:py-36">
+      <section id="iteration" className="relative overflow-hidden bg-[#02040a] px-5 py-28 text-white md:px-10 lg:py-36">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(52,245,166,0.06),transparent_34%),radial-gradient(circle_at_76%_64%,rgba(246,196,95,0.05),transparent_28%)]" />
         <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-14">
           <div className="grid gap-5">

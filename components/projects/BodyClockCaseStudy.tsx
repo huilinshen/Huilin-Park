@@ -223,114 +223,101 @@ const journeyOrbitPositions = [
 const challenges = [
   {
     title: "AI Understanding",
-    subtitle: "Transcription of intent",
-    accent: "#10d985",
+    subtitle: "Making intent interpretation visible",
+    accent: "#7c4dff",
     afterState: "Active",
-    problem: "Users could not tell when or why the AI was acting on their behalf. The watch felt invasive - actions happened without consent or explanation.",
-    failed: "Showing a spinning 'AI thinking' indicator. Users found it anxiety-inducing and opaque. They had no idea what the AI was doing or whether to trust it.",
-    move: "A persistent intent ring: a visible glyph at the edge of the face that shows the AI's active goal, always colour-coded by priority. State is never hidden.",
-    result: "Users felt 'in dialogue' with the watch rather than being acted upon without consent. Trust scores improved significantly across usability sessions.",
-    proved: "Legibility of AI state is as important as AI capability itself. An invisible AI is an untrustworthy AI.",
+    challenge:
+      "Voice transcription relied on floating bubbles. During testing, users struggled to understand whether AI was listening, processing or confused. Longer conversations quickly became visually noisy.",
+    decision:
+      "Replaced floating bubbles with a continuous outer waveform that communicates AI confidence through a single evolving visual language.",
+    impact:
+      "Users immediately understood the AI's state without interpreting multiple visual elements. The simplified interaction also proved easier to implement, demonstrating that expressing AI confidence matters more than creating novel interactions.",
+    images: {
+      before: "/projects/generative-watch-face/iteration/AI understanding before.png",
+      after1: "/projects/generative-watch-face/iteration/AI understanding after1.png",
+      after2: "/projects/generative-watch-face/iteration/AI understanding after2.png",
+    },
   },
   {
     title: "Home Page",
-    subtitle: "The face that changes everything",
-    accent: "#7c4dff",
-    afterState: "context",
-    problem: "The default watch face was a static analog clock. It communicated nothing about context, intent, or the user's situation - a wasted surface.",
-    failed: "A modular widget system letting users manually arrange tiles. Cognitive load was far too high for a sub-3-second wrist interaction.",
-    move: "A single adaptive face that automatically surfaces the most relevant signal based on time of day, location, activity, and biometrics.",
-    result: "Time-to-information reduced from 4.2s to 1.8s across usability sessions. Glanceability scores improved by 61%.",
-    proved: "Adaptation beats configurability for time-critical, wrist-based contexts. Let the AI choose, let the user override.",
-  },
-  {
-    title: "Task Management",
-    subtitle: "Fitting a list on a wrist",
+    subtitle: "Balancing ambient context and glanceability",
     accent: "#c47a12",
-    afterState: "Active",
-    problem: "Tasks from the phone AI assistant appeared as a scrollable flat list. Completely unusable in under 3 seconds - the core wrist constraint.",
-    failed: "A vertically scrollable task list ported from the phone UI. Testers could not locate the right task before their wrist dropped. Zero scroll tolerance.",
-    move: "A priority orbit: the single most relevant task is always centre-stage, others orbit as glanceable chips. No scrolling - ever.",
-    result: "Zero scroll needed. 94% of target tasks accessible within one interaction. Wrist-raise-to-task time dropped to under 1.5s.",
-    proved: "The watch needs its own information architecture. A phone UI reduced in size is not a watch UI.",
+    afterState: "context",
+    challenge:
+      "The large outer ring occupied valuable screen space, while users mistook it for decoration and struggled to understand when goals would actually happen.",
+    decision:
+      "Reduced the ring to a lightweight timeline and shifted attention to contextual reminders that appear only before the next relevant task.",
+    impact:
+      "Users understood upcoming actions at a glance and felt less overwhelmed, while retaining quick access to the full daily schedule. The redesign reinforced that AI should surface the next action—not every action.",
+    images: {
+      before: "/projects/generative-watch-face/iteration/Home page before.png",
+      after1: "/projects/generative-watch-face/iteration/Home page after1.png",
+      after2: "/projects/generative-watch-face/iteration/Home page after2.png",
+    },
   },
   {
-    title: "Sub-task Hierarchy",
-    subtitle: "One thing at a time",
-    accent: "#b3622c",
+    title: "Goal Management",
+    subtitle: "Giving users control over AI-organised goals",
+    accent: "#10d985",
+    afterState: "Active",
+    challenge:
+      "A traditional scrolling list ignored the circular nature of the watch and offered little guidance when reorganising a day's schedule.",
+    decision:
+      "Introduced a radial planner combining familiar manual control with AI-assisted scheduling, using chronobiology colours and guided placement.",
+    impact:
+      "Users completed scheduling with greater confidence while still feeling in control of their plans, showing that good AI reduces decisions without removing user control.",
+    images: {
+      before: "/projects/generative-watch-face/iteration/Goal managment before.png",
+      after1: "/projects/generative-watch-face/iteration/Goal managment after1.png",
+      after2: "/projects/generative-watch-face/iteration/Goal managment after2.png",
+    },
+  },
+  {
+    title: "Sub-task Flow",
+    subtitle: "Guiding nested decisions inside a larger task",
+    accent: "#74d6ff",
     afterState: "Peak",
-    problem: "Complex intents like 'prepare for my 10am presentation' decomposed into 8+ sub-tasks, overwhelming the 42mm screen with nested hierarchy.",
-    failed: "Showing all sub-tasks simultaneously in a tree. The watch face became completely unreadable. Users abandoned the task mid-flow.",
-    move: "Progressive disclosure: the parent goal is always visible. Sub-tasks surface one at a time as each step is completed - temporal not spatial hierarchy.",
-    result: "Completion rate for multi-step tasks improved from 34% to 71% across prototype testing sessions.",
-    proved: "The wrist is a single-task surface. Hierarchy must be expressed through time, not through space.",
+    challenge:
+      "Many goals required multiple connected actions across different apps, yet every step was presented at the same level, making navigation feel fragmented.",
+    decision:
+      "Created a dedicated sub-task layer by extending the primary task layout and adding a subtle outer ring to maintain spatial context.",
+    impact:
+      "Users always understood they were completing part of a larger goal instead of navigating unrelated screens, proving that maintaining context is essential when AI orchestrates multiple actions.",
+    images: {
+      before: "/projects/generative-watch-face/iteration/sub-task before.png",
+      after1: "/projects/generative-watch-face/iteration/sub-task after1.png",
+      after2: "/projects/generative-watch-face/iteration/sub-task after2.png",
+    },
   },
 ];
 
 function LabWatchMockup({
   mode,
-  index,
   accent,
-  afterState,
+  imageSrc,
+  imageAlt,
+  showLabel = true,
 }: {
   mode: "before" | "after";
-  index: number;
   accent: string;
-  afterState: string;
+  imageSrc: string;
+  imageAlt: string;
+  showLabel?: boolean;
 }) {
   const isAfter = mode === "after";
-  const beforeContent = [
-    <div key="analog" className="absolute inset-0">
-      {Array.from({ length: 12 }).map((_, tickIndex) => (
-        <span
-          key={tickIndex}
-          className="absolute left-1/2 top-1/2 h-4 w-0.5 origin-[0_0] rounded-full bg-emerald-300/45"
-          style={{ transform: `rotate(${tickIndex * 30}deg) translateY(-92px)` }}
-        />
-      ))}
-      <span className="absolute left-1/2 top-1/2 h-0.5 w-[32%] origin-left -translate-y-1/2 rotate-[12deg] bg-white/35" />
-      <span className="absolute left-1/2 top-1/2 h-0.5 w-[38%] origin-left -translate-y-1/2 rotate-[106deg] bg-emerald-300/65" />
-      <span className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-300/70" />
-      <p className="absolute bottom-14 left-0 right-0 text-center font-mono text-[27px] font-semibold tracking-[0.16em] text-white/50">
-        09:18
-      </p>
-    </div>,
-    <div key="tiles" className="absolute inset-12 grid grid-cols-2 place-items-center gap-px text-center font-mono text-white/22">
-      {["12:45\nTIME", "72\nBPM", "4.2k\nSTEPS", "18\nTEMP"].map((item) => (
-        <span key={item} className="grid h-full w-full place-items-center border border-white/[0.04] text-[18px] whitespace-pre-line">
-          {item}
-        </span>
-      ))}
-      <p className="absolute left-0 right-0 top-4 text-center text-[9px] uppercase tracking-[0.28em] text-white/18">
-        drag to configure
-      </p>
-    </div>,
-    <div key="tasks" className="absolute inset-x-12 top-12 grid gap-4 font-mono text-[14px] text-white/25">
-      <p className="text-center text-[11px] uppercase tracking-[0.22em] text-emerald-300/45">Tasks</p>
-      {["Book Uber", "Call dentist", "Review slides", "Buy groceries", "Reply to Jan"].map((item, taskIndex) => (
-        <div key={item} className="flex items-center gap-3 border-b border-white/[0.04] pb-2">
-          <span className={`h-3 w-3 rounded-full border ${taskIndex === 0 ? "border-emerald-300/50" : "border-white/16"}`} />
-          <span className={taskIndex === 0 ? "line-through opacity-35" : ""}>{item}</span>
-        </div>
-      ))}
-    </div>,
-    <div key="subtasks" className="absolute inset-x-12 top-10 grid gap-4 font-mono text-[13px] text-white/25">
-      <p className="text-[15px] text-white/35">Prep: 10am pres.</p>
-      <div className="h-px bg-white/[0.05]" />
-      {["Check slides", "-> Review deck", "--> Update chart", "--> Fix typos", "Call venue", "-> Confirm AV", "Print agenda"].map((item) => (
-        <p key={item}>{item}</p>
-      ))}
-    </div>,
-  ];
 
   return (
     <div className="grid justify-items-center gap-6">
-      <p
-        className="font-mono text-[11px] font-semibold uppercase tracking-[0.34em]"
-        style={{ color: isAfter ? accent : "#ef6464" }}
-      >
-        {mode}
-      </p>
+      {showLabel ? (
+        <p
+          className="font-mono text-[11px] font-semibold uppercase tracking-[0.34em]"
+          style={{ color: isAfter ? accent : "#ef6464" }}
+        >
+          {mode}
+        </p>
+      ) : (
+        <span className="h-[13px]" aria-hidden="true" />
+      )}
       <div
         className="relative aspect-square w-[230px] rounded-full border bg-[#070918] md:w-[260px]"
         style={{
@@ -341,43 +328,13 @@ function LabWatchMockup({
           opacity: isAfter ? 1 : 0.42,
         }}
       >
-        <div className="absolute inset-2 rounded-full border border-indigo-300/10" />
-        {isAfter ? (
-          <div className="absolute inset-0 grid place-items-center">
-            {Array.from({ length: index === 3 ? 18 : 5 }).map((_, ringIndex) => (
-              <span
-                key={ringIndex}
-                className="absolute rounded-full border"
-                style={{
-                  inset: `${18 + ringIndex * (index === 3 ? 8 : 18)}px`,
-                  borderColor: `${ringIndex % 2 === 0 ? accent : "#7c4dff"}${index === 3 ? "66" : "44"}`,
-                  borderStyle: index === 0 || index === 2 ? "dashed" : "solid",
-                }}
-              />
-            ))}
-            {Array.from({ length: index === 3 ? 18 : 8 }).map((_, dotIndex) => (
-              <span
-                key={dotIndex}
-                className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
-                style={{
-                  backgroundColor: dotIndex === 0 ? "#34f5a6" : accent,
-                  transform: `rotate(${dotIndex * (index === 3 ? 20 : 45)}deg) translateY(-78px)`,
-                  opacity: dotIndex === 0 ? 1 : 0.74,
-                }}
-              />
-            ))}
-            <div className="relative z-10 text-center">
-              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-white/28">
-                {index === 3 ? "Energy" : index === 1 ? "Adapting" : "Intent"}
-              </p>
-              <p className="mt-1 text-[26px] font-semibold leading-none" style={{ color: accent }}>
-                {afterState}
-              </p>
-            </div>
-          </div>
-        ) : (
-          beforeContent[index]
-        )}
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          sizes="(max-width: 768px) 230px, 260px"
+          className="object-contain"
+        />
       </div>
     </div>
   );
@@ -1293,10 +1250,10 @@ export function BodyClockCaseStudy() {
         <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-14">
           <div className="grid gap-5">
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.34em] text-white/25">
-              Design Decision Lab
+              Design Iteration
             </p>
             <h2 className="text-[48px] font-normal leading-[1.04] tracking-[-0.055em] text-white md:text-[72px]">
-              Four failures. Four breakthroughs.
+              Key iterations toward a watch-native experience
             </h2>
           </div>
 
@@ -1350,21 +1307,58 @@ export function BodyClockCaseStudy() {
                   >
                     <div className="overflow-hidden">
                       <div className="mx-6 border-t border-white/[0.08] pb-8 pt-10 md:mx-8 md:pb-10 lg:pt-12">
-                        <div className="grid items-center gap-8 lg:grid-cols-[1fr_72px_1fr]">
-                          <LabWatchMockup mode="before" index={index} accent={challenge.accent} afterState={challenge.afterState} />
-                          <p className="hidden text-center text-[38px] font-light text-white/14 lg:block">&rarr;</p>
-                          <LabWatchMockup mode="after" index={index} accent={challenge.accent} afterState={challenge.afterState} />
-                        </div>
-
-                        <div className="mt-12 grid gap-4 lg:grid-cols-2">
-                          <div className="grid gap-4">
-                            <LabInsightBlock label="Problem" body={challenge.problem} accent={challenge.accent} tone="danger" />
-                            <LabInsightBlock label="Why it failed" body={challenge.failed} accent={challenge.accent} tone="danger" />
+                        <div className="relative grid gap-8 lg:grid-cols-3 lg:gap-y-12">
+                          <p className="absolute left-[33.333%] top-[116px] hidden -translate-x-1/2 text-center text-[38px] font-light text-white/14 lg:block">
+                            &rarr;
+                          </p>
+                          <div className="grid gap-12 lg:contents">
+                            <div className="lg:col-start-1 lg:row-start-1">
+                              <LabWatchMockup
+                                mode="before"
+                                accent={challenge.accent}
+                                imageSrc={challenge.images.before}
+                                imageAlt={`${challenge.title} before watch UI`}
+                              />
+                            </div>
+                            <div className="lg:col-start-1 lg:row-start-2">
+                              <LabInsightBlock
+                                label="Challenge"
+                                body={challenge.challenge}
+                                accent={challenge.accent}
+                                tone="danger"
+                              />
+                            </div>
                           </div>
-                          <div className="grid gap-4">
-                            <LabInsightBlock label="Design move" body={challenge.move} accent={challenge.accent} />
-                            <LabInsightBlock label="Result" body={challenge.result} accent={challenge.accent} />
-                            <LabInsightBlock label="What this proved" body={challenge.proved} accent={challenge.accent} />
+                          <div className="grid gap-12 lg:contents">
+                            <div className="lg:col-start-2 lg:row-start-1">
+                              <LabWatchMockup
+                                mode="after"
+                                accent={challenge.accent}
+                                imageSrc={challenge.images.after1}
+                                imageAlt={`${challenge.title} after watch UI 1`}
+                              />
+                            </div>
+                            <div className="lg:col-start-2 lg:row-start-2">
+                              <LabInsightBlock label="Decision" body={challenge.decision} accent={challenge.accent} />
+                            </div>
+                          </div>
+                          <div className="grid gap-12 lg:contents">
+                            <div className="lg:col-start-3 lg:row-start-1">
+                              <LabWatchMockup
+                                mode="after"
+                                accent={challenge.accent}
+                                imageSrc={challenge.images.after2}
+                                imageAlt={`${challenge.title} after watch UI 2`}
+                                showLabel={false}
+                              />
+                            </div>
+                            <div className="lg:col-start-3 lg:row-start-2">
+                              <LabInsightBlock
+                                label="Impact"
+                                body={challenge.impact}
+                                accent={challenge.accent}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>

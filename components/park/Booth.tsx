@@ -19,7 +19,7 @@ function getHomepageHoverTitle(destination: ParkDestination) {
   }
 
   if (destination.landmark === "ice-cream-truck") {
-    return "About Me";
+    return "Meet Huilin";
   }
 
   if (destination.id === "project-03") {

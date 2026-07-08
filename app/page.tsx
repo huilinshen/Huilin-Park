@@ -68,7 +68,7 @@ export default function Home() {
             <span>Click booths to explore</span>
           </div>
           <Link className="inline-flex items-center gap-2 font-medium" href="/about">
-            <UserRound size={16} /> About Me
+            <UserRound size={16} /> Meet Huilin
           </Link>
         </footer>
       </section>

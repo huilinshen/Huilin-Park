@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   ChevronDown,
 } from "lucide-react";
@@ -88,7 +88,19 @@ const architectureStages = [
   },
 ];
 
-const journey = [
+type JourneyItem = {
+  time: string;
+  title: string;
+  copy: string;
+  screens: string[];
+  accent: string;
+  icon: string;
+  value: string;
+  label: string;
+  frames?: string[];
+};
+
+const journey: JourneyItem[] = [
   {
     time: "6:00",
     title: "Wake up",
@@ -98,6 +110,16 @@ const journey = [
     icon: "MN",
     value: "82",
     label: "recovery",
+    frames: [
+      "/projects/generative-watch-face/journey/wake-up-01-default.png",
+      "/projects/generative-watch-face/journey/wake-up-02-select-reschedule.png",
+      "/projects/generative-watch-face/journey/wake-up-03-confirm-reschedule.png",
+      "/projects/generative-watch-face/journey/wake-up-04-updated-view.png",
+      "/projects/generative-watch-face/journey/wake-up-05-select-remove.png",
+      "/projects/generative-watch-face/journey/wake-up-06-remove-confirmation.png",
+      "/projects/generative-watch-face/journey/wake-up-07-done.png",
+      "/projects/generative-watch-face/journey/wake-up-08-action-menu.png",
+    ],
   },
   {
     time: "7:00",
@@ -619,6 +641,117 @@ function WorkflowLoopAnimation() {
   );
 }
 
+function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      mediaQuery.addEventListener("change", onStoreChange);
+
+      return () => mediaQuery.removeEventListener("change", onStoreChange);
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false,
+  );
+}
+
+function WatchFlowPlayer({
+  frames,
+  autoPlay = true,
+  interval = 1400,
+  loop = true,
+  clickToAdvance = true,
+  accent = "#9b7cff",
+  label = "Advance watch UI flow",
+}: {
+  frames: string[];
+  autoPlay?: boolean;
+  interval?: number;
+  loop?: boolean;
+  clickToAdvance?: boolean;
+  accent?: string;
+  label?: string;
+}) {
+  const [frameIndex, setFrameIndex] = useState(0);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const canAdvance = frames.length > 1;
+
+  const advanceFrame = useCallback(() => {
+    if (!canAdvance) {
+      return;
+    }
+
+    setFrameIndex((currentIndex) => {
+      const nextIndex = currentIndex + 1;
+
+      if (nextIndex < frames.length) {
+        return nextIndex;
+      }
+
+      return loop ? 0 : currentIndex;
+    });
+  }, [canAdvance, frames.length, loop]);
+
+  useEffect(() => {
+    if (!autoPlay || prefersReducedMotion || !canAdvance) {
+      return;
+    }
+
+    const timer = window.setInterval(advanceFrame, interval);
+
+    return () => window.clearInterval(timer);
+  }, [advanceFrame, autoPlay, canAdvance, interval, prefersReducedMotion]);
+
+  const currentFrame = frames[frameIndex] ?? frames[0];
+
+  return (
+    <button
+      type="button"
+      onClick={clickToAdvance ? advanceFrame : undefined}
+      className="group absolute left-1/2 top-1/2 aspect-square w-[190px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border bg-[#060817] shadow-[0_0_90px_rgba(52,245,166,0.08)] outline-none transition duration-300 focus-visible:ring-2 focus-visible:ring-white/70"
+      style={{
+        borderColor: `${accent}35`,
+        boxShadow: `0 0 80px ${accent}1f, inset 0 0 44px ${accent}12`,
+      }}
+      aria-label={label}
+    >
+      <span
+        className="pointer-events-none absolute inset-0 rounded-full border-[10px] opacity-40 transition duration-300 group-hover:opacity-65"
+        style={{
+          borderColor: `${accent}80`,
+          boxShadow: `inset 0 0 36px ${accent}1f`,
+        }}
+      />
+      {currentFrame ? (
+        <Image
+          key={currentFrame}
+          src={currentFrame}
+          alt=""
+          fill
+          sizes="190px"
+          className="watch-flow-frame object-contain p-3"
+        />
+      ) : (
+        <span className="grid h-full place-items-center px-8 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-white/38">
+          Frames pending
+        </span>
+      )}
+      <span className="pointer-events-none absolute inset-x-0 bottom-4 flex justify-center gap-1.5">
+        {frames.map((frame, index) => (
+          <span
+            key={frame}
+            className="h-1 w-1 rounded-full transition duration-300"
+            style={{
+              backgroundColor: index === frameIndex ? accent : "rgba(255,255,255,0.22)",
+              transform: index === frameIndex ? "scale(1.45)" : "scale(1)",
+            }}
+          />
+        ))}
+      </span>
+    </button>
+  );
+}
+
 function DayOrbit({
   activeJourney,
   journeyIndex,
@@ -664,16 +797,28 @@ function DayOrbit({
         );
       })}
 
-      <div className="absolute left-1/2 top-1/2 aspect-square w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.06] bg-[#060817] shadow-[0_0_90px_rgba(52,245,166,0.08)]">
-        <div className="absolute inset-8 rounded-full border-[10px] border-violet-400/80 border-r-emerald-300 border-t-emerald-300 shadow-[0_0_28px_rgba(155,124,255,0.45)]" />
-        <p className="absolute inset-x-0 top-[39%] text-center font-mono text-[12px] text-white/42">HR</p>
-        <p className="absolute inset-x-0 top-[44%] text-center font-mono text-[44px] font-semibold leading-none text-white">
-          {activeJourney.value}
-        </p>
-        <p className="absolute inset-x-0 bottom-[29%] text-center font-mono text-[9px] uppercase tracking-[0.16em]" style={{ color: activeJourney.accent }}>
-          {activeJourney.label}
-        </p>
-      </div>
+      {activeJourney.frames ? (
+        <WatchFlowPlayer
+          frames={activeJourney.frames}
+          autoPlay
+          interval={1400}
+          loop
+          clickToAdvance
+          accent={activeJourney.accent}
+          label={`Advance ${activeJourney.title} watch UI flow`}
+        />
+      ) : (
+        <div className="absolute left-1/2 top-1/2 aspect-square w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.06] bg-[#060817] shadow-[0_0_90px_rgba(52,245,166,0.08)]">
+          <div className="absolute inset-8 rounded-full border-[10px] border-violet-400/80 border-r-emerald-300 border-t-emerald-300 shadow-[0_0_28px_rgba(155,124,255,0.45)]" />
+          <p className="absolute inset-x-0 top-[39%] text-center font-mono text-[12px] text-white/42">HR</p>
+          <p className="absolute inset-x-0 top-[44%] text-center font-mono text-[44px] font-semibold leading-none text-white">
+            {activeJourney.value}
+          </p>
+          <p className="absolute inset-x-0 bottom-[29%] text-center font-mono text-[9px] uppercase tracking-[0.16em]" style={{ color: activeJourney.accent }}>
+            {activeJourney.label}
+          </p>
+        </div>
+      )}
 
       {journey.map((item, index) => {
         const position = journeyOrbitPositions[index];
@@ -827,8 +972,16 @@ export function BodyClockCaseStudy() {
           0%, 100% { transform: translateY(0); opacity: 0.35; }
           50% { transform: translateY(6px); opacity: 0.8; }
         }
+        @keyframes watchFlowFrameIn {
+          from { opacity: 0.42; transform: scale(0.975); }
+          to { opacity: 1; transform: scale(1); }
+        }
         .body-clock-reveal { animation: bodyClockReveal 720ms ease-out both; }
         .body-clock-scroll { animation: bodyClockScroll 1.8s ease-in-out infinite; }
+        .watch-flow-frame { animation: watchFlowFrameIn 360ms ease-out both; }
+        @media (prefers-reduced-motion: reduce) {
+          .watch-flow-frame { animation: none; }
+        }
       `}</style>
 
       <nav className="sticky top-4 z-40 mx-auto flex w-max max-w-[calc(100%-2rem)] items-center justify-center gap-1.5 overflow-x-auto rounded-full border border-white/10 bg-black/45 p-1 backdrop-blur-xl">

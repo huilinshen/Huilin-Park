@@ -156,7 +156,7 @@ export const parkDestinations = [
   ...projects,
   {
     id: "about",
-    title: "About Me",
+    title: "Meet Huilin",
     label: "About",
     type: "about",
     href: "/about",

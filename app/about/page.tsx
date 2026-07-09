@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { PortraitEyeTrack } from "@/components/about/PortraitEyeTrack";
+import { PhotoBoothCamera } from "@/components/about/PhotoBoothHero";
 
 const currentWork = [
   {
@@ -47,7 +47,9 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <PortraitEyeTrack />
+        <div className="hero-polaroid-feature" aria-label="Interactive Polaroid camera">
+          <PhotoBoothCamera />
+        </div>
       </section>
 
       <section className="about-quote-section" aria-labelledby="philosophy-title">

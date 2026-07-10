@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const photoBoothPhotos = [
   {
@@ -19,7 +19,7 @@ const photoBoothPhotos = [
   },
   {
     id: "photo-03",
-    src: "/about/photo-03.JPG",
+    src: "/about/photo-03.jpg",
     caption: "Finding inspiration in art and everyday life.",
     objectPosition: "55% 30%",
   },
@@ -32,14 +32,12 @@ const photoBoothPhotos = [
 ];
 
 const rotations = ["-3.5deg", "2.5deg", "-1.2deg", "3.2deg"];
-const printAnimationMs = 760;
 
 const hintCopy = {
   initial: "Take a picture",
   first: "Nice one!",
   second: "Take another",
   third: "Almost there",
-  fourth: "One more",
   restart: "Start over",
 };
 
@@ -47,38 +45,13 @@ export function PhotoBoothCamera() {
   const [printedCount, setPrintedCount] = useState(0);
   const [printCycle, setPrintCycle] = useState(0);
   const [hintText, setHintText] = useState(hintCopy.initial);
-  const hintTimeoutRef = useRef<number | null>(null);
   const allPrinted = printedCount >= photoBoothPhotos.length;
 
-  useEffect(() => {
-    return () => {
-      if (hintTimeoutRef.current !== null) {
-        window.clearTimeout(hintTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  const scheduleHint = (text: string) => {
-    if (hintTimeoutRef.current !== null) {
-      window.clearTimeout(hintTimeoutRef.current);
-    }
-    hintTimeoutRef.current = window.setTimeout(() => {
-      setHintText(text);
-      hintTimeoutRef.current = null;
-    }, printAnimationMs);
-  };
-
   const printPhoto = () => {
-    if (hintTimeoutRef.current !== null) {
-      window.clearTimeout(hintTimeoutRef.current);
-      hintTimeoutRef.current = null;
-    }
-
     if (allPrinted) {
       setPrintCycle((cycle) => cycle + 1);
-      setHintText(hintCopy.initial);
       setPrintedCount(1);
-      scheduleHint(hintCopy.first);
+      setHintText(hintCopy.first);
       return;
     }
 
@@ -88,10 +61,7 @@ export function PhotoBoothCamera() {
     if (nextCount === 1) setHintText(hintCopy.first);
     if (nextCount === 2) setHintText(hintCopy.second);
     if (nextCount === 3) setHintText(hintCopy.third);
-    if (nextCount === 4) {
-      setHintText(hintCopy.fourth);
-      scheduleHint(hintCopy.restart);
-    }
+    if (nextCount === 4) setHintText(hintCopy.restart);
   };
 
   return (

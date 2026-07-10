@@ -2579,7 +2579,7 @@ a {
   gap: clamp(2rem, 4.5vw, 4.5rem);
   width: min(1440px, calc(100% - 2.5rem));
   margin: 0 auto;
-  padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(4rem, 7vw, 7rem);
+  padding: clamp(1.3rem, 3vw, 3.2rem) 0 clamp(2rem, 3.8vw, 4rem);
 }
 
 .section-label {
@@ -2617,21 +2617,46 @@ a {
 }
 
 .hero-polaroid-feature .photo-booth-stage {
-  --camera-width: min(100%, 44rem);
-  --photo-card-width: min(58vw, 26rem);
-  --photo-base-y: clamp(17.4rem, 31vw, 32.55rem);
-  --photo-gap-y: 3.3rem;
-  width: min(100%, 58rem);
-  min-height: clamp(58rem, 96svh, 68rem);
-  padding-top: clamp(3.7rem, 6svh, 5rem);
+  --camera-lift: clamp(6rem, 11.5svh, 6.8rem);
+  --camera-width: min(100%, clamp(30.5rem, 33vw, 35rem));
+  --photo-card-width: clamp(14.8rem, 15.5vw, 16.5rem);
+  --photo-base-y: clamp(12.3rem, 15.4vw, 15.3rem);
+  --photo-gap-y: clamp(0.5rem, 0.65vw, 0.8rem);
+  overflow: visible;
+  width: min(100%, 48rem);
+  min-height: clamp(32rem, 67svh, 36rem);
+  padding-top: clamp(2.4rem, 4.2svh, 3.4rem);
+}
+
+.hero-polaroid-feature .photo-booth-hint {
+  top: calc(clamp(2.4rem, 4.2svh, 3.4rem) - var(--camera-lift) + clamp(9rem, 11vw, 10.5rem));
+  left: calc(50% + (var(--camera-width) * 0.38) + clamp(1.3rem, 2vw, 2rem));
+  transform: none;
+}
+
+.hero-polaroid-feature .photo-booth-hint:hover {
+  transform: translateY(-0.12rem);
+}
+
+.hero-polaroid-feature .polaroid-camera-button {
+  transform: translateY(calc(-1 * var(--camera-lift)));
+}
+
+.hero-polaroid-feature .polaroid-camera-button:not(:disabled):hover {
+  transform: translateY(calc(-1 * var(--camera-lift) - 0.2rem));
+}
+
+.hero-polaroid-feature .polaroid-camera {
+  transform: scale(0.7);
+  transform-origin: center;
 }
 
 .hero-polaroid-feature .printed-photo-stack {
-  top: clamp(3.7rem, 6svh, 5rem);
+  top: clamp(2.4rem, 4.2svh, 3.4rem);
 }
 
 .editorial-hero .hero-polaroid-feature .photo-booth-stage {
-  --photo-base-y: clamp(17.4rem, 31vw, 32.55rem);
+  --photo-base-y: clamp(12.3rem, 15.4vw, 15.3rem);
 }
 
 .citypop-poster {
@@ -3417,6 +3442,7 @@ a {
   }
 
   .hero-polaroid-feature .photo-booth-stage {
+    --camera-lift: 0rem;
     --camera-width: min(100%, 34rem);
     --photo-card-width: min(70vw, 22rem);
     --photo-base-y: 25.55rem;
@@ -3424,6 +3450,24 @@ a {
     width: min(100%, 40rem);
     min-height: clamp(52rem, 84svh, 60rem);
     padding-top: clamp(4.2rem, 8svh, 5rem);
+  }
+
+  .hero-polaroid-feature .photo-booth-hint {
+    top: clamp(0.2rem, 1.2svh, 1rem);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero-polaroid-feature .photo-booth-hint:hover {
+    transform: translate(-50%, -0.12rem);
+  }
+
+  .hero-polaroid-feature .polaroid-camera-button {
+    transform: none;
+  }
+
+  .hero-polaroid-feature .polaroid-camera-button:not(:disabled):hover {
+    transform: translateY(-0.2rem);
   }
 
   .editorial-hero .hero-polaroid-feature .photo-booth-stage {

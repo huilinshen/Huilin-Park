@@ -21,7 +21,7 @@ const photoBoothPhotos = [
     id: "photo-03",
     src: "/about/photo-03.jpg",
     caption: "Finding inspiration in art and everyday life.",
-    objectPosition: "55% 30%",
+    objectPosition: "58% 18%",
   },
   {
     id: "photo-04",

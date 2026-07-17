@@ -8,6 +8,7 @@ import { BodyClockCaseStudy } from "@/components/projects/BodyClockCaseStudy";
 import { CalendarFlipbook } from "@/components/projects/CalendarFlipbook";
 import { CaseStudySubAccordion } from "@/components/projects/CaseStudySubAccordion";
 import { ResearchProcessAccordion } from "@/components/projects/ResearchProcessAccordion";
+import { InternshipProjectsCaseStudy } from "@/components/projects/InternshipProjectsCaseStudy";
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -52,6 +53,7 @@ export default async function ProjectPage({
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const isBodyClock = project.slug === "generative-watch-face";
   const isCommunityGardens = project.slug === "community-gardens";
+  const isInternshipProjects = project.slug === "internship-projects";
   const communityProjectTitleClass =
     "max-w-5xl text-[38px] font-black leading-tight text-[#75A723] md:text-[52px] xl:text-[64px]";
   const communityBodyClass =
@@ -112,6 +114,44 @@ export default async function ProjectPage({
                 <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[220px] group-hover:opacity-100 group-focus-visible:max-w-[220px] group-focus-visible:opacity-100">
                   Next Project
                 </span>
+                <ArrowRight size={48} strokeWidth={1.8} />
+              </Link>
+            </nav>
+          </footer>
+        </article>
+      </main>
+    );
+  }
+
+  if (isInternshipProjects) {
+    return (
+      <main className="min-h-screen bg-white text-[#0a0a0a]">
+        <article className="mx-auto grid w-full gap-0 px-0 py-8">
+          <Link
+            className="group z-50 ml-5 inline-flex min-h-16 w-fit items-center justify-self-start gap-4 text-[18px] font-black text-black/40 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:ml-8 md:text-[22px] lg:ml-10 xl:ml-12 xl:text-[28px]"
+            href="/"
+            aria-label="Back to Huilin Park"
+          >
+            <Home size={48} strokeWidth={1.8} />
+            <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">
+              Back to Huilin Park
+            </span>
+          </Link>
+
+          <InternshipProjectsCaseStudy />
+
+          <footer className="mx-auto grid w-full max-w-[1440px] bg-white px-5 pb-16 pt-40 md:px-8 md:pb-20 md:pt-56 lg:px-10 xl:px-12">
+            <nav className="grid grid-cols-3 items-center gap-4 md:gap-6">
+              <Link href={previousProject.href} aria-label="Previous Project" className="group inline-flex min-h-16 items-center justify-self-start gap-4 text-[18px] font-black text-black/40 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]">
+                <ArrowLeft size={48} strokeWidth={1.8} />
+                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[260px] group-hover:opacity-100 group-focus-visible:max-w-[260px] group-focus-visible:opacity-100">Previous Project</span>
+              </Link>
+              <Link href="/" aria-label="Back to Huilin Park" className="group inline-flex min-h-16 items-center justify-self-center gap-4 text-[18px] font-black text-black/40 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]">
+                <Home size={48} strokeWidth={1.8} />
+                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">Back to Huilin Park</span>
+              </Link>
+              <Link href={nextProject.href} aria-label="Next Project" className="group inline-flex min-h-16 items-center justify-self-end gap-4 text-[18px] font-black text-black/40 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]">
+                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[220px] group-hover:opacity-100 group-focus-visible:max-w-[220px] group-focus-visible:opacity-100">Next Project</span>
                 <ArrowRight size={48} strokeWidth={1.8} />
               </Link>
             </nav>

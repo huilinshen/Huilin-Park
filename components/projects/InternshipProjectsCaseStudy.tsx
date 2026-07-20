@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const internshipCopy = {
@@ -12,15 +13,13 @@ const internshipCopy = {
     metadata: [
       ["Role", "Design Internships"],
       ["Timeline", "2020–2023"],
-      ["Project type", "Consumer Innovation · Industrial Design"],
+      ["Impact", ""],
     ],
   },
-  overview:
-    "This case study brings together two projects shaped by different design contexts: consumer innovation for a beverage launch and multidisciplinary product development for a kitchen appliance.",
   projects: [
     {
       id: "illuminera-suntory",
-      index: "01",
+      index: "02",
       discipline: "Consumer Innovation",
       studio: "Illuminera × Suntory",
       title: "Suntory Qingxiang Oolong Tea",
@@ -41,7 +40,7 @@ const internshipCopy = {
     },
     {
       id: "fotile-range-hood",
-      index: "02",
+      index: "01",
       discipline: "Industrial Design",
       studio: "GoodMatter × FOTILE",
       title: "FOTILE Refrigerated Range Hood",
@@ -63,9 +62,8 @@ const internshipCopy = {
 } as const;
 
 const chapters = [
-  ["Overview", "overview"],
-  ["01 · Suntory", "illuminera-suntory"],
-  ["02 · FOTILE", "fotile-range-hood"],
+  ["01 · FOTILE", "fotile-range-hood"],
+  ["02 · Suntory", "illuminera-suntory"],
 ] as const;
 
 const sectionLabelClass =
@@ -74,20 +72,45 @@ const sectionTitleClass =
   "text-[42px] font-normal leading-[0.98] tracking-[-0.055em] text-[#0a0a0a] md:text-[62px] lg:text-[72px]";
 const bodyClass = "text-[17px] leading-relaxed text-black/52 md:text-[19px]";
 
+function ProjectHeading({
+  number,
+  discipline,
+  studio,
+  color,
+}: {
+  number: string;
+  discipline: string;
+  studio: string;
+  color: string;
+}) {
+  return (
+    <div className="grid gap-2 py-2" style={{ color }}>
+      <h2 className="text-[24px] font-bold leading-[1.08] tracking-[-0.025em] md:text-[28px] lg:text-[32px]">
+        {number} / {discipline}
+      </h2>
+      <p className="text-[17px] font-bold leading-[1.2] tracking-[-0.015em] md:text-[19px] lg:text-[21px]">
+        {studio}
+      </p>
+    </div>
+  );
+}
+
 function SuntoryProjectChapter() {
   return (
     <section
       id="illuminera-suntory"
-      className="scroll-mt-24 overflow-hidden bg-white px-5 py-24 md:px-10 lg:py-32"
+      className="mt-48 scroll-mt-24 overflow-hidden bg-white px-5 py-24 md:px-10 lg:mt-64 lg:py-32"
       data-future-sections="Overview,Challenge,My Contribution,Impact"
     >
       <div className="mx-auto grid w-full max-w-[1280px] gap-16 lg:gap-20">
         <header className="grid gap-10 border-t border-black/[0.08] pt-8 lg:grid-cols-[minmax(0,0.56fr)_minmax(320px,0.44fr)] lg:items-start lg:gap-16">
           <div className="grid content-start gap-7 lg:py-4">
-            <div className="grid gap-3">
-              <p className={sectionLabelClass}>01 / Consumer Innovation</p>
-              <p className="text-[17px] leading-relaxed text-black/42 md:text-[18px]">Illuminera × Suntory</p>
-            </div>
+            <ProjectHeading
+              number="02"
+              discipline="Consumer Innovation"
+              studio="Illuminera × Suntory"
+              color="#52C4DE"
+            />
 
             <div className="grid gap-5">
               <h2 className="max-w-[720px] text-[42px] font-normal leading-[0.98] tracking-[-0.055em] text-[#0a0a0a] md:text-[58px] lg:text-[64px]">
@@ -189,8 +212,13 @@ function FotileProjectChapter() {
     >
       <div className="mx-auto grid w-full max-w-[1280px] gap-24 lg:gap-32">
         <header className="grid gap-10 border-t border-black/[0.08] pt-8 lg:grid-cols-[minmax(0,0.55fr)_minmax(360px,0.45fr)] lg:items-center lg:gap-16">
-          <div className="grid content-start gap-7">
-            <p className={sectionLabelClass}>Good Matter Design Studio × FOTILE</p>
+          <div className="grid content-start gap-7 lg:py-4">
+            <ProjectHeading
+              number="01"
+              discipline="Industrial Design"
+              studio="Good Matter Design Studio × FOTILE"
+              color="#9E2E2D"
+            />
             <div className="grid gap-5">
               <h2 className="max-w-[720px] text-[48px] font-normal leading-[0.95] tracking-[-0.06em] text-[#0a0a0a] md:text-[68px] lg:text-[76px]">
                 Where Cool Air Meets Cooking Heat
@@ -215,7 +243,7 @@ function FotileProjectChapter() {
             </dl>
           </div>
 
-          <figure className="grid min-w-0 place-items-center bg-[#f4f3f1] p-4 md:p-7">
+          <figure className="grid min-w-0 overflow-hidden">
             <Image
               src="/projects/internship-projects/fotile/fotile-hero.jpg"
               alt="FOTILE A1.i Integrated Cooling Range Hood installed in a contemporary kitchen"
@@ -233,8 +261,8 @@ function FotileProjectChapter() {
           <div className="grid max-w-[900px] gap-6 border-t border-black/[0.08] pt-8">
             <h3 className={sectionTitleClass}>Rethinking comfort in the Chinese kitchen</h3>
             <div className={`grid max-w-[820px] gap-4 ${bodyClass}`}>
-              <p>Chinese stir-fry cooking creates an intense combination of heat, oil smoke and frequent cleaning.</p>
-              <p>Working within Good Matter Design Studio&apos;s multidisciplinary team, I helped translate research in real family kitchens into the product and interface direction for FOTILE&apos;s A1.i — a range hood that brings cooling and smoke extraction into one integrated experience.</p>
+              <p>FOTILE is China&apos;s leading kitchen appliance brand. The Good Matter design team developed a cooling range hood that combines smoke extraction, cooling and easier cleaning for Chinese stir-fry cooking.</p>
+              <p>I designed the “Skyline” UI, with a horizon-like glow that changes in size and brightness with the airflow. Launched as the FOTILE A1.i, the product received a 2022 iF Design Award and Gold at the 2022 China Excellent Industrial Design Award.</p>
             </div>
           </div>
         </section>
@@ -244,9 +272,8 @@ function FotileProjectChapter() {
             <p className={sectionLabelClass}>01 — Contextual Research</p>
             <h3 className="text-[38px] font-normal leading-[0.98] tracking-[-0.05em] text-black md:text-[54px]">Understanding the real kitchen</h3>
             <div className={`grid gap-4 ${bodyClass}`}>
-              <p>We conducted contextual research in real family kitchens to understand how people cooked, cleaned and moved through limited kitchen spaces.</p>
-              <p>The research revealed that heat, oil smoke, maintenance and spatial efficiency were not separate problems, but interconnected parts of the same cooking experience.</p>
-              <p>I helped document user behaviour, synthesise recurring pain points and translate the findings into design opportunities.</p>
+              <p>The GoodMatter design team visited target users in their homes and conducted focus groups and qualitative research.</p>
+              <p>We observed how people cooked, cleaned and used limited kitchen space. The research showed that heat, oil smoke, difficult cleaning and lack of space were closely connected problems.</p>
             </div>
           </div>
           <figure className="grid gap-3">
@@ -287,16 +314,17 @@ function FotileProjectChapter() {
 
           <div className="grid content-start gap-7 lg:order-2">
             <p className={sectionLabelClass}>02 — Design Development</p>
-            <h3 className="text-[38px] font-normal leading-[0.98] tracking-[-0.05em] text-black md:text-[54px]">From insight to product experience</h3>
+            <h3 className="text-[38px] font-normal leading-[0.98] tracking-[-0.05em] text-black md:text-[54px]">From Insight to Product</h3>
             <div className={`grid gap-4 ${bodyClass}`}>
-              <p>Working with the multidisciplinary design team, I supported the development of early product concepts and 3D form studies.</p>
-              <p>The research informed both the physical product and its interaction language, including a full-width oil collection solution and the touchscreen interface.</p>
+              <p>Working with the GoodMatter design team, I supported the development of the product concept, physical form and touchscreen experience.</p>
+              <p>For the physical product, we focused on making the range hood easier to clean. The front was designed as a seamless black crystal glass panel that could be wiped clean, without the exposed oil filters found on traditional range hoods.</p>
+              <p>We also integrated an extra-long oil cup into the product form. With twice the capacity of a standard oil cup, it significantly reduced how often users needed to empty and clean it.</p>
             </div>
             <div className="grid gap-5 border-y border-black/[0.08] py-7">
               <h4 className="text-[28px] font-normal leading-tight tracking-[-0.04em] text-black md:text-[36px]">Designing the Skyline UI</h4>
               <div className={`grid gap-4 ${bodyClass}`}>
-                <p>I developed the “Skyline” interface concept to express the product&apos;s core idea: cool airflow descending from above and cooking heat rising from below.</p>
-                <p>Blue light represented cooling, while warm orange light represented the heat from the hob. Their meeting point formed a horizon — turning a complex engineering system into a simple visual identity.</p>
+                <p>I designed the “Skyline” touchscreen interface around the product&apos;s cooling and extraction system.</p>
+                <p>Blue light represented cool airflow descending from above, while warm orange light represented heat rising from the hob. The two colours met at the centre to form a clear horizon line. The brightness and spread of the glow changed with the airflow level, allowing users to understand changes in the hood&apos;s operation at a glance.</p>
               </div>
             </div>
           </div>
@@ -314,27 +342,71 @@ function FotileProjectChapter() {
             </div>
           </div>
 
-          <figure className="grid place-items-center bg-[#f6f6f5] px-5 py-10 md:px-10 md:py-16">
-            <Image
-              src="/projects/internship-projects/fotile/fotile-product.png"
-              alt="Complete FOTILE A1.i Integrated Cooling Range Hood product"
-              width={800}
-              height={800}
-              sizes="(min-width: 1280px) 1100px, 100vw"
-              className="h-auto max-h-[820px] w-full max-w-[1100px] object-contain"
-            />
+              <figure className="grid place-items-center">
+            <div className="aspect-[4/3] w-full max-w-[1100px] overflow-hidden">
+              <Image
+                src="/projects/internship-projects/fotile/fotile-outcome.jpg"
+                alt="Front view of the complete FOTILE A1.i Integrated Cooling Range Hood"
+                width={2250}
+                height={1500}
+                sizes="(min-width: 1280px) 1100px, 100vw"
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
           </figure>
 
-          <div className="grid gap-10 border-y border-black/[0.08] py-10 md:grid-cols-[0.38fr_0.62fr] md:items-start md:gap-16">
-            <div className="grid gap-2">
-              <p className="text-[48px] font-normal leading-none tracking-[-0.055em] text-black md:text-[64px]">2022</p>
-              <p className={sectionLabelClass}>China Excellent Industrial Design Award</p>
-              <p className="text-[22px] font-medium uppercase tracking-[0.08em] text-black/72">Gold</p>
+          <div className="grid gap-8 border-y border-black/[0.08] py-10">
+            <div className="grid gap-8 md:grid-cols-2 md:gap-0">
+              <article className="grid content-start gap-7 md:pr-10 lg:pr-16">
+                <div className="grid gap-2">
+                  <div className="flex h-20 items-center">
+                    <Image
+                      src="/projects/internship-projects/fotile/awards/ceid-award.webp"
+                      alt="China Excellent Industrial Design Award logo"
+                      width={441}
+                      height={680}
+                      className="h-20 w-auto max-w-[150px] object-contain object-left"
+                    />
+                  </div>
+                  <p className="text-[48px] font-normal leading-none tracking-[-0.055em] text-black md:text-[64px]">2022</p>
+                  <p className={sectionLabelClass}>China Excellent Industrial Design Award</p>
+                  <p className="text-[22px] font-medium uppercase tracking-[0.08em] text-black/72">Gold</p>
+                </div>
+                <p className={bodyClass}>The FOTILE A1.i received Gold at the 2022 China Excellent Industrial Design Award, one of only ten Gold-winning projects that year.</p>
+              </article>
+
+              <article className="grid content-start gap-7 border-t border-black/[0.08] pt-8 md:border-l md:border-t-0 md:pl-10 md:pt-0 lg:pl-16">
+                <div className="grid gap-2">
+                  <div className="flex h-20 items-center">
+                    <Image
+                      src="/projects/internship-projects/fotile/awards/if-design-award-2022.png"
+                      alt="iF Design Award 2022 logo"
+                      width={411}
+                      height={211}
+                      className="h-20 w-auto max-w-[150px] object-contain object-left"
+                    />
+                  </div>
+                  <p className="text-[48px] font-normal leading-none tracking-[-0.055em] text-black md:text-[64px]">2022</p>
+                  <p className={sectionLabelClass}>iF Design Award</p>
+                  <p className="text-[22px] font-medium uppercase tracking-[0.08em] text-black/72">Product Design Winner</p>
+                </div>
+                <div className="grid gap-5">
+                  <p className={bodyClass}>The FOTILE A1.i also received a 2022 iF Design Award for its integrated cooling and smoke-extraction experience, ultra-thin form and responsive Skyline interface.</p>
+                  <a
+                    href="https://ifdesign.com/en/winner-ranking/project/cxw-258-lc15-a1i/334116"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-fit items-center gap-1.5 text-[14px] font-medium text-[#ED1827] underline decoration-[#ED1827] underline-offset-4 transition hover:opacity-70 md:text-[15px]"
+                    style={{ color: "#ED1827", textDecoration: "underline", textDecorationColor: "#ED1827" }}
+                  >
+                    <span>View iF award</span>
+                    <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                  </a>
+                </div>
+              </article>
             </div>
-            <div className="grid max-w-[720px] gap-7">
-              <p className={bodyClass}>The FOTILE A1.i later received Gold at the 2022 China Excellent Industrial Design Award, one of only ten Gold-winning projects that year.</p>
-              <p className="border-t border-black/[0.08] pt-6 text-[14px] leading-relaxed text-black/38 md:text-[15px]">I contributed to this project as a UI/UX Design Intern within Good Matter&apos;s multidisciplinary team. The final product was developed collaboratively with FOTILE.</p>
-            </div>
+
+            <p className="border-t border-black/[0.08] pt-6 text-[14px] leading-relaxed text-black/38 md:text-[15px]">I contributed to the project as a UI/UX Design Intern within the GoodMatter design team. The final product was developed collaboratively with FOTILE.</p>
           </div>
         </section>
       </div>
@@ -343,7 +415,7 @@ function FotileProjectChapter() {
 }
 
 export function InternshipProjectsCaseStudy() {
-  const [activeChapter, setActiveChapter] = useState("overview");
+  const [activeChapter, setActiveChapter] = useState("fotile-range-hood");
 
   useEffect(() => {
     const sections = chapters
@@ -378,8 +450,8 @@ export function InternshipProjectsCaseStudy() {
         ))}
       </nav>
 
-      <header className="relative -mt-16 grid min-h-[calc(100vh-2rem)] overflow-hidden bg-white px-5 pb-20 pt-32 md:px-10">
-        <div className="mx-auto grid min-h-[calc(100vh-10rem)] w-full max-w-[1280px] content-center gap-12">
+      <header className="relative -mt-16 grid min-h-[calc(60vh-2rem)] overflow-hidden bg-white px-5 pb-20 pt-32 md:px-10">
+        <div className="mx-auto grid min-h-[calc(60vh-10rem)] w-full max-w-[1280px] content-center gap-12">
           <div className="grid max-w-[1080px] gap-7">
             <p className={sectionLabelClass}>{internshipCopy.hero.label}</p>
             <h1 className="max-w-[1100px] text-[58px] font-normal leading-[0.92] tracking-[-0.075em] text-[#0a0a0a] sm:text-[72px] md:text-[96px] lg:text-[112px]">
@@ -394,32 +466,33 @@ export function InternshipProjectsCaseStudy() {
             {internshipCopy.hero.metadata.map(([label, value]) => (
               <div key={label} className="grid content-start gap-2">
                 <dt className={sectionLabelClass}>{label}</dt>
-                <dd className="text-[16px] leading-relaxed text-black/58 md:text-[18px]">{value}</dd>
+                {label === "Impact" ? (
+                  <dd className="flex min-h-16 items-center gap-5">
+                    <Image
+                      src="/projects/internship-projects/fotile/awards/if-design-award-2022.png"
+                      alt="iF Design Award 2022"
+                      width={411}
+                      height={211}
+                      className="h-16 w-auto object-contain"
+                    />
+                    <Image
+                      src="/projects/internship-projects/fotile/awards/ceid-award.webp"
+                      alt="China Excellent Industrial Design Award"
+                      width={441}
+                      height={680}
+                      className="h-16 w-auto object-contain"
+                    />
+                  </dd>
+                ) : (
+                  <dd className="text-[16px] leading-relaxed text-black/58 md:text-[18px]">{value}</dd>
+                )}
               </div>
             ))}
           </dl>
         </div>
       </header>
 
-      <section id="overview" className="scroll-mt-24 overflow-hidden bg-white px-5 py-24 md:px-10 lg:py-32">
-        <div className="mx-auto grid w-full max-w-[1280px] gap-16 lg:grid-cols-[minmax(220px,0.28fr)_minmax(0,0.72fr)] lg:gap-20">
-          <p className={sectionLabelClass}>Overview</p>
-          <div className="grid max-w-[900px] gap-8 border-t border-black/[0.08] pt-8">
-            <h2 className={sectionTitleClass}>Two projects, two design contexts.</h2>
-            <p className={`max-w-[820px] ${bodyClass}`}>{internshipCopy.overview}</p>
-            <nav className="grid border-y border-black/[0.08]" aria-label="Project chapter links">
-              {internshipCopy.projects.map((project) => (
-                <a key={project.id} href={`#${project.id}`} className="group grid gap-2 border-b border-black/[0.08] py-5 last:border-b-0 sm:grid-cols-[150px_1fr] sm:gap-8">
-                  <span className={sectionLabelClass}>{project.index} · {project.studio}</span>
-                  <span className="text-[16px] leading-relaxed text-black/42 transition group-hover:text-black md:text-[17px]">{project.navMetadata}</span>
-                </a>
-              ))}
-            </nav>
-          </div>
-        </div>
-      </section>
-
-      {internshipCopy.projects.map((project) =>
+      {[...internshipCopy.projects].reverse().map((project) =>
         project.id === "illuminera-suntory" ? <SuntoryProjectChapter key={project.id} /> : <FotileProjectChapter key={project.id} />,
       )}
 

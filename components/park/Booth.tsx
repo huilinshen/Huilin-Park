@@ -126,7 +126,7 @@ export function Booth({
           <div
             style={{
               color: hovered ? "rgba(0, 0, 0, 1)" : "rgba(0, 0, 0, 0.2)",
-              fontSize: "32px",
+              fontSize: "24px",
               fontWeight: 800,
               lineHeight: 1.15,
               maxWidth: "220px",

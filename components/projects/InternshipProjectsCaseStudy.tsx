@@ -21,22 +21,20 @@ const internshipCopy = {
       id: "illuminera-suntory",
       index: "02",
       discipline: "Consumer Innovation",
-      studio: "Illuminera × Suntory",
+      studio: "Illuminera × Suntory × TMIC",
       title: "Suntory Qingxiang Oolong Tea",
       introduction:
-        "At Illuminera, I worked at the intersection of user research, product strategy and visual design. For Suntory and Tmall Innovation Center, I contributed to the positioning, packaging and launch of Qingxiang Oolong Tea, helping translate consumer and market insights into a clear product proposition.",
+        "Suntory wanted to identify a new product opportunity in China’s increasingly competitive ready-to-drink tea market.",
       details: [
-        ["Role", "UI/UX Designer Intern"],
-        ["Company", "Illuminera, an IQVIA business"],
-        ["Client", "Suntory × Tmall Innovation Center (TMIC)"],
-        ["Timeline", "Jan 2023 – Jun 2023"],
+        ["Role", "Design Intern, Consumer & Big Health (CBH)"],
+        ["Company", "Illuminera"],
+        ["Client", "Suntory × TMIC"],
         ["Location", "Shanghai"],
       ],
       outcome: "Within six months of launch, Qingxiang Oolong Tea became Suntory’s No.1 new product by GMV.",
-      roleNote:
-        "I also helped establish visual identities and reusable design-system foundations for two internal data and research products.",
-      navMetadata: "Consumer Research · Positioning · Packaging",
-      futureSections: ["Overview", "Challenge", "My Contribution", "Insight", "Positioning", "Packaging", "Impact"],
+      roleNote: "Brand Research · User Research · Opportunity Definition · Packaging Design",
+      navMetadata: "Brand Research · User Research · Opportunity Definition · Packaging Design",
+      futureSections: ["Project Brief", "The Challenge", "Target Audience", "My Contribution", "Impact"],
     },
     {
       id: "fotile-range-hood",
@@ -100,15 +98,15 @@ function SuntoryProjectChapter() {
     <section
       id="illuminera-suntory"
       className="mt-48 scroll-mt-24 overflow-hidden bg-white px-5 py-24 md:px-10 lg:mt-64 lg:py-32"
-      data-future-sections="Overview,Challenge,My Contribution,Impact"
+      data-future-sections="Project Brief,The Challenge,Target Audience,My Contribution,Impact"
     >
-      <div className="mx-auto grid w-full max-w-[1280px] gap-16 lg:gap-20">
-        <header className="grid gap-10 border-t border-black/[0.08] pt-8 lg:grid-cols-[minmax(0,0.56fr)_minmax(320px,0.44fr)] lg:items-start lg:gap-16">
+      <div className="mx-auto grid w-full max-w-[1280px] gap-20 lg:gap-24">
+        <header className="grid gap-12 border-t border-black/[0.08] pt-8 lg:grid-cols-[minmax(0,0.55fr)_minmax(360px,0.45fr)] lg:items-start lg:gap-14">
           <div className="grid content-start gap-7 lg:py-4">
             <ProjectHeading
               number="02"
               discipline="Consumer Innovation"
-              studio="Illuminera × Suntory"
+              studio="Illuminera × Suntory × TMIC"
               color="#52C4DE"
             />
 
@@ -117,21 +115,25 @@ function SuntoryProjectChapter() {
                 Suntory Qingxiang Oolong Tea
               </h2>
               <p className="max-w-[680px] text-[23px] font-medium leading-tight tracking-[-0.035em] text-black/76 md:text-[30px]">
-                From consumer insight to a market-ready tea proposition
+                From consumer insight to a launched new tea product
               </p>
             </div>
 
             <div className="grid gap-2 border-y border-black/[0.08] py-6 font-mono text-[11px] font-semibold uppercase leading-relaxed tracking-[0.14em] text-black/38 md:text-[12px]">
-              <p>Illuminera, Shanghai · Design Intern</p>
-              <p>Consumer Research · Product Positioning · Persona · Packaging Design</p>
+              <p>Illuminera, Shanghai · Design Intern, Consumer &amp; Big Health (CBH)</p>
+              <p>Brand Research · User Research · Opportunity Definition · Packaging Design</p>
             </div>
 
-            <p className={`max-w-[700px] ${bodyClass}`}>
-              Suntory wanted to identify a new growth opportunity within China&apos;s increasingly competitive ready-to-drink tea market. Working with Illuminera&apos;s innovation team, I supported the development of a new tea proposition by translating consumer and market research into a clear target audience, positioning direction and packaging concept.
-            </p>
+            <div className="grid max-w-[640px] gap-5">
+              <p className={sectionLabelClass}>Project Brief</p>
+              <div className={`grid gap-4 ${bodyClass}`}>
+                <p>Suntory, a Japanese beverage company, wanted to find new growth in China&apos;s increasingly competitive ready-to-drink tea market.</p>
+                <p>As a Design Intern in Illuminera&apos;s Consumer &amp; Big Health (CBH) team, I worked with Suntory and TMIC (Tmall Innovation Center, Alibaba&apos;s consumer insight and product innovation platform) to research consumers, analyse the category and help develop and launch Qingxiang Oolong Tea.</p>
+              </div>
+            </div>
           </div>
 
-          <figure className="grid gap-3 lg:justify-self-end">
+          <figure className="grid gap-3 lg:pt-24">
             <div className="overflow-hidden border border-black/[0.08] bg-[#eef2e7]">
               <Image
                 src="/projects/internship-projects/suntory/suntory-impact-poster.png"
@@ -149,53 +151,52 @@ function SuntoryProjectChapter() {
           </figure>
         </header>
 
-        <div className="grid gap-12 border-t border-black/[0.08] pt-12 md:grid-cols-2 md:gap-10 lg:grid-cols-12 lg:gap-12">
-          <article className="grid content-start gap-5 lg:col-span-3">
+        <div className="mx-auto grid w-full max-w-[920px] border-t border-black/[0.08]">
+          <article className="grid gap-5 border-b border-black/[0.08] py-12 md:grid-cols-[180px_minmax(0,1fr)] md:gap-10 lg:py-14">
             <p className={sectionLabelClass}>The Challenge</p>
-            <div className={`grid gap-4 ${bodyClass}`}>
-              <p>Sugar-free tea was growing rapidly, but many products were communicating similar claims and beginning to look interchangeable.</p>
-              <p>The challenge was to create a proposition that felt relevant to changing health expectations while remaining credible to Suntory&apos;s established tea heritage.</p>
+            <div className={`grid max-w-[720px] gap-4 ${bodyClass}`}>
+              <p>Traditional tea products were often associated with older consumers and established tea-drinking habits. Meanwhile, the fast-growing sugar-free tea category was becoming crowded with similar health claims, flavours and packaging.</p>
+              <p>The challenge was to make tea relevant to a younger urban audience while retaining the quality and credibility associated with Suntory&apos;s tea heritage.</p>
             </div>
           </article>
 
-          <article className="grid content-start gap-6 lg:col-span-5">
+          <article className="grid gap-5 border-b border-black/[0.08] py-12 md:grid-cols-[180px_minmax(0,1fr)] md:gap-10 lg:py-14">
+            <p className={sectionLabelClass}>Target Audience</p>
+            <div className={`grid max-w-[720px] gap-4 ${bodyClass}`}>
+              <p>We focused on young urban professionals, particularly women who wanted drinks that felt refined, enjoyable and compatible with a health-conscious lifestyle.</p>
+              <p>Our target user, represented by the persona “Annie”, cared about reducing sugar but did not want to compromise on flavour or experience. She viewed tea as more than a traditional everyday drink: it could support work, social occasions and more experimental combinations with coffee or cocktails.</p>
+              <p>This led to a product direction centred on zero sugar, a light floral flavour and a more contemporary tea-drinking experience.</p>
+            </div>
+          </article>
+
+          <article className="grid gap-5 py-12 md:grid-cols-[180px_minmax(0,1fr)] md:gap-10 lg:py-14">
             <p className={sectionLabelClass}>My Contribution</p>
-            <p className="border-y border-black/[0.08] py-5 text-[20px] font-medium leading-tight tracking-[-0.025em] text-black/78 md:text-[24px]">
-              My focus: Positioning · Persona · Packaging
-            </p>
-            <div className={`grid gap-4 ${bodyClass}`}>
-              <p>My focus was turning research findings into a consumer-facing product direction.</p>
-              <p>I synthesised consumer needs and competitor patterns, helped define the target positioning, developed the core user persona and translated the strategy into the final packaging direction.</p>
-              <p>The design aimed to communicate a tea that felt natural, light and suitable for everyday consumption—without becoming overly clinical or aggressively health-focused.</p>
-            </div>
-          </article>
-
-          <article className="grid content-start gap-6 md:col-span-2 lg:col-span-4">
-            <p className={sectionLabelClass}>Impact</p>
-            <p className="text-[34px] font-normal leading-[1.02] tracking-[-0.05em] text-black md:text-[42px] lg:text-[46px]">
-              No.1 Suntory new product by GMV within six months
-            </p>
-            <div className={`grid gap-4 ${bodyClass}`}>
-              <p>The resulting product, Suntory Qingxiang Oolong Tea, successfully entered the market and became Suntory&apos;s highest-performing new product by GMV within six months of launch.</p>
-              <p>This project showed me how consumer research, positioning and visual design can work together to turn an emerging market opportunity into a commercially successful product.</p>
+            <div className={`grid max-w-[720px] gap-4 ${bodyClass}`}>
+              <p>I contributed to brand and competitor research, user research and insight synthesis.</p>
+              <p>I helped define the target audience, identify the new-product opportunity and develop the product concept. I then translated this direction into the packaging design, including the visual hierarchy and the communication of Tieguanyin tea, orchid aroma, zero-sugar benefits and the product&apos;s light, contemporary character.</p>
             </div>
           </article>
         </div>
 
-        <div className="grid gap-8 border-y border-black/[0.08] py-10 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center md:gap-6">
-          {[
-            ["Research", "Market and consumer signals"],
-            ["Positioning", "Natural everyday balance"],
-            ["Design", "Persona and packaging direction"],
-          ].map(([label, copy], index) => (
-            <div key={label} className="contents">
-              <div className="grid gap-2">
-                <p className={sectionLabelClass}>{label}</p>
-                <p className="text-[17px] leading-relaxed text-black/58 md:text-[18px]">{copy}</p>
-              </div>
-              {index < 2 ? <span className="rotate-90 text-[20px] text-black/22 md:rotate-0" aria-hidden="true">→</span> : null}
+        <article className="mx-auto grid w-full max-w-[1100px] gap-6 px-6 py-10 md:px-10 md:py-12 lg:px-14 lg:py-14">
+            <p className={sectionLabelClass}>Impact</p>
+            <p className="max-w-[980px] text-[38px] font-normal leading-[1.02] tracking-[-0.05em] text-black md:text-[54px] lg:text-[66px]">
+              No.1 Suntory new product by GMV within six months
+            </p>
+            <div className={`grid max-w-[720px] gap-4 ${bodyClass}`}>
+              <p>Suntory Qingxiang Oolong Tea was successfully launched and became Suntory&apos;s highest-performing new product by GMV within six months of launch.</p>
             </div>
-          ))}
+        </article>
+
+        <div className="mx-auto w-full max-w-[1100px] border-y border-black/[0.08] py-12 md:py-14">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-4 text-[16px] font-medium leading-relaxed text-black/58 md:gap-x-4 md:text-[18px]">
+            {["Brand Research", "User Research", "Opportunity Definition", "Product Concept", "Packaging", "Launch"].map((step, index) => (
+              <div key={step} className="flex items-center gap-x-3 md:gap-x-4">
+                {index > 0 ? <span className="text-black/22" aria-hidden="true">→</span> : null}
+                <span>{step}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>

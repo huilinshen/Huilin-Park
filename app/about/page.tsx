@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { PhotoBoothCamera } from "@/components/about/PhotoBoothHero";
+import { ProjectFooterNavigation } from "@/components/projects/ProjectFooterNavigation";
 
 const currentWork = [
   {
@@ -198,6 +199,10 @@ export default function AboutPage() {
           </a>
         </address>
       </section>
+
+      <footer className="mx-auto w-full max-w-[1440px] px-5 py-12 md:px-8 md:py-16 lg:px-10 xl:px-12">
+        <ProjectFooterNavigation current="about" />
+      </footer>
     </main>
   );
 }

@@ -2,13 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, Home, Sparkles } from "lucide-react";
+import { Home, Sparkles } from "lucide-react";
 import { getProjectBySlug, projects } from "@/data/projects";
 import { BodyClockCaseStudy } from "@/components/projects/BodyClockCaseStudy";
 import { CalendarFlipbook } from "@/components/projects/CalendarFlipbook";
 import { CaseStudySubAccordion } from "@/components/projects/CaseStudySubAccordion";
 import { ResearchProcessAccordion } from "@/components/projects/ResearchProcessAccordion";
 import { InternshipProjectsCaseStudy } from "@/components/projects/InternshipProjectsCaseStudy";
+import { ProjectFooterNavigation } from "@/components/projects/ProjectFooterNavigation";
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -48,9 +49,6 @@ export default async function ProjectPage({
     notFound();
   }
 
-  const projectIndex = projects.findIndex((item) => item.slug === project.slug);
-  const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
-  const nextProject = projects[(projectIndex + 1) % projects.length];
   const isBodyClock = project.slug === "generative-watch-face";
   const isCommunityGardens = project.slug === "community-gardens";
   const isInternshipProjects = project.slug === "internship-projects";
@@ -67,8 +65,8 @@ export default async function ProjectPage({
 
   if (isBodyClock) {
     return (
-      <main className="min-h-screen bg-[#050609] text-white">
-        <article className="mx-auto grid w-full gap-0 px-0 py-8">
+      <main className="min-h-screen overflow-x-clip bg-black text-white">
+        <article className="mx-auto grid w-full min-w-0 max-w-full gap-0 overflow-x-clip px-0 py-8">
           <Link
             className="group z-50 ml-5 inline-flex min-h-16 w-fit items-center justify-self-start gap-4 text-[18px] font-black text-white/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-white focus-visible:text-white md:ml-8 md:text-[22px] lg:ml-10 xl:ml-12 xl:text-[28px]"
             href="/"
@@ -82,41 +80,8 @@ export default async function ProjectPage({
 
           <BodyClockCaseStudy />
 
-          <footer className="mx-auto grid w-full max-w-[1440px] gap-24 bg-[#02040a] px-5 pb-16 pt-40 md:px-8 md:pb-20 md:pt-56 lg:px-10 xl:px-12">
-            <nav className="grid grid-cols-3 items-center gap-6">
-              <Link
-                href={previousProject.href}
-                aria-label="Previous Project"
-                className="group inline-flex min-h-16 items-center justify-self-start gap-4 text-center text-[18px] font-black text-white/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-white focus-visible:text-white md:text-[22px] xl:text-[28px]"
-              >
-                <ArrowLeft size={48} strokeWidth={1.8} />
-                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[260px] group-hover:opacity-100 group-focus-visible:max-w-[260px] group-focus-visible:opacity-100">
-                  Previous Project
-                </span>
-              </Link>
-
-              <Link
-                href="/"
-                aria-label="Back to Huilin Park"
-                className="group inline-flex min-h-16 items-center justify-self-center gap-4 text-center text-[18px] font-black text-white/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-white focus-visible:text-white md:text-[22px] xl:text-[28px]"
-              >
-                <Home size={48} strokeWidth={1.8} />
-                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">
-                  Back to Huilin Park
-                </span>
-              </Link>
-
-              <Link
-                href={nextProject.href}
-                aria-label="Next Project"
-                className="group inline-flex min-h-16 items-center justify-self-end gap-4 text-center text-[18px] font-black text-white/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-white focus-visible:text-white md:text-[22px] xl:text-[28px]"
-              >
-                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[220px] group-hover:opacity-100 group-focus-visible:max-w-[220px] group-focus-visible:opacity-100">
-                  Next Project
-                </span>
-                <ArrowRight size={48} strokeWidth={1.8} />
-              </Link>
-            </nav>
+          <footer className="grid w-dvw max-w-[1440px] justify-self-start bg-[#02040a] px-5 py-12 md:px-8 md:py-16 lg:px-10 xl:mx-auto xl:justify-self-center xl:px-12">
+            <ProjectFooterNavigation current="generative-watch-face" tone="dark" />
           </footer>
         </article>
       </main>
@@ -140,21 +105,8 @@ export default async function ProjectPage({
 
           <InternshipProjectsCaseStudy />
 
-          <footer className="mx-auto grid w-full max-w-[1440px] bg-white px-5 pb-16 pt-40 md:px-8 md:pb-20 md:pt-56 lg:px-10 xl:px-12">
-            <nav className="grid grid-cols-3 items-center gap-4 md:gap-6">
-              <Link href={previousProject.href} aria-label="Previous Project" className="group inline-flex min-h-16 items-center justify-self-start gap-4 text-[18px] font-black text-black/40 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]">
-                <ArrowLeft size={48} strokeWidth={1.8} />
-                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[260px] group-hover:opacity-100 group-focus-visible:max-w-[260px] group-focus-visible:opacity-100">Previous Project</span>
-              </Link>
-              <Link href="/" aria-label="Back to Huilin Park" className="group inline-flex min-h-16 items-center justify-self-center gap-4 text-[18px] font-black text-black/40 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]">
-                <Home size={48} strokeWidth={1.8} />
-                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">Back to Huilin Park</span>
-              </Link>
-              <Link href={nextProject.href} aria-label="Next Project" className="group inline-flex min-h-16 items-center justify-self-end gap-4 text-[18px] font-black text-black/40 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]">
-                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[220px] group-hover:opacity-100 group-focus-visible:max-w-[220px] group-focus-visible:opacity-100">Next Project</span>
-                <ArrowRight size={48} strokeWidth={1.8} />
-              </Link>
-            </nav>
+          <footer className="mx-auto grid w-full max-w-[1440px] bg-white px-5 py-12 md:px-8 md:py-16 lg:px-10 xl:px-12">
+            <ProjectFooterNavigation current="internship-projects" />
           </footer>
         </article>
       </main>
@@ -1899,7 +1851,7 @@ export default async function ProjectPage({
           </section>
         )}
 
-        <footer className="grid gap-24 pt-32 md:gap-32 md:pt-48">
+        <footer className="grid gap-12 py-12 md:gap-16 md:py-16">
           <div className="flex items-start justify-center" aria-hidden="true">
             <div className="flex w-full items-start justify-center">
               <span className="mt-2 h-px flex-1 border-t-2 border-dotted border-[#b8b0a2]" />
@@ -1917,40 +1869,7 @@ export default async function ProjectPage({
             </div>
           </div>
 
-          <nav className="grid grid-cols-3 items-center gap-6">
-            <Link
-              href={previousProject.href}
-              aria-label="Previous Project"
-              className="group inline-flex min-h-16 items-center justify-self-start gap-4 text-center text-[18px] font-black text-black/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]"
-            >
-              <ArrowLeft size={48} strokeWidth={1.8} />
-              <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[260px] group-hover:opacity-100 group-focus-visible:max-w-[260px] group-focus-visible:opacity-100">
-                Previous Project
-              </span>
-            </Link>
-
-            <Link
-              href="/"
-              aria-label="Back to Huilin Park"
-              className="group inline-flex min-h-16 items-center justify-self-center gap-4 text-center text-[18px] font-black text-black/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]"
-            >
-              <Home size={48} strokeWidth={1.8} />
-              <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">
-                Back to Huilin Park
-              </span>
-            </Link>
-
-            <Link
-              href={nextProject.href}
-              aria-label="Next Project"
-              className="group inline-flex min-h-16 items-center justify-self-end gap-4 text-center text-[18px] font-black text-black/50 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]"
-            >
-              <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[220px] group-hover:opacity-100 group-focus-visible:max-w-[220px] group-focus-visible:opacity-100">
-                Next Project
-              </span>
-              <ArrowRight size={48} strokeWidth={1.8} />
-            </Link>
-          </nav>
+          <ProjectFooterNavigation current="community-gardens" />
         </footer>
       </article>
     </main>

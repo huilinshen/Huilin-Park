@@ -13,7 +13,6 @@ const chapters = [
   ["Principles", "principles"],
   ["Architecture", "architecture"],
   ["Workflow", "workflow"],
-  ["CUJ", "ujp"],
   ["Iteration", "iteration"],
   ["Impact", "impact"],
 ];
@@ -62,184 +61,26 @@ const architectureStages = [
     number: "01",
     title: "Understand",
     body: "Interpret intent, context, feasibility and safety before taking action.",
-    accent: "52,245,166",
-    highlight: { left: "3.5%", top: "15%", width: "43%", height: "22%" },
+    accent: "#34f5a6",
   },
   {
     number: "02",
     title: "Plan",
     body: "Translate intent into a structured goal and break it into executable tasks.",
-    accent: "155,124,255",
-    highlight: { left: "24%", top: "35%", width: "28%", height: "18%" },
+    accent: "#9b7cff",
   },
   {
     number: "03",
     title: "Coordinate",
     body: "Use scheduling, memory and context to adapt execution as conditions change.",
-    accent: "116,214,255",
-    highlight: { left: "51%", top: "4%", width: "30%", height: "54%" },
+    accent: "#f6c45f",
   },
   {
     number: "04",
     title: "Execute",
     body: "Coordinate tools and services while surfacing only the next relevant interaction.",
-    accent: "246,196,95",
-    highlight: { left: "42%", top: "55%", width: "38%", height: "37%" },
+    accent: "#74d6ff",
   },
-];
-
-type JourneyItem = {
-  time: string;
-  title: string;
-  copy: string;
-  screens: string[];
-  accent: string;
-  icon: string;
-  value: string;
-  label: string;
-  frames?: string[];
-};
-
-const journey: JourneyItem[] = [
-  {
-    time: "6:00",
-    title: "Wake up",
-    copy: "A low-noise wake state surfaces sleep recovery, light exposure, and one suggested morning action.",
-    screens: ["Sleep recovery", "Light cue", "Routine"],
-    accent: "#9b7cff",
-    icon: "MN",
-    value: "82",
-    label: "recovery",
-    frames: [
-      "/projects/generative-watch-face/journey/wake-up-01-default.png",
-      "/projects/generative-watch-face/journey/wake-up-02-select-reschedule.png",
-      "/projects/generative-watch-face/journey/wake-up-03-confirm-reschedule.png",
-      "/projects/generative-watch-face/journey/wake-up-04-updated-view.png",
-      "/projects/generative-watch-face/journey/wake-up-05-select-remove.png",
-      "/projects/generative-watch-face/journey/wake-up-06-remove-confirmation.png",
-      "/projects/generative-watch-face/journey/wake-up-07-done.png",
-      "/projects/generative-watch-face/journey/wake-up-08-action-menu.png",
-    ],
-  },
-  {
-    time: "7:00",
-    title: "Morning routine",
-    copy: "Heart rate and stress baseline established. The face shows a calm health ring, nothing to act on, just a quiet biological awareness before the day begins.",
-    screens: ["Resting HR: 58 bpm", "Stress: Low", "Mood: Rested"],
-    accent: "#34f5a6",
-    icon: "AM",
-    value: "74",
-    label: "low stress",
-  },
-  {
-    time: "9:00",
-    title: "Uber to meeting",
-    copy: "The user intent becomes a goal, then a small set of confirmed transport tasks.",
-    screens: ["Intent", "Uber", "Route", "ETA"],
-    accent: "#f6c45f",
-    icon: "UB",
-    value: "09",
-    label: "eta",
-  },
-  {
-    time: "10:00",
-    title: "Monitoring stress",
-    copy: "Stress monitoring stays visible without becoming alarmist, using a softer biofeedback ring.",
-    screens: ["Stress", "Breath", "Focus"],
-    accent: "#34f5a6",
-    icon: "HR",
-    value: "66",
-    label: "focus",
-  },
-  {
-    time: "11:00",
-    title: "Meeting presentation",
-    copy: "Meeting mode prioritises time, next slide cues, and subtle haptics for pacing.",
-    screens: ["Meeting", "Timer", "Prompt"],
-    accent: "#9b7cff",
-    icon: "PR",
-    value: "11",
-    label: "present",
-  },
-  {
-    time: "13:00",
-    title: "Lunch",
-    copy: "A restorative midday state balances activity, nutrition and social context.",
-    screens: ["Meal", "Walk", "Reset"],
-    accent: "#f6c45f",
-    icon: "LN",
-    value: "13",
-    label: "reset",
-  },
-  {
-    time: "16:00",
-    title: "WhatsApp",
-    copy: "Messaging is translated into a glanceable decision: reply now, summarize later, or ignore.",
-    screens: ["Message", "Summary", "Reply"],
-    accent: "#9b7cff",
-    icon: "WA",
-    value: "16",
-    label: "reply",
-  },
-  {
-    time: "18:00",
-    title: "Bake pecan pie",
-    copy: "A home task becomes steps that can be tracked without turning the watch into a phone.",
-    screens: ["Recipe", "Timer", "Step"],
-    accent: "#f6c45f",
-    icon: "BK",
-    value: "18",
-    label: "bake",
-  },
-  {
-    time: "20:00",
-    title: "Summary",
-    copy: "The day closes with an adaptive reflection: completed goals, recovery, and tomorrow's preparation.",
-    screens: ["Daily recap", "Mood", "Tomorrow"],
-    accent: "#34f5a6",
-    icon: "EV",
-    value: "20",
-    label: "recap",
-  },
-];
-
-const orbitTickLines = [
-  { x1: 50, y1: 9.5, x2: 50, y2: 6.2, major: true },
-  { x1: 60.922, y1: 9.238, x2: 61.336, y2: 7.692, major: false },
-  { x1: 71.1, y1: 13.454, x2: 71.9, y2: 12.068, major: false },
-  { x1: 79.84, y1: 20.16, x2: 80.971, y2: 19.029, major: false },
-  { x1: 86.546, y1: 28.9, x2: 87.932, y2: 28.1, major: false },
-  { x1: 90.762, y1: 39.078, x2: 92.308, y2: 38.664, major: false },
-  { x1: 90.5, y1: 50, x2: 93.8, y2: 50, major: true },
-  { x1: 90.762, y1: 60.922, x2: 92.308, y2: 61.336, major: false },
-  { x1: 86.546, y1: 71.1, x2: 87.932, y2: 71.9, major: false },
-  { x1: 79.84, y1: 79.84, x2: 80.971, y2: 80.971, major: false },
-  { x1: 71.1, y1: 86.546, x2: 71.9, y2: 87.932, major: false },
-  { x1: 60.922, y1: 90.762, x2: 61.336, y2: 92.308, major: false },
-  { x1: 50, y1: 90.5, x2: 50, y2: 93.8, major: true },
-  { x1: 39.078, y1: 90.762, x2: 38.664, y2: 92.308, major: false },
-  { x1: 28.9, y1: 86.546, x2: 28.1, y2: 87.932, major: false },
-  { x1: 20.16, y1: 79.84, x2: 19.029, y2: 80.971, major: false },
-  { x1: 13.454, y1: 71.1, x2: 12.068, y2: 71.9, major: false },
-  { x1: 9.238, y1: 60.922, x2: 7.692, y2: 61.336, major: false },
-  { x1: 9.5, y1: 50, x2: 6.2, y2: 50, major: true },
-  { x1: 9.238, y1: 39.078, x2: 7.692, y2: 38.664, major: false },
-  { x1: 13.454, y1: 28.9, x2: 12.068, y2: 28.1, major: false },
-  { x1: 20.16, y1: 20.16, x2: 19.029, y2: 19.029, major: false },
-  { x1: 28.9, y1: 13.454, x2: 28.1, y2: 12.068, major: false },
-  { x1: 39.078, y1: 9.238, x2: 38.664, y2: 7.692, major: false },
-];
-
-const journeyOrbitPositions = [
-  { left: 93, top: 50 },
-  { left: 91.535, top: 61.129 },
-  { left: 87.239, top: 71.5 },
-  { left: 71.5, top: 87.239 },
-  { left: 50, top: 93 },
-  { left: 38.871, top: 91.535 },
-  { left: 19.594, top: 80.406 },
-  { left: 7, top: 50 },
-  { left: 28.5, top: 12.761 },
 ];
 
 const challenges = [
@@ -391,29 +232,30 @@ function LabInsightBlock({
 
 function HeroClock() {
   const bubbles = [
-    { label: "10am presentation", className: "left-[3%] top-[27%] text-emerald-300" },
-    { label: "Uber to meeting", className: "right-[6%] top-[23%] text-emerald-300" },
-    { label: "Breathing guide", className: "bottom-[20%] left-[7%] text-violet-300" },
-    { label: "Reply to WhatsApp messages", className: "bottom-[25%] right-[7%] text-amber-300" },
+    { label: "10am presentation", className: "left-[18%] top-[calc(22%-30px)] text-emerald-300" },
+    { label: "Uber to meeting", className: "left-[43%] top-[24%] text-emerald-300" },
+    { label: "Breathing guide", className: "left-[20%] top-[54%] text-violet-300" },
+    { label: "Reply to WhatsApp messages", className: "left-[42%] top-[58%] text-amber-300" },
   ];
 
   return (
-    <div className="relative mx-auto aspect-square w-[min(78vw,520px)] md:w-[520px]">
-      <div className="absolute inset-0 overflow-hidden rounded-full shadow-[0_0_110px_rgba(105,214,151,0.22)]">
+    <div className="relative mx-auto aspect-[2232/944] w-[min(94vw,520px)] md:w-[min(calc(100vw-5rem),1280px)]">
+      <div className="absolute inset-0 overflow-hidden">
         <Image
-          src="/projects/generative-watch-face/body-clock-hero-watch.svg"
-          alt="Body Clock watch face"
+          src="/projects/generative-watch-face/body-clock-hero-scene.png"
+          alt="Body Clock watch worn on a hand"
           fill
           priority
-          sizes="(max-width: 768px) 78vw, 448px"
-          className="rounded-full object-contain"
+          sizes="(max-width: 768px) 94vw, 980px"
+          className="object-contain"
         />
       </div>
 
-      {bubbles.map((bubble) => (
+      {bubbles.map((bubble, index) => (
         <div
           key={bubble.label}
-          className={`absolute hidden rounded-full border border-current/20 bg-black/24 px-4 py-2 font-mono text-[12px] tracking-[0.02em] shadow-[0_0_34px_rgba(52,211,153,0.12)] backdrop-blur-md md:block ${bubble.className}`}
+          className={`hero-bubble-pulse absolute hidden rounded-full border border-current/20 bg-black/24 px-4 py-2 font-mono text-[12px] tracking-[0.02em] shadow-[0_0_34px_rgba(52,211,153,0.12)] backdrop-blur-md md:block ${bubble.className}`}
+          style={{ animationDelay: `${index * 420}ms` }}
         >
           <span className="mr-2 inline-block h-2 w-2 rounded-full bg-current shadow-[0_0_14px_currentColor]" />
           {bubble.label}
@@ -426,9 +268,13 @@ function HeroClock() {
 function PrincipleWatch({
   label,
   accent,
+  index,
+  total,
 }: {
   label: string;
   accent: string;
+  index: number;
+  total: number;
 }) {
   const principleWatchImages: Record<string, string> = {
     "Intent-first": "/projects/generative-watch-face/principles/principle-01-intent-first.png",
@@ -477,21 +323,27 @@ function PrincipleWatch({
           }}
         >
           <Image
+            key={watchImageSrc}
             src={watchImageSrc}
             alt={`${label} watch face`}
             fill
             sizes="(max-width: 768px) 64vw, 362px"
-            className="object-contain"
+            className="principle-watch-state object-contain"
           />
         </div>
       </div>
 
-      <p
-        className="font-mono text-[12px] font-semibold uppercase tracking-[0.32em] transition duration-500"
-        style={{ color: accent }}
-      >
-        {label}
-      </p>
+      <div key={`${index}-${label}`} className="principle-watch-state grid justify-items-center gap-2" aria-live="polite">
+        <p className="font-mono text-[11px] font-semibold tracking-[0.24em] text-white/42">
+          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </p>
+        <p
+          className="font-mono text-[12px] font-semibold uppercase tracking-[0.32em]"
+          style={{ color: accent }}
+        >
+          {label}
+        </p>
+      </div>
     </div>
   );
 }
@@ -655,256 +507,47 @@ function usePrefersReducedMotion() {
   );
 }
 
-function WatchFlowPlayer({
-  frames,
-  autoPlay = true,
-  interval = 1400,
-  loop = true,
-  clickToAdvance = true,
-  accent = "#9b7cff",
-  label = "Advance watch UI flow",
-}: {
-  frames: string[];
-  autoPlay?: boolean;
-  interval?: number;
-  loop?: boolean;
-  clickToAdvance?: boolean;
-  accent?: string;
-  label?: string;
-}) {
-  const [frameIndex, setFrameIndex] = useState(0);
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const canAdvance = frames.length > 1;
-
-  const advanceFrame = useCallback(() => {
-    if (!canAdvance) {
-      return;
-    }
-
-    setFrameIndex((currentIndex) => {
-      const nextIndex = currentIndex + 1;
-
-      if (nextIndex < frames.length) {
-        return nextIndex;
-      }
-
-      return loop ? 0 : currentIndex;
-    });
-  }, [canAdvance, frames.length, loop]);
-
-  useEffect(() => {
-    if (!autoPlay || prefersReducedMotion || !canAdvance) {
-      return;
-    }
-
-    const timer = window.setInterval(advanceFrame, interval);
-
-    return () => window.clearInterval(timer);
-  }, [advanceFrame, autoPlay, canAdvance, interval, prefersReducedMotion]);
-
-  const currentFrame = frames[frameIndex] ?? frames[0];
-
-  return (
-    <button
-      type="button"
-      onClick={clickToAdvance ? advanceFrame : undefined}
-      className="group absolute left-1/2 top-1/2 aspect-square w-[190px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border bg-[#060817] shadow-[0_0_90px_rgba(52,245,166,0.08)] outline-none transition duration-300 focus-visible:ring-2 focus-visible:ring-white/70"
-      style={{
-        borderColor: `${accent}35`,
-        boxShadow: `0 0 80px ${accent}1f, inset 0 0 44px ${accent}12`,
-      }}
-      aria-label={label}
-    >
-      <span
-        className="pointer-events-none absolute inset-0 rounded-full border-[10px] opacity-40 transition duration-300 group-hover:opacity-65"
-        style={{
-          borderColor: `${accent}80`,
-          boxShadow: `inset 0 0 36px ${accent}1f`,
-        }}
-      />
-      {currentFrame ? (
-        <Image
-          key={currentFrame}
-          src={currentFrame}
-          alt=""
-          fill
-          sizes="190px"
-          className="watch-flow-frame object-contain p-3"
-        />
-      ) : (
-        <span className="grid h-full place-items-center px-8 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-white/38">
-          Frames pending
-        </span>
-      )}
-      <span className="pointer-events-none absolute inset-x-0 bottom-4 flex justify-center gap-1.5">
-        {frames.map((frame, index) => (
-          <span
-            key={frame}
-            className="h-1 w-1 rounded-full transition duration-300"
-            style={{
-              backgroundColor: index === frameIndex ? accent : "rgba(255,255,255,0.22)",
-              transform: index === frameIndex ? "scale(1.45)" : "scale(1)",
-            }}
-          />
-        ))}
-      </span>
-    </button>
-  );
-}
-
-function DayOrbit({
-  activeJourney,
-  journeyIndex,
-  onSelect,
-}: {
-  activeJourney: (typeof journey)[number];
-  journeyIndex: number;
-  onSelect: (index: number) => void;
-}) {
-  return (
-    <div className="relative mx-auto aspect-square w-full max-w-[680px]">
-      <div className="absolute inset-[7%] rounded-full border border-white/[0.035]" />
-      <div className="absolute inset-[18%] rounded-full bg-[radial-gradient(circle,rgba(35,62,86,0.22),transparent_64%)]" />
-      <div className="absolute inset-[4%] rounded-full border border-dashed border-white/[0.035]" />
-      <svg className="absolute inset-[6%] h-[88%] w-[88%]" viewBox="0 0 100 100" aria-hidden="true">
-        <circle cx="50" cy="50" r="43" fill="none" stroke="rgba(246,196,95,0.28)" strokeWidth="0.42" />
-        {orbitTickLines.map(({ x1, y1, x2, y2, major }, index) => {
-          return (
-            <line
-              key={index}
-              x1={x1}
-              y1={y1}
-              x2={x2}
-              y2={y2}
-              stroke={major ? "rgba(246,196,95,0.62)" : "rgba(255,255,255,0.12)"}
-              strokeWidth={major ? "0.55" : "0.25"}
-            />
-          );
-        })}
-      </svg>
-
-      {["00", "06", "12", "18"].map((time, index) => {
-        const positions = [
-          "left-1/2 top-[1%] -translate-x-1/2",
-          "right-[3%] top-1/2 -translate-y-1/2",
-          "bottom-[1%] left-1/2 -translate-x-1/2",
-          "left-[3%] top-1/2 -translate-y-1/2",
-        ];
-        return (
-          <span key={time} className={`absolute ${positions[index]} font-mono text-[12px] text-white/16`}>
-            {time}
-          </span>
-        );
-      })}
-
-      {activeJourney.frames ? (
-        <WatchFlowPlayer
-          frames={activeJourney.frames}
-          autoPlay
-          interval={1400}
-          loop
-          clickToAdvance
-          accent={activeJourney.accent}
-          label={`Advance ${activeJourney.title} watch UI flow`}
-        />
-      ) : (
-        <div className="absolute left-1/2 top-1/2 aspect-square w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.06] bg-[#060817] shadow-[0_0_90px_rgba(52,245,166,0.08)]">
-          <div className="absolute inset-8 rounded-full border-[10px] border-violet-400/80 border-r-emerald-300 border-t-emerald-300 shadow-[0_0_28px_rgba(155,124,255,0.45)]" />
-          <p className="absolute inset-x-0 top-[39%] text-center font-mono text-[12px] text-white/42">HR</p>
-          <p className="absolute inset-x-0 top-[44%] text-center font-mono text-[44px] font-semibold leading-none text-white">
-            {activeJourney.value}
-          </p>
-          <p className="absolute inset-x-0 bottom-[29%] text-center font-mono text-[9px] uppercase tracking-[0.16em]" style={{ color: activeJourney.accent }}>
-            {activeJourney.label}
-          </p>
-        </div>
-      )}
-
-      {journey.map((item, index) => {
-        const position = journeyOrbitPositions[index];
-        const isActive = journeyIndex === index;
-
-        return (
-          <button
-            key={item.time}
-            type="button"
-            onClick={() => onSelect(index)}
-            className="absolute grid h-10 w-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full transition duration-300"
-            style={{
-              left: `${position.left}%`,
-              top: `${position.top}%`,
-              backgroundColor: isActive ? `${item.accent}36` : "rgba(255,255,255,0.06)",
-              boxShadow: isActive ? `0 0 34px ${item.accent}55` : "none",
-            }}
-            aria-label={`Show ${item.time} ${item.title}`}
-          >
-            <span className="font-mono text-[11px] font-semibold tracking-[0.08em]" aria-hidden="true">
-              {item.icon}
-            </span>
-            <span
-              className="absolute -bottom-1 h-2.5 w-2.5 rounded-full"
-              style={{ backgroundColor: item.accent }}
-            />
-          </button>
-        );
-      })}
-
-      <div
-        className="absolute left-1/2 top-1/2 h-px w-[42%] origin-left border-t border-dashed opacity-45"
-        style={{
-          borderColor: activeJourney.accent,
-          transform: `rotate(${Number(activeJourney.time.split(":")[0]) * 15 - 90}deg)`,
-        }}
-      />
-    </div>
-  );
-}
-
-function JourneyDetail({ activeJourney }: { activeJourney: (typeof journey)[number] }) {
-  return (
-    <div className="grid content-center gap-8">
-      <div className="flex items-center gap-4">
-        <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 font-mono text-[11px] font-semibold tracking-[0.08em]">
-          {activeJourney.icon}
-        </span>
-        <p className="font-mono text-[14px] font-semibold tracking-[0.18em]" style={{ color: activeJourney.accent }}>
-          {activeJourney.time}
-        </p>
-      </div>
-      <div className="grid gap-5">
-        <h3 className="text-[42px] font-normal leading-none tracking-[-0.05em] text-white md:text-[58px]">
-          {activeJourney.title}
-        </h3>
-        <p className="max-w-[680px] text-[18px] leading-relaxed text-white/50 md:text-[20px]">
-          {activeJourney.copy}
-        </p>
-      </div>
-      <div className="grid gap-4">
-        <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.34em] text-white/24">
-          Watch screens
-        </p>
-        <div className="grid gap-3">
-          {activeJourney.screens.map((screen) => (
-            <div key={screen} className="flex items-center gap-4 border-t border-white/[0.06] py-4">
-              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: activeJourney.accent }} />
-              <p className="font-mono text-[15px] font-semibold tracking-[0.08em] text-white/58">{screen}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function BodyClockCaseStudy() {
   const projectFilmVideoRef = useRef<HTMLVideoElement | null>(null);
+  const principlesSectionRef = useRef<HTMLElement | null>(null);
+  const principleDemoHasRunRef = useRef(false);
+  const principleUserInteractedRef = useRef(false);
+  const principleDemoTimersRef = useRef<number[]>([]);
   const [principleIndex, setPrincipleIndex] = useState(0);
-  const [journeyIndex, setJourneyIndex] = useState(2);
   const [activeChapter, setActiveChapter] = useState("hero");
-  const [activeChallengeIndex, setActiveChallengeIndex] = useState<number | null>(null);
-  const [activeArchitectureIndex, setActiveArchitectureIndex] = useState(0);
+  const [openChallengeIndexes, setOpenChallengeIndexes] = useState<Set<number>>(
+    () => new Set(challenges.map((_, index) => index)),
+  );
   const activePrinciple = principles[principleIndex];
-  const activeJourney = journey[journeyIndex];
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const stopPrincipleDemo = useCallback(() => {
+    principleUserInteractedRef.current = true;
+    principleDemoTimersRef.current.forEach((timer) => window.clearTimeout(timer));
+    principleDemoTimersRef.current = [];
+  }, []);
+
+  const handlePrincipleSelect = useCallback(
+    (index: number) => {
+      stopPrincipleDemo();
+      setPrincipleIndex(index);
+    },
+    [stopPrincipleDemo],
+  );
+
+  const toggleChallenge = useCallback((index: number) => {
+    setOpenChallengeIndexes((currentIndexes) => {
+      const nextIndexes = new Set(currentIndexes);
+
+      if (nextIndexes.has(index)) {
+        nextIndexes.delete(index);
+      } else {
+        nextIndexes.add(index);
+      }
+
+      return nextIndexes;
+    });
+  }, []);
 
   useEffect(() => {
     const sections = chapters
@@ -961,26 +604,83 @@ export function BodyClockCaseStudy() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const section = principlesSectionRef.current;
+
+    if (!section || prefersReducedMotion || principleDemoHasRunRef.current) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || principleDemoHasRunRef.current || principleUserInteractedRef.current) {
+          return;
+        }
+
+        principleDemoHasRunRef.current = true;
+        observer.disconnect();
+
+        principleDemoTimersRef.current = [
+          window.setTimeout(() => {
+            if (!principleUserInteractedRef.current) {
+              setPrincipleIndex(1);
+            }
+          }, 850),
+          window.setTimeout(() => {
+            if (!principleUserInteractedRef.current) {
+              setPrincipleIndex(0);
+            }
+            principleDemoTimersRef.current = [];
+          }, 1750),
+        ];
+      },
+      { threshold: 0.32 },
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+      principleDemoTimersRef.current.forEach((timer) => window.clearTimeout(timer));
+      principleDemoTimersRef.current = [];
+    };
+  }, [prefersReducedMotion]);
+
   return (
-    <div className="body-clock-page bg-[#050609] text-white">
+    <div className="body-clock-page bg-black text-white">
       <style>{`
         @keyframes bodyClockReveal {
           from { opacity: 0; transform: translateY(28px); }
           to { opacity: 1; transform: translateY(0); }
         }
         @keyframes bodyClockScroll {
-          0%, 100% { transform: translateY(0); opacity: 0.35; }
-          50% { transform: translateY(6px); opacity: 0.8; }
+          0%, 100% { transform: translateY(0); opacity: 0.62; }
+          50% { transform: translateY(8px); opacity: 1; }
         }
         @keyframes watchFlowFrameIn {
           from { opacity: 0.42; transform: scale(0.975); }
           to { opacity: 1; transform: scale(1); }
         }
+        @keyframes principleStateIn {
+          from { opacity: 0.18; transform: scale(0.975); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes principleHintArrow {
+          0%, 100% { transform: translateX(0); opacity: 0.45; }
+          50% { transform: translateX(5px); opacity: 0.9; }
+        }
+        @keyframes heroBubblePulse {
+          0%, 100% { opacity: 0.62; }
+          50% { opacity: 1; }
+        }
         .body-clock-reveal { animation: bodyClockReveal 720ms ease-out both; }
         .body-clock-scroll { animation: bodyClockScroll 1.8s ease-in-out infinite; }
         .watch-flow-frame { animation: watchFlowFrameIn 360ms ease-out both; }
+        .principle-watch-state { animation: principleStateIn 360ms ease-out both; }
+        .principle-hint-arrow { animation: principleHintArrow 1.6s ease-in-out infinite; }
+        .hero-bubble-pulse { animation: heroBubblePulse 2.8s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
-          .watch-flow-frame { animation: none; }
+          .watch-flow-frame, .principle-watch-state, .principle-hint-arrow, .hero-bubble-pulse { animation: none; }
         }
       `}</style>
 
@@ -1000,12 +700,10 @@ export function BodyClockCaseStudy() {
         ))}
       </nav>
 
-      <section id="hero" className="relative -mt-16 grid min-h-screen overflow-hidden bg-[#02040a] px-5 pb-16 pt-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_52%,rgba(20,184,166,0.20),transparent_35%),radial-gradient(circle_at_72%_44%,rgba(91,72,191,0.24),transparent_38%),radial-gradient(circle_at_50%_94%,rgba(193,125,55,0.13),transparent_26%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,4,10,0.25),rgba(2,4,10,0.04)_44%,rgba(2,4,10,0.58))]" />
-        <div className="body-clock-reveal relative z-10 mx-auto grid min-h-[calc(100vh-7rem)] w-full max-w-[980px] content-center justify-items-center gap-8 text-center">
+      <section id="hero" className="relative -mt-16 grid min-h-screen overflow-hidden bg-black px-5 pb-16 pt-28">
+        <div className="body-clock-reveal relative z-10 mx-auto grid min-h-[calc(100vh-7rem)] w-full max-w-[1280px] content-center justify-items-center gap-8 text-center">
           <HeroClock />
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="mt-6 flex flex-wrap justify-center gap-3 md:mt-10">
             {[
               "Huawei Watch · HarmonyOS",
               "Intent-first AI System",
@@ -1028,19 +726,28 @@ export function BodyClockCaseStudy() {
               We designed the watch-native interface layer that made AI intent, timing, confidence and user control visible on a 46mm wearable surface.
             </p>
           </div>
-          <a href="#brief" className="body-clock-scroll absolute bottom-4 grid justify-items-center gap-2 font-mono text-[10px] uppercase tracking-[0.32em] text-white/30">
+          <a href="#brief" className="body-clock-scroll group absolute bottom-4 grid justify-items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.34em] text-white/60 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none">
             Scroll
-            <span className="text-[18px] leading-none">⌄</span>
+            <span className="relative block h-11 w-5" aria-hidden="true">
+              <span className="absolute left-1/2 top-0 h-9 w-px -translate-x-1/2 bg-white/70 transition-colors group-hover:bg-white" />
+              <span className="absolute bottom-1 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rotate-45 border-b border-r border-white/70 transition-colors group-hover:border-white" />
+            </span>
           </a>
         </div>
       </section>
 
-      <section id="project-film" className="relative overflow-hidden bg-[#02040a] px-5 py-20 text-white md:px-10 lg:py-24">
+      <section id="project-film" className="relative overflow-hidden bg-black px-5 py-20 text-white md:px-10 lg:py-24">
         <div className="relative z-10 mx-auto grid w-full max-w-[1280px]">
-          <div className="mx-auto grid w-full max-w-[1080px] gap-3">
+          <div className="mx-auto grid w-full max-w-[1280px] gap-3">
+            <div className="relative isolate">
+              <div className="pointer-events-none absolute -inset-16 -z-10 overflow-visible" aria-hidden="true">
+                <span className="absolute -left-10 top-[12%] h-[76%] w-40 bg-[radial-gradient(ellipse_at_center,rgba(102,118,154,0.17),transparent_72%)] blur-3xl md:-left-16 md:w-64" />
+                <span className="absolute -right-10 top-[12%] h-[76%] w-40 bg-[radial-gradient(ellipse_at_center,rgba(102,118,154,0.15),transparent_72%)] blur-3xl md:-right-16 md:w-64" />
+                <span className="absolute -bottom-10 left-[8%] h-40 w-[84%] bg-[radial-gradient(ellipse_at_center,rgba(86,100,136,0.16),transparent_72%)] blur-3xl md:-bottom-16 md:h-64" />
+              </div>
             <video
               ref={projectFilmVideoRef}
-              className="aspect-video w-full bg-black object-contain"
+              className="relative aspect-video w-full bg-black object-contain shadow-[36px_44px_100px_rgba(72,84,116,0.10)]"
               src="/projects/generative-watch-face/body-clock-video.mp4"
               title="A one-minute introduction to Body Clock — an AI-powered watch face that turns user intent into contextual action."
               muted
@@ -1048,6 +755,7 @@ export function BodyClockCaseStudy() {
               controls
               preload="metadata"
             />
+            </div>
             <p className="text-[15px] leading-relaxed text-white/42 md:text-[17px]">
               A one-minute introduction to Body Clock — an AI-powered watch face that turns user intent into contextual action.
             </p>
@@ -1162,7 +870,7 @@ export function BodyClockCaseStudy() {
         </div>
       </section>
 
-      <section id="principles" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
+      <section ref={principlesSectionRef} id="principles" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
         <div
           className="pointer-events-none absolute right-0 top-1/2 h-[760px] w-[760px] -translate-y-1/2 rounded-full blur-3xl transition duration-500"
           style={{ backgroundColor: `${activePrinciple.accent}12` }}
@@ -1180,10 +888,19 @@ export function BodyClockCaseStudy() {
 
           <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-20">
             <div className="order-1 lg:order-2">
-              <PrincipleWatch label={activePrinciple.title} accent={activePrinciple.accent} />
+              <PrincipleWatch
+                label={activePrinciple.title}
+                accent={activePrinciple.accent}
+                index={principleIndex}
+                total={principles.length}
+              />
             </div>
 
             <div className="order-2 grid lg:order-1">
+              <p className="mb-4 flex items-center gap-2 font-mono text-[11px] font-medium tracking-[0.08em] text-white/46 md:text-[12px]">
+                Click to explore each principle
+                <span className="principle-hint-arrow inline-block text-white/60" aria-hidden="true">→</span>
+              </p>
               {principles.map((principle, index) => {
                 const isActive = principleIndex === index;
                 const chipBackground =
@@ -1196,26 +913,35 @@ export function BodyClockCaseStudy() {
                 return (
                   <button
                     key={principle.title}
-                    onClick={() => setPrincipleIndex(index)}
-                    className="group grid text-left outline-none"
-                    style={{ color: isActive ? "#ffffff" : "rgba(255,255,255,0.3)" }}
+                    type="button"
+                    onClick={() => handlePrincipleSelect(index)}
+                    aria-pressed={isActive}
+                    className={`group grid w-full cursor-pointer rounded-r-[18px] text-left outline-none transition-[background-color,box-shadow] duration-[250ms] focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-white/55 ${
+                      isActive ? "" : "hover:bg-white/[0.035]"
+                    }`}
+                    style={{
+                      backgroundColor: isActive ? `${principle.accent}0c` : undefined,
+                    }}
                   >
                     <div
-                      className="grid gap-4 border-t py-6 transition duration-500 md:grid-cols-[68px_1fr_22px] md:gap-6"
+                      className="grid min-h-[88px] grid-cols-[48px_minmax(0,1fr)_44px] items-start gap-3 border-t px-4 py-5 transition-[border-color] duration-[250ms] md:min-h-[98px] md:grid-cols-[68px_1fr_48px] md:gap-6 md:px-5 md:py-6"
                       style={{
                         borderColor: isActive ? principle.accent : "rgba(255,255,255,0.08)",
-                        boxShadow: isActive ? `0 -1px 0 ${principle.accent}44` : "none",
                       }}
                     >
                       <span
-                        className="font-mono text-[13px] font-semibold tracking-[0.18em] transition duration-500"
-                        style={{ color: isActive ? principle.accent : "rgba(255,255,255,0.24)" }}
+                        className="pt-1 font-mono text-[13px] font-semibold tracking-[0.18em] transition-colors duration-[250ms] group-hover:text-white/70"
+                        style={{ color: isActive ? principle.accent : "rgba(255,255,255,0.4)" }}
                       >
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
                       <div className="grid gap-3">
-                        <h3 className="text-[28px] font-normal leading-tight tracking-[-0.035em] transition duration-300 md:text-[36px]">
+                        <h3
+                          className={`text-[28px] font-normal leading-tight tracking-[-0.035em] text-white transition-[transform,opacity] duration-[250ms] ease-out group-hover:translate-x-2 md:text-[36px] ${
+                            isActive ? "opacity-100" : "opacity-[0.62] group-hover:opacity-100"
+                          }`}
+                        >
                           {principle.title}
                         </h3>
                         <div
@@ -1231,14 +957,23 @@ export function BodyClockCaseStudy() {
                         </div>
                       </div>
 
-                      <span
-                        className="mt-2 hidden h-2.5 w-2.5 rounded-full transition duration-500 md:block"
-                        style={{
-                          backgroundColor: chipBackground,
-                          opacity: isActive ? 1 : 0.18,
-                          boxShadow: isActive ? `0 0 24px ${principle.accent}` : "none",
-                        }}
-                      />
+                      <span className="flex items-center justify-end gap-3 pt-2" aria-hidden="true">
+                        <span
+                          className="h-2.5 w-2.5 rounded-full transition-[transform,opacity,box-shadow] duration-[250ms] group-hover:scale-125 group-hover:opacity-100"
+                          style={{
+                            backgroundColor: chipBackground,
+                            opacity: isActive ? 1 : 0.55,
+                            transform: isActive ? "scale(1.28)" : undefined,
+                            boxShadow: isActive ? `0 0 22px ${principle.accent}` : "none",
+                          }}
+                        />
+                        <span
+                          className="translate-x-1 font-mono text-[18px] leading-none text-white opacity-0 transition-[transform,opacity] duration-[250ms] group-hover:translate-x-0 group-hover:opacity-80"
+                          style={{ opacity: isActive ? 0.9 : undefined, transform: isActive ? "translateX(0)" : undefined }}
+                        >
+                          →
+                        </span>
+                      </span>
                     </div>
                   </button>
                 );
@@ -1267,47 +1002,27 @@ export function BodyClockCaseStudy() {
             </div>
 
             <div className="grid">
-              {architectureStages.map((stage, index) => {
-                const isActive = activeArchitectureIndex === index;
-
-                return (
+              {architectureStages.map((stage) => (
                 <article
                   key={stage.number}
-                  data-architecture-stage
-                  role="button"
-                  tabIndex={0}
-                  onMouseEnter={() => setActiveArchitectureIndex(index)}
-                  onFocus={() => setActiveArchitectureIndex(index)}
-                  onClick={() => setActiveArchitectureIndex(index)}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      setActiveArchitectureIndex(index);
-                    }
-                  }}
-                  className="grid cursor-pointer gap-4 border-t py-6 outline-none transition duration-500 md:grid-cols-[58px_1fr] md:gap-5"
-                  style={{
-                    borderColor: isActive ? `rgba(${stage.accent},0.34)` : "rgba(255,255,255,0.08)",
-                    opacity: isActive ? 1 : 0.52,
-                  }}
+                  className="grid gap-4 border-t border-white/[0.08] py-6 md:grid-cols-[58px_1fr] md:gap-5"
                 >
                   <p
-                    className="font-mono text-[12px] font-semibold tracking-[0.18em] transition duration-500"
-                    style={{ color: isActive ? `rgb(${stage.accent})` : "#34f5a6" }}
+                    className="font-mono text-[12px] font-semibold tracking-[0.18em]"
+                    style={{ color: stage.accent }}
                   >
                     {stage.number}
                   </p>
                   <div className="grid gap-2">
-                    <h3 className="text-[24px] font-normal leading-tight tracking-[-0.03em] text-white transition duration-500 md:text-[28px]">
+                    <h3 className="text-[24px] font-normal leading-tight tracking-[-0.03em] text-white md:text-[28px]">
                       {stage.title}
                     </h3>
-                    <p className="text-[16px] leading-relaxed text-white/44 transition duration-500 md:text-[17px]">
+                    <p className="text-[16px] leading-relaxed text-white/46 md:text-[17px]">
                       {stage.body}
                     </p>
                   </div>
                 </article>
-                );
-              })}
+              ))}
             </div>
 
             <p className="max-w-none border-t border-white/[0.08] pt-7 text-[19px] font-medium leading-relaxed tracking-[-0.02em] text-white/68 md:text-[22px]">
@@ -1323,25 +1038,8 @@ export function BodyClockCaseStudy() {
                 alt="IFS Pipeline overview"
                 fill
                 sizes="(max-width: 1023px) calc(100vw - 40px), 65vw"
-                className="object-contain brightness-[0.78] transition duration-700"
+                className="object-contain"
               />
-              {architectureStages.map((stage, index) => {
-                const isActive = activeArchitectureIndex === index;
-
-                return (
-                  <div
-                    key={stage.number}
-                    className="pointer-events-none absolute rounded-[18px] transition duration-700"
-                    style={{
-                      ...stage.highlight,
-                      opacity: isActive ? 1 : 0,
-                      backgroundColor: `rgba(${stage.accent},0.18)`,
-                      border: `1px solid rgba(${stage.accent},0.42)`,
-                      boxShadow: `0 0 36px rgba(${stage.accent},0.22), inset 0 0 22px rgba(${stage.accent},0.10)`,
-                    }}
-                  />
-                );
-              })}
             </div>
           </div>
         </div>
@@ -1362,42 +1060,6 @@ export function BodyClockCaseStudy() {
         </div>
       </section>
 
-      <section id="ujp" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_52%,rgba(52,245,166,0.08),transparent_34%),radial-gradient(circle_at_72%_48%,rgba(155,124,255,0.06),transparent_32%)]" />
-        <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-16">
-          <div className="grid max-w-[900px] gap-6">
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.34em] text-white/25">
-              Critical User Journey
-            </p>
-            <h2 className="text-[48px] font-normal leading-[0.98] tracking-[-0.055em] text-white md:text-[72px] lg:text-[82px]">
-              A day in orbit.
-            </h2>
-          </div>
-
-          <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_560px] lg:gap-20">
-            <DayOrbit activeJourney={activeJourney} journeyIndex={journeyIndex} onSelect={setJourneyIndex} />
-            <JourneyDetail activeJourney={activeJourney} />
-          </div>
-
-          <div className="grid gap-5 lg:hidden">
-            {journey.map((item, index) => (
-              <button
-                key={item.time}
-                type="button"
-                onClick={() => setJourneyIndex(index)}
-                className="grid border-t border-white/[0.06] py-5 text-left"
-              >
-                <p className="font-mono text-[12px] font-semibold tracking-[0.18em]" style={{ color: item.accent }}>
-                  {item.time}
-                </p>
-                <h3 className="mt-2 text-[30px] font-normal tracking-[-0.04em] text-white">{item.title}</h3>
-                <p className="mt-3 text-[17px] leading-relaxed text-white/50">{item.copy}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="iteration" className="relative overflow-hidden bg-[#02040a] px-5 py-28 text-white md:px-10 lg:py-36">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(52,245,166,0.06),transparent_34%),radial-gradient(circle_at_76%_64%,rgba(246,196,95,0.05),transparent_28%)]" />
         <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-14">
@@ -1412,7 +1074,7 @@ export function BodyClockCaseStudy() {
 
           <div className="grid gap-4">
             {challenges.map((challenge, index) => {
-              const isOpen = activeChallengeIndex === index;
+              const isOpen = openChallengeIndexes.has(index);
 
               return (
                 <article
@@ -1429,8 +1091,8 @@ export function BodyClockCaseStudy() {
                     type="button"
                     aria-expanded={isOpen}
                     aria-controls={`lab-panel-${index}`}
-                    onClick={() => setActiveChallengeIndex(isOpen ? null : index)}
-                    className="grid w-full grid-cols-[50px_1fr_auto] items-center gap-5 px-6 py-7 text-left md:grid-cols-[72px_1fr_auto] md:px-8 md:py-8"
+                    onClick={() => toggleChallenge(index)}
+                    className="group grid w-full cursor-pointer grid-cols-[50px_1fr_auto] items-center gap-5 px-6 py-7 text-left outline-none transition-colors duration-300 hover:bg-white/[0.035] focus-visible:bg-white/[0.045] focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-white/55 md:grid-cols-[72px_1fr_auto] md:px-8 md:py-8"
                   >
                     <span
                       className="font-mono text-[32px] font-medium leading-none md:text-[38px]"
@@ -1438,23 +1100,25 @@ export function BodyClockCaseStudy() {
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className="grid gap-2">
-                      <span className="text-[22px] font-medium leading-tight tracking-[-0.025em] text-white md:text-[24px]">
+                    <span className="grid gap-2 transition-colors duration-300">
+                      <span className="text-[22px] font-medium leading-tight tracking-[-0.025em] text-white/90 transition-colors duration-300 group-hover:text-white group-focus-visible:text-white md:text-[24px]">
                         {challenge.title}
                       </span>
-                      <span className="text-[16px] leading-tight text-white/32 md:text-[17px]">
+                      <span className="text-[16px] leading-tight text-white/42 transition-colors duration-300 group-hover:text-white/62 group-focus-visible:text-white/62 md:text-[17px]">
                         {challenge.subtitle}
                       </span>
                     </span>
-                    <ChevronDown
-                      className={`h-5 w-5 text-white/28 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-                      strokeWidth={1.8}
-                    />
+                    <span className="grid h-11 w-11 place-items-center rounded-full border border-white/[0.08] bg-white/[0.045] text-white/72 transition-[background-color,border-color,color,transform] duration-300 group-hover:border-white/20 group-hover:bg-white/[0.09] group-hover:text-white group-focus-visible:border-white/25 group-focus-visible:bg-white/[0.10] group-focus-visible:text-white" aria-hidden="true">
+                      <ChevronDown
+                        className={`h-6 w-6 transition-transform duration-300 ease-out ${isOpen ? "rotate-180" : "rotate-0"}`}
+                        strokeWidth={2.1}
+                      />
+                    </span>
                   </button>
 
                   <div
                     id={`lab-panel-${index}`}
-                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out ${
+                    className={`grid transition-[grid-template-rows,opacity] duration-[600ms] ease-out ${
                       isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
@@ -1589,33 +1253,15 @@ export function BodyClockCaseStudy() {
             </p>
           </div>
 
-          <div className="mx-auto grid justify-items-center gap-16">
-            <div className="relative aspect-square w-32 rounded-full border border-emerald-300/25 bg-[#050715] shadow-[0_0_96px_rgba(52,245,166,0.26),inset_0_0_34px_rgba(155,124,255,0.16)]">
-              <div className="absolute inset-3 rounded-full border border-violet-300/25" />
-              <div className="absolute inset-6 rounded-full border border-emerald-300/35 border-dashed" />
-              {Array.from({ length: 18 }).map((_, index) => (
-                <span
-                  key={index}
-                  className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-300/80"
-                  style={{ transform: `rotate(${index * 20}deg) translateY(-48px)` }}
-                />
-              ))}
-              <span className="absolute left-1/2 top-6 h-3 w-3 -translate-x-1/2 rounded-full bg-emerald-300 shadow-[0_0_18px_rgba(52,245,166,0.9)]" />
-              <div className="absolute inset-0 grid place-items-center text-center">
-                <div>
-                  <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/28">Intent</p>
-                  <p className="text-[17px] font-semibold leading-none text-emerald-300">Active</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid w-[min(76vw,720px)] grid-cols-[1fr_auto_1fr] items-center gap-6">
-              <span className="h-px bg-gradient-to-r from-transparent via-white/14 to-white/24" />
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.32em] text-white/24">
-                Body Clock - Huawei Watch - HarmonyOS
-              </p>
-              <span className="h-px bg-gradient-to-l from-transparent via-white/14 to-white/24" />
-            </div>
+          <div className="mx-auto grid w-full justify-items-center gap-16">
+            <Image
+              src="/projects/generative-watch-face/body-clock-end.png"
+              alt="A person checking the Body Clock watch during lunch"
+              width={2066}
+              height={1200}
+              sizes="(max-width: 768px) calc(100vw - 2.5rem), (max-width: 1280px) calc(100vw - 5rem), 1280px"
+              className="h-auto w-full object-contain"
+            />
           </div>
         </div>
       </section>

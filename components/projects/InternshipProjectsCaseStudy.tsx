@@ -351,6 +351,8 @@ function FotileProjectChapter() {
                 width={2250}
                 height={1500}
                 sizes="(min-width: 1280px) 1100px, 100vw"
+                loading="eager"
+                unoptimized
                 className="h-full w-full object-cover object-center"
               />
             </div>

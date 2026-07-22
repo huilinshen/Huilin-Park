@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useFrame } from "@react-three/fiber";
 import { Html, useCursor } from "@react-three/drei";
+import type { Group } from "three";
 import type { ParkDestination } from "@/data/projects";
 import { DestinationModel } from "@/components/park/DestinationModel";
 import { FerrisWheel } from "@/components/park/FerrisWheel";
@@ -38,6 +40,7 @@ export function Booth({
   onHoverDestination?: (title: string | null) => void;
 }) {
   const router = useRouter();
+  const interactiveUnitRef = useRef<Group>(null);
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
   const isFerrisWheel = destination.landmark === "ferris-wheel";
@@ -46,14 +49,25 @@ export function Booth({
   const isInternshipProjects = destination.id === "project-03";
   const hoverTitle = getHomepageHoverTitle(destination);
   const hoverLabelPosition: [number, number, number] = isFerrisWheel
-    ? [0, 1.24, 0]
+    ? [0, 1.34, 0]
     : isTulip
-      ? [0, 1.36, 0]
+      ? [0, 1.32, 0]
       : isIceCreamTruck
-        ? [0, 1.15, 0]
+        ? [0, 1.08, 0]
         : isInternshipProjects
-          ? [0, 1.08, 0]
+          ? [0, 1.05, 0]
         : [0, 1.1, 0];
+
+  useFrame((_, delta) => {
+    if (!interactiveUnitRef.current) return;
+
+    const targetScale = hovered ? 1.1 : 1;
+    const ease = 1 - Math.exp(-delta * 12);
+    const nextScale = interactiveUnitRef.current.scale.x
+      + (targetScale - interactiveUnitRef.current.scale.x) * ease;
+
+    interactiveUnitRef.current.scale.setScalar(nextScale);
+  });
 
   const openDestination = () => {
     if (destination.href.startsWith("mailto:")) {
@@ -67,6 +81,7 @@ export function Booth({
   return (
     <group position={destination.position}>
       <group
+        ref={interactiveUnitRef}
         onClick={openDestination}
         onPointerEnter={(event) => {
           event.stopPropagation();
@@ -77,7 +92,6 @@ export function Booth({
           setHovered(false);
           onHoverDestination?.(null);
         }}
-        scale={hovered ? 1.06 : 1}
       >
         {destination.modelPath ? (
           <DestinationModel path={destination.modelPath} />
@@ -107,26 +121,26 @@ export function Booth({
             </mesh>
           </group>
         )}
-      </group>
 
-      {hovered ? (
         <Html position={hoverLabelPosition} pointerEvents="none">
           <div
             style={{
-              color: "#000000",
+              color: hovered ? "rgba(0, 0, 0, 1)" : "rgba(0, 0, 0, 0.2)",
               fontSize: "32px",
               fontWeight: 800,
               lineHeight: 1.15,
               maxWidth: "220px",
               textAlign: "center",
-              transform: "translate(-50%, calc(-100% - 36px))",
+              transform: `translate(-50%, calc(-100% - 36px)) scale(${hovered ? 1.1 : 1})`,
+              transformOrigin: "center bottom",
+              transition: "color 260ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1)",
               width: "max-content",
             }}
           >
             {hoverTitle}
           </div>
         </Html>
-      ) : null}
+      </group>
     </group>
   );
 }

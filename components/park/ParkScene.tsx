@@ -1,6 +1,5 @@
 "use client";
 
-import { Text } from "@react-three/drei";
 import { parkDestinations } from "@/data/projects";
 import { Booth } from "@/components/park/Booth";
 
@@ -24,10 +23,6 @@ function Path() {
     <group position={[0, 0.018, 0]}>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[1.75, 48]} />
-        <meshStandardMaterial color="#f7d892" roughness={0.9} />
-      </mesh>
-      <mesh receiveShadow position={[0, 0.004, 1.5]} rotation={[-Math.PI / 2, 0, 0]}>
-        <boxGeometry args={[1.1, 2.4, 0.02]} />
         <meshStandardMaterial color="#f7d892" roughness={0.9} />
       </mesh>
     </group>
@@ -56,15 +51,6 @@ export function ParkScene({
       <Tree position={[-3.25, 0, 1.55]} />
       <Tree position={[3.25, 0, 1.4]} />
 
-      <Text
-        color="#3d392f"
-        fontSize={0.22}
-        fontWeight={500}
-        position={[0, 0.08, 2.42]}
-        rotation={[-Math.PI / 2, 0, 0]}
-      >
-        Huilin Park
-      </Text>
     </group>
   );
 }

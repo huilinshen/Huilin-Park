@@ -169,7 +169,7 @@ export function IceCreamTruck({
   const counterAngles = Array.from({ length: 14 }, (_, index) => (index * Math.PI * 2) / 14);
 
   return (
-    <group ref={standRef} scale={0.92}>
+    <group ref={standRef} scale={0.64}>
       <mesh castShadow receiveShadow position={[0, 0.09, 0]}>
         <cylinderGeometry args={[0.88, 0.96, 0.18, 18]} />
         <meshStandardMaterial color={pastelPink} roughness={0.78} />

@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Billboard, Text, useCursor } from "@react-three/drei";
+import { Html, useCursor } from "@react-three/drei";
 import type { ParkDestination } from "@/data/projects";
 import { DestinationModel } from "@/components/park/DestinationModel";
 import { FerrisWheel } from "@/components/park/FerrisWheel";
 import { IceCreamTruck } from "@/components/park/IceCreamTruck";
+import { InternshipRollerCoaster } from "@/components/park/InternshipRollerCoaster";
 import { TulipRide } from "@/components/park/TulipRide";
 
 function getHomepageHoverTitle(destination: ParkDestination) {
@@ -23,7 +24,7 @@ function getHomepageHoverTitle(destination: ParkDestination) {
   }
 
   if (destination.id === "project-03") {
-    return "IFS";
+    return "Internship Projects";
   }
 
   return destination.title;
@@ -42,14 +43,17 @@ export function Booth({
   const isFerrisWheel = destination.landmark === "ferris-wheel";
   const isTulip = destination.landmark === "tulip";
   const isIceCreamTruck = destination.landmark === "ice-cream-truck";
+  const isInternshipProjects = destination.id === "project-03";
   const hoverTitle = getHomepageHoverTitle(destination);
   const hoverLabelPosition: [number, number, number] = isFerrisWheel
-    ? [0, 2.35, 0]
+    ? [0, 1.24, 0]
     : isTulip
-      ? [0, 1.9, 0]
+      ? [0, 1.36, 0]
       : isIceCreamTruck
-        ? [0, 1.55, 0]
-        : [0, 1.45, 0];
+        ? [0, 1.15, 0]
+        : isInternshipProjects
+          ? [0, 1.08, 0]
+        : [0, 1.1, 0];
 
   const openDestination = () => {
     if (destination.href.startsWith("mailto:")) {
@@ -83,6 +87,8 @@ export function Booth({
           <TulipRide destination={destination} hovered={hovered} />
         ) : isIceCreamTruck ? (
           <IceCreamTruck destination={destination} hovered={hovered} />
+        ) : isInternshipProjects ? (
+          <InternshipRollerCoaster hovered={hovered} />
         ) : (
           <group>
             <mesh castShadow receiveShadow position={[0, 0.16, 0]}>
@@ -104,21 +110,22 @@ export function Booth({
       </group>
 
       {hovered ? (
-        <Billboard position={hoverLabelPosition}>
-          <Text
-            color="#202018"
-            fontSize={0.14}
-            fontWeight={800}
-            maxWidth={2.15}
-            outlineColor="#fffaf0"
-            outlineWidth={0.012}
-            textAlign="center"
-            anchorX="center"
-            anchorY="middle"
+        <Html position={hoverLabelPosition} pointerEvents="none">
+          <div
+            style={{
+              color: "#000000",
+              fontSize: "32px",
+              fontWeight: 800,
+              lineHeight: 1.15,
+              maxWidth: "220px",
+              textAlign: "center",
+              transform: "translate(-50%, calc(-100% - 36px))",
+              width: "max-content",
+            }}
           >
             {hoverTitle}
-          </Text>
-        </Billboard>
+          </div>
+        </Html>
       ) : null}
     </group>
   );

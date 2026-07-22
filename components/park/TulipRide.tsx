@@ -5,37 +5,59 @@ import { useFrame } from "@react-three/fiber";
 import type { Group } from "three";
 import type { ParkDestination } from "@/data/projects";
 
-function Petal({
+const PETAL_ANGLES = Array.from({ length: 5 }, (_, index) => (index * Math.PI * 2) / 5 + Math.PI / 2);
+
+function BalloonFlower({
   color,
-  side,
-  hovered,
+  centerColor,
+  position,
+  scale = 1,
+  stemHeight,
+  rotation = 0,
 }: {
   color: string;
-  side: -1 | 0 | 1;
-  hovered: boolean;
+  centerColor: string;
+  position: [number, number, number];
+  scale?: number;
+  stemHeight: number;
+  rotation?: number;
 }) {
-  const petalRef = useRef<Group>(null);
-
-  useFrame((_, delta) => {
-    if (!petalRef.current) {
-      return;
-    }
-
-    const closed = side === 0 ? 0 : side * 0.24;
-    const open = side === 0 ? 0 : side * 0.78;
-    const targetZ = hovered ? open : closed;
-    const targetX = hovered ? -0.45 : -0.12;
-
-    petalRef.current.rotation.z += (targetZ - petalRef.current.rotation.z) * delta * 7;
-    petalRef.current.rotation.x += (targetX - petalRef.current.rotation.x) * delta * 7;
-  });
-
   return (
-    <group ref={petalRef} position={[side * 0.16, 0.86, 0]} rotation={[side === 0 ? -0.04 : -0.12, 0, side * 0.24]}>
-      <mesh castShadow position={[0, 0.16, 0]}>
-        <sphereGeometry args={[0.18, 16, 16, 0, Math.PI * 2, 0, Math.PI / 1.5]} />
-        <meshStandardMaterial color={color} roughness={0.62} />
+    <group position={position} scale={scale} rotation={[0, rotation, 0]}>
+      <mesh castShadow receiveShadow position={[0, stemHeight / 2, 0]}>
+        <cylinderGeometry args={[0.045, 0.06, stemHeight, 8]} />
+        <meshStandardMaterial color="#66a96e" roughness={0.72} metalness={0} />
       </mesh>
+
+      <mesh castShadow position={[-0.1, stemHeight * 0.46, 0.015]} rotation={[0.12, 0.12, 1.02]} scale={[0.12, 0.24, 0.08]}>
+        <sphereGeometry args={[1, 12, 10]} />
+        <meshStandardMaterial color="#86c98b" roughness={0.55} metalness={0} />
+      </mesh>
+      <mesh castShadow position={[0.1, stemHeight * 0.62, 0.015]} rotation={[0.12, -0.12, -1.02]} scale={[0.11, 0.21, 0.075]}>
+        <sphereGeometry args={[1, 12, 10]} />
+        <meshStandardMaterial color="#75bb7d" roughness={0.55} metalness={0} />
+      </mesh>
+
+      <group position={[0, stemHeight, 0]}>
+        {PETAL_ANGLES.map((angle) => (
+          <mesh
+            key={angle}
+            castShadow
+            receiveShadow
+            position={[Math.cos(angle) * 0.16, Math.sin(angle) * 0.16, 0]}
+            rotation={[0, 0, angle - Math.PI / 2]}
+            scale={[0.155, 0.205, 0.12]}
+          >
+            <sphereGeometry args={[1, 14, 12]} />
+            <meshStandardMaterial color={color} roughness={0.26} metalness={0.015} />
+          </mesh>
+        ))}
+
+        <mesh castShadow receiveShadow position={[0, 0, 0.055]} scale={[0.155, 0.155, 0.11]}>
+          <sphereGeometry args={[1, 14, 12]} />
+          <meshStandardMaterial color={centerColor} roughness={0.24} metalness={0.015} />
+        </mesh>
+      </group>
     </group>
   );
 }
@@ -49,43 +71,44 @@ export function TulipRide({
 }) {
   const rideRef = useRef<Group>(null);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     if (rideRef.current) {
       const targetY = hovered ? 0.08 : 0;
-      rideRef.current.position.y += (targetY - rideRef.current.position.y) * delta * 5;
-      rideRef.current.rotation.y += delta * (hovered ? 0.45 : 0.12);
+      const breezeStrength = hovered ? 0.055 : 0.035;
+      const sway = Math.sin(state.clock.elapsedTime * 0.85) * breezeStrength;
+      const settle = 1 - Math.exp(-delta * 5);
+
+      rideRef.current.position.y += (targetY - rideRef.current.position.y) * settle;
+      rideRef.current.rotation.z += (sway - rideRef.current.rotation.z) * settle;
+      rideRef.current.rotation.x += (sway * 0.18 - rideRef.current.rotation.x) * settle;
+      rideRef.current.rotation.y += (0 - rideRef.current.rotation.y) * settle;
     }
   });
 
   return (
     <group ref={rideRef}>
-      <mesh receiveShadow castShadow position={[0, 0.08, 0]}>
-        <cylinderGeometry args={[0.58, 0.7, 0.16, 16]} />
-        <meshStandardMaterial color="#f7d892" roughness={0.86} />
-      </mesh>
-
-      <mesh castShadow position={[0, 0.47, 0]}>
-        <cylinderGeometry args={[0.07, 0.1, 0.78, 10]} />
-        <meshStandardMaterial color="#4f9b62" roughness={0.76} />
-      </mesh>
-
-      <mesh castShadow position={[-0.17, 0.42, 0]} rotation={[0.1, 0, 0.95]}>
-        <sphereGeometry args={[0.18, 12, 12, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <meshStandardMaterial color="#6fbd79" roughness={0.78} />
-      </mesh>
-      <mesh castShadow position={[0.19, 0.5, 0]} rotation={[0.1, 0, -0.95]}>
-        <sphereGeometry args={[0.2, 12, 12, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <meshStandardMaterial color="#6fbd79" roughness={0.78} />
-      </mesh>
-
-      <Petal color={destination.color} side={-1} hovered={hovered} />
-      <Petal color="#ffc1d4" side={0} hovered={hovered} />
-      <Petal color={destination.accent} side={1} hovered={hovered} />
-
-      <mesh castShadow position={[0, 0.82, 0]}>
-        <sphereGeometry args={[0.2, 16, 16]} />
-        <meshStandardMaterial color="#ffe1ec" roughness={0.65} />
-      </mesh>
+      <BalloonFlower
+        color="#ffd27f"
+        centerColor="#ff9d62"
+        position={[-0.36, 0, 0.04]}
+        rotation={-0.16}
+        scale={0.8}
+        stemHeight={0.72}
+      />
+      <BalloonFlower
+        color={destination.color}
+        centerColor="#ff9d62"
+        position={[0, 0, 0]}
+        stemHeight={0.84}
+      />
+      <BalloonFlower
+        color="#b9b7ee"
+        centerColor="#7797dc"
+        position={[0.37, 0, 0.03]}
+        rotation={0.16}
+        scale={0.74}
+        stemHeight={0.68}
+      />
     </group>
   );
 }

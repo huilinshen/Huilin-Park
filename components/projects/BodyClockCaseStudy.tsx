@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
+  ChevronLeft,
+  ChevronRight,
   ChevronDown,
 } from "lucide-react";
 
@@ -56,6 +58,23 @@ const principles = [
   },
 ];
 
+const principleWatchImages: Record<string, string> = {
+  "Intent-first": "/projects/generative-watch-face/principles/principle-01-intent-first.png",
+  Glanceable: "/projects/generative-watch-face/principles/principle-02-glanceable.png",
+  Generative: "/projects/generative-watch-face/principles/principle-03-generative.png",
+  "User control": "/projects/generative-watch-face/principles/principle-04-user-control.png",
+  "Biological time": "/projects/generative-watch-face/principles/principle-05-biological-time.png",
+  "Visible AI state": "/projects/generative-watch-face/principles/principle-06-visible-ai-state.png",
+};
+
+const loopingPrinciples = Array.from({ length: 3 }, (_, copyIndex) =>
+  principles.map((principle, principleIndex) => ({
+    ...principle,
+    principleIndex,
+    virtualIndex: copyIndex * principles.length + principleIndex,
+  })),
+).flat();
+
 const architectureStages = [
   {
     number: "01",
@@ -80,6 +99,41 @@ const architectureStages = [
     title: "Execute",
     body: "Coordinate tools and services while surfacing only the next relevant interaction.",
     accent: "#74d6ff",
+  },
+];
+
+const publicPipelineSteps = [
+  {
+    title: "Understand",
+    subtitle: "Intent, context, safety",
+    pills: ["Intent classifier", "Clarify loop"],
+    support: {
+      label: "Privacy sandbox",
+      accent: "#34f5a6",
+    },
+  },
+  {
+    title: "Plan",
+    subtitle: "Goals broken into tasks",
+    pills: ["Task graph", "Plan reuse"],
+  },
+  {
+    title: "Coordinate",
+    subtitle: "Adapts as conditions change",
+    pills: ["Scheduler", "Triggers", "Memory tiers"],
+    support: {
+      label: "Memory system",
+      accent: "#9b7cff",
+    },
+  },
+  {
+    title: "Execute",
+    subtitle: "Only the next step shown",
+    pills: ["Expert routing", "Weighted aggregation"],
+    support: {
+      label: "Tool registry",
+      accent: "#74d6ff",
+    },
   },
 ];
 
@@ -265,39 +319,39 @@ function HeroClock() {
   );
 }
 
-function PrincipleWatch({
-  label,
-  accent,
-  index,
-  total,
+function PrincipleCarouselItem({
+  principle,
+  principleIndex,
+  virtualIndex,
+  isActive,
 }: {
-  label: string;
-  accent: string;
-  index: number;
-  total: number;
+  principle: (typeof principles)[number];
+  principleIndex: number;
+  virtualIndex: number;
+  isActive: boolean;
 }) {
-  const principleWatchImages: Record<string, string> = {
-    "Intent-first": "/projects/generative-watch-face/principles/principle-01-intent-first.png",
-    Glanceable: "/projects/generative-watch-face/principles/principle-02-glanceable.png",
-    Generative: "/projects/generative-watch-face/principles/principle-03-generative.png",
-    "User control": "/projects/generative-watch-face/principles/principle-04-user-control.png",
-    "Biological time": "/projects/generative-watch-face/principles/principle-05-biological-time.png",
-    "Visible AI state": "/projects/generative-watch-face/principles/principle-06-visible-ai-state.png",
-  };
-  const watchImageSrc = principleWatchImages[label];
-
   return (
-    <div className="relative mx-auto grid justify-items-center gap-8">
+    <article
+      data-carousel-index={virtualIndex}
+      aria-hidden={!isActive}
+      className={`principle-carousel-item relative grid shrink-0 snap-center justify-items-center content-start text-center transition-[opacity,transform,filter] duration-500 ease-out ${
+        isActive
+          ? "z-10 scale-100 opacity-100 blur-0"
+          : "scale-[0.84] opacity-35 blur-[0.35px] md:scale-[0.82]"
+      }`}
+    >
       <div
-        className="pointer-events-none absolute top-1/2 h-[420px] w-[420px] -translate-y-[58%] rounded-full blur-3xl transition duration-500 md:h-[560px] md:w-[560px]"
+        className={`pointer-events-none absolute left-1/2 top-0 aspect-square w-[118%] -translate-x-1/2 -translate-y-[8%] rounded-full blur-3xl transition-opacity duration-500 ${
+          isActive ? "opacity-100" : "opacity-0"
+        }`}
         style={{
-          background: `radial-gradient(circle, rgba(255,255,255,0.08) 0%, ${accent}12 42%, transparent 70%)`,
+          background: `radial-gradient(circle, ${principle.accent}24 0%, ${principle.accent}12 38%, transparent 70%)`,
         }}
       />
 
-      <div className="relative aspect-square w-[min(78vw,430px)] md:w-[430px]">
+      <div className="relative aspect-square w-full">
         <svg
-          className="absolute inset-0 h-full w-full transition duration-500"
+          className="absolute inset-0 h-full w-full"
           viewBox="0 0 500 500"
           aria-hidden="true"
         >
@@ -306,43 +360,187 @@ function PrincipleWatch({
             cy="250"
             r="226"
             fill="none"
-            stroke={accent}
-            strokeOpacity="0.2"
+            stroke={principle.accent}
+            strokeOpacity={isActive ? "0.2" : "0.08"}
             strokeWidth="1"
             className="transition duration-500"
           />
-          <circle cx="250" cy="250" r="198" fill="none" stroke={accent} strokeOpacity="0.1" strokeWidth="1" />
+          <circle
+            cx="250"
+            cy="250"
+            r="198"
+            fill="none"
+            stroke={principle.accent}
+            strokeOpacity={isActive ? "0.1" : "0.04"}
+            strokeWidth="1"
+          />
         </svg>
 
-        {/* Outer rings stay separate from the swappable watch face content below. */}
         <div
-          className="absolute inset-[8%] overflow-hidden rounded-full bg-[#050715] shadow-[inset_0_0_46px_rgba(120,96,255,0.16)] transition duration-500"
+          className="absolute inset-[8%] overflow-hidden rounded-full bg-[#050715] transition-[border-color,box-shadow] duration-500"
           style={{
-            border: `1px solid ${accent}33`,
-            boxShadow: `inset 0 0 46px rgba(120,96,255,0.16), 0 0 80px ${accent}30`,
+            border: `1px solid ${principle.accent}${isActive ? "33" : "14"}`,
+            boxShadow: isActive
+              ? `inset 0 0 46px rgba(120,96,255,0.16), 0 0 80px ${principle.accent}30`
+              : "inset 0 0 34px rgba(120,96,255,0.08)",
           }}
         >
           <Image
-            key={watchImageSrc}
-            src={watchImageSrc}
-            alt={`${label} watch face`}
+            src={principleWatchImages[principle.title]}
+            alt={`${principle.title} watch face`}
             fill
-            sizes="(max-width: 768px) 64vw, 362px"
-            className="principle-watch-state object-contain"
+            sizes="(max-width: 767px) 72vw, (max-width: 1023px) 42vw, 360px"
+            draggable={false}
+            className="select-none object-contain"
           />
         </div>
       </div>
 
-      <div key={`${index}-${label}`} className="principle-watch-state grid justify-items-center gap-2" aria-live="polite">
-        <p className="font-mono text-[11px] font-semibold tracking-[0.24em] text-white/42">
-          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </p>
+      <div className="mt-5 grid w-full justify-items-center gap-3 px-2 md:mt-7">
         <p
-          className="font-mono text-[12px] font-semibold uppercase tracking-[0.32em]"
-          style={{ color: accent }}
+          className="font-mono text-[11px] font-semibold tracking-[0.24em] transition-colors duration-500"
+          style={{ color: isActive ? principle.accent : "rgba(255,255,255,0.34)" }}
         >
-          {label}
+          {String(principleIndex + 1).padStart(2, "0")} / {String(principles.length).padStart(2, "0")}
         </p>
+        <h3
+          className="text-[30px] font-normal leading-tight tracking-[-0.04em] text-white md:text-[36px]"
+        >
+          {principle.title}
+        </h3>
+        <p className="max-w-[390px] text-[16px] leading-relaxed text-white/52 md:text-[17px]">
+          {principle.body}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+function PipelineConnector() {
+  return (
+    <div className="grid h-5 place-items-center md:h-6" aria-hidden="true">
+      <div className="relative h-full w-px bg-gradient-to-b from-white/18 via-white/26 to-white/8">
+        <span className="absolute -bottom-0.5 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-white/32" />
+      </div>
+    </div>
+  );
+}
+
+function PublicPipelineDiagram() {
+  return (
+    <div
+      className="relative isolate grid w-full content-center overflow-hidden rounded-[30px] border border-white/[0.08] bg-[#030610]/88 px-4 py-5 shadow-[0_32px_90px_rgba(0,0,0,0.28)] sm:px-6 sm:py-6 md:px-8 lg:px-6 xl:px-8"
+      role="img"
+      aria-label="Simplified intent-first AI pipeline"
+    >
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_44%_38%,rgba(116,214,255,0.08),transparent_36%),radial-gradient(circle_at_78%_70%,rgba(155,124,255,0.07),transparent_30%)]" />
+      <div className="pointer-events-none absolute inset-x-[15%] top-0 -z-10 h-24 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.055),transparent_72%)] blur-2xl" />
+
+      <div className="mx-auto grid w-full max-w-[690px]">
+        <div className="grid md:grid-cols-[minmax(0,1fr)_42px_minmax(130px,0.5fr)]">
+          <div className="justify-self-center rounded-full border border-white/[0.12] bg-white/[0.06] px-7 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-white/74">
+            Input
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-[minmax(0,1fr)_42px_minmax(130px,0.5fr)]">
+          <PipelineConnector />
+        </div>
+
+        {publicPipelineSteps.map((step, index) => (
+          <div key={step.title}>
+            <div className="grid items-center gap-3 md:grid-cols-[minmax(0,1fr)_42px_minmax(130px,0.5fr)] md:gap-0">
+              <div className="grid gap-2">
+                <div className="rounded-[16px] border border-white/[0.11] bg-[linear-gradient(145deg,rgba(255,255,255,0.075),rgba(255,255,255,0.035))] px-5 py-2.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.035),0_18px_50px_rgba(0,0,0,0.16)]">
+                  <h3 className="text-[17px] font-medium tracking-[-0.02em] text-white/92">
+                    {step.title}
+                  </h3>
+                  <p className="mt-1 text-[13px] leading-relaxed text-white/44 md:text-[14px]">
+                    {step.subtitle}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-2">
+                  {step.pills.map((pill) => (
+                    <span
+                      key={pill}
+                      className="rounded-full border border-white/[0.09] bg-black/24 px-3.5 py-1 font-mono text-[9px] font-medium tracking-[0.03em] text-white/38 md:text-[10px]"
+                    >
+                      {pill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {step.support ? (
+                <>
+                  <div className="hidden items-center md:flex" aria-hidden="true">
+                    <span className="h-px flex-1 border-t border-dashed border-white/16" />
+                    <span
+                      className="h-1.5 w-1.5 rounded-full"
+                      style={{ backgroundColor: step.support.accent }}
+                    />
+                  </div>
+                  <div
+                    className="ml-auto flex w-max max-w-full items-center gap-2.5 rounded-full border px-4 py-1.5 font-mono text-[9px] font-semibold tracking-[0.04em] md:ml-0 md:justify-self-stretch md:px-3 md:text-[10px]"
+                    style={{
+                      color: step.support.accent,
+                      borderColor: `${step.support.accent}48`,
+                      backgroundColor: `${step.support.accent}14`,
+                      boxShadow: `0 0 30px ${step.support.accent}10`,
+                    }}
+                  >
+                    <span
+                      className="h-1.5 w-1.5 shrink-0 rounded-full shadow-[0_0_10px_currentColor]"
+                      style={{ backgroundColor: step.support.accent }}
+                      aria-hidden="true"
+                    />
+                    {step.support.label}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="hidden md:block" />
+                  <div className="hidden md:block" />
+                </>
+              )}
+            </div>
+
+            {index < publicPipelineSteps.length - 1 ? (
+              <div className="grid md:grid-cols-[minmax(0,1fr)_42px_minmax(130px,0.5fr)]">
+                <PipelineConnector />
+              </div>
+            ) : null}
+          </div>
+        ))}
+
+        <div className="grid md:grid-cols-[minmax(0,1fr)_42px_minmax(130px,0.5fr)]">
+          <PipelineConnector />
+        </div>
+
+        <div className="grid md:grid-cols-[minmax(0,1fr)_42px_minmax(130px,0.5fr)]">
+          <div className="grid grid-cols-2 gap-3">
+            {["Conversational", "UI output"].map((output, index) => (
+              <div
+                key={output}
+                className="rounded-full border px-3 py-2.5 text-center text-[13px] font-medium text-white/82 md:text-[14px]"
+                style={{
+                  borderColor: index === 0 ? "rgba(155,124,255,0.28)" : "rgba(116,214,255,0.28)",
+                  background:
+                    index === 0
+                      ? "rgba(155,124,255,0.09)"
+                      : "rgba(116,214,255,0.09)",
+                  boxShadow:
+                    index === 0
+                      ? "0 0 34px rgba(155,124,255,0.08)"
+                      : "0 0 34px rgba(116,214,255,0.08)",
+                }}
+              >
+                {output}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -510,30 +708,100 @@ function usePrefersReducedMotion() {
 export function BodyClockCaseStudy() {
   const projectFilmVideoRef = useRef<HTMLVideoElement | null>(null);
   const principlesSectionRef = useRef<HTMLElement | null>(null);
-  const principleDemoHasRunRef = useRef(false);
-  const principleUserInteractedRef = useRef(false);
-  const principleDemoTimersRef = useRef<number[]>([]);
-  const [principleIndex, setPrincipleIndex] = useState(0);
+  const principleCarouselRef = useRef<HTMLDivElement | null>(null);
+  const principleScrollFrameRef = useRef<number | null>(null);
+  const principleSettleTimerRef = useRef<number | null>(null);
+  const principleDragRef = useRef({ active: false, startX: 0, startScrollLeft: 0 });
+  const principleCarouselIndexRef = useRef(principles.length);
+  const [principleCarouselIndex, setPrincipleCarouselIndex] = useState(principles.length);
+  const [isPrincipleDragging, setIsPrincipleDragging] = useState(false);
   const [activeChapter, setActiveChapter] = useState("hero");
   const [openChallengeIndexes, setOpenChallengeIndexes] = useState<Set<number>>(
     () => new Set(challenges.map((_, index) => index)),
   );
+  const principleIndex =
+    ((principleCarouselIndex % principles.length) + principles.length) % principles.length;
   const activePrinciple = principles[principleIndex];
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  const stopPrincipleDemo = useCallback(() => {
-    principleUserInteractedRef.current = true;
-    principleDemoTimersRef.current.forEach((timer) => window.clearTimeout(timer));
-    principleDemoTimersRef.current = [];
-  }, []);
+  const centrePrincipleItem = useCallback(
+    (virtualIndex: number, behavior: ScrollBehavior = "smooth") => {
+      const carousel = principleCarouselRef.current;
+      const item = carousel?.querySelector<HTMLElement>(`[data-carousel-index="${virtualIndex}"]`);
 
-  const handlePrincipleSelect = useCallback(
-    (index: number) => {
-      stopPrincipleDemo();
-      setPrincipleIndex(index);
+      if (!carousel || !item) {
+        return;
+      }
+
+      const targetLeft = item.offsetLeft - (carousel.clientWidth - item.offsetWidth) / 2;
+      carousel.scrollTo({ left: targetLeft, behavior: prefersReducedMotion ? "auto" : behavior });
+      principleCarouselIndexRef.current = virtualIndex;
+      setPrincipleCarouselIndex(virtualIndex);
     },
-    [stopPrincipleDemo],
+    [prefersReducedMotion],
   );
+
+  const movePrincipleCarousel = useCallback(
+    (direction: -1 | 1) => {
+      centrePrincipleItem(principleCarouselIndexRef.current + direction);
+    },
+    [centrePrincipleItem],
+  );
+
+  const updatePrincipleFromScroll = useCallback(() => {
+    const carousel = principleCarouselRef.current;
+
+    if (!carousel) {
+      return;
+    }
+
+    const items = Array.from(carousel.querySelectorAll<HTMLElement>("[data-carousel-index]"));
+    const viewportCenter = carousel.scrollLeft + carousel.clientWidth / 2;
+    const closestItem = items.reduce<HTMLElement | null>((closest, item) => {
+      if (!closest) {
+        return item;
+      }
+
+      const itemDistance = Math.abs(item.offsetLeft + item.offsetWidth / 2 - viewportCenter);
+      const closestDistance = Math.abs(
+        closest.offsetLeft + closest.offsetWidth / 2 - viewportCenter,
+      );
+
+      return itemDistance < closestDistance ? item : closest;
+    }, null);
+    const closestIndex = Number(closestItem?.dataset.carouselIndex);
+
+    if (!Number.isFinite(closestIndex)) {
+      return;
+    }
+
+    principleCarouselIndexRef.current = closestIndex;
+    setPrincipleCarouselIndex(closestIndex);
+
+    if (principleSettleTimerRef.current !== null) {
+      window.clearTimeout(principleSettleTimerRef.current);
+    }
+
+    principleSettleTimerRef.current = window.setTimeout(() => {
+      if (closestIndex < principles.length || closestIndex >= principles.length * 2) {
+        const normalisedIndex =
+          ((closestIndex % principles.length) + principles.length) % principles.length +
+          principles.length;
+        centrePrincipleItem(normalisedIndex, "auto");
+      }
+    }, 180);
+  }, [centrePrincipleItem]);
+
+  const handlePrincipleScroll = useCallback(() => {
+    if (principleScrollFrameRef.current !== null) {
+      return;
+    }
+
+    principleScrollFrameRef.current = window.requestAnimationFrame(() => {
+      principleScrollFrameRef.current = null;
+      updatePrincipleFromScroll();
+    });
+  }, [updatePrincipleFromScroll]);
 
   const toggleChallenge = useCallback((index: number) => {
     setOpenChallengeIndexes((currentIndexes) => {
@@ -605,46 +873,28 @@ export function BodyClockCaseStudy() {
   }, []);
 
   useEffect(() => {
-    const section = principlesSectionRef.current;
+    const carousel = principleCarouselRef.current;
 
-    if (!section || prefersReducedMotion || principleDemoHasRunRef.current) {
+    if (!carousel) {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting || principleDemoHasRunRef.current || principleUserInteractedRef.current) {
-          return;
-        }
-
-        principleDemoHasRunRef.current = true;
-        observer.disconnect();
-
-        principleDemoTimersRef.current = [
-          window.setTimeout(() => {
-            if (!principleUserInteractedRef.current) {
-              setPrincipleIndex(1);
-            }
-          }, 850),
-          window.setTimeout(() => {
-            if (!principleUserInteractedRef.current) {
-              setPrincipleIndex(0);
-            }
-            principleDemoTimersRef.current = [];
-          }, 1750),
-        ];
-      },
-      { threshold: 0.32 },
-    );
-
-    observer.observe(section);
+    const alignCarousel = () => centrePrincipleItem(principleCarouselIndexRef.current, "auto");
+    alignCarousel();
+    window.addEventListener("resize", alignCarousel);
 
     return () => {
-      observer.disconnect();
-      principleDemoTimersRef.current.forEach((timer) => window.clearTimeout(timer));
-      principleDemoTimersRef.current = [];
+      window.removeEventListener("resize", alignCarousel);
+
+      if (principleScrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(principleScrollFrameRef.current);
+      }
+
+      if (principleSettleTimerRef.current !== null) {
+        window.clearTimeout(principleSettleTimerRef.current);
+      }
     };
-  }, [prefersReducedMotion]);
+  }, [centrePrincipleItem]);
 
   return (
     <div className="body-clock-page bg-black text-white">
@@ -653,34 +903,45 @@ export function BodyClockCaseStudy() {
           from { opacity: 0; transform: translateY(28px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes bodyClockScroll {
-          0%, 100% { transform: translateY(0); opacity: 0.62; }
-          50% { transform: translateY(8px); opacity: 1; }
-        }
         @keyframes watchFlowFrameIn {
           from { opacity: 0.42; transform: scale(0.975); }
           to { opacity: 1; transform: scale(1); }
         }
-        @keyframes principleStateIn {
-          from { opacity: 0.18; transform: scale(0.975); }
-          to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes principleHintArrow {
+        @keyframes principleCarouselCue {
           0%, 100% { transform: translateX(0); opacity: 0.45; }
-          50% { transform: translateX(5px); opacity: 0.9; }
+          50% { transform: translateX(7px); opacity: 0.9; }
         }
         @keyframes heroBubblePulse {
           0%, 100% { opacity: 0.62; }
           50% { opacity: 1; }
         }
         .body-clock-reveal { animation: bodyClockReveal 720ms ease-out both; }
-        .body-clock-scroll { animation: bodyClockScroll 1.8s ease-in-out infinite; }
         .watch-flow-frame { animation: watchFlowFrameIn 360ms ease-out both; }
-        .principle-watch-state { animation: principleStateIn 360ms ease-out both; }
-        .principle-hint-arrow { animation: principleHintArrow 1.6s ease-in-out infinite; }
+        .principle-carousel-cue { animation: principleCarouselCue 1.6s ease-in-out infinite; }
+        .principle-carousel {
+          --principle-card-width: min(78vw, 420px);
+          gap: clamp(12px, 4vw, 56px);
+          padding-inline: calc((100% - var(--principle-card-width)) / 2);
+          scrollbar-width: none;
+          overscroll-behavior-x: contain;
+          touch-action: pan-x pan-y;
+        }
+        .principle-carousel::-webkit-scrollbar { display: none; }
+        .principle-carousel-item { width: var(--principle-card-width); }
+        .principle-carousel.is-dragging {
+          cursor: grabbing;
+          scroll-snap-type: none;
+          user-select: none;
+        }
+        @media (min-width: 768px) {
+          .principle-carousel { --principle-card-width: min(46vw, 400px); }
+        }
+        @media (min-width: 1024px) {
+          .principle-carousel { --principle-card-width: min(34vw, 420px); }
+        }
         .hero-bubble-pulse { animation: heroBubblePulse 2.8s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
-          .watch-flow-frame, .principle-watch-state, .principle-hint-arrow, .hero-bubble-pulse { animation: none; }
+          .watch-flow-frame, .principle-carousel-cue, .hero-bubble-pulse { animation: none; }
         }
       `}</style>
 
@@ -726,13 +987,6 @@ export function BodyClockCaseStudy() {
               We designed the watch-native interface layer that made AI intent, timing, confidence and user control visible on a 46mm wearable surface.
             </p>
           </div>
-          <a href="#brief" className="body-clock-scroll group absolute bottom-4 grid justify-items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.34em] text-white/60 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none">
-            Scroll
-            <span className="relative block h-11 w-5" aria-hidden="true">
-              <span className="absolute left-1/2 top-0 h-9 w-px -translate-x-1/2 bg-white/70 transition-colors group-hover:bg-white" />
-              <span className="absolute bottom-1 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rotate-45 border-b border-r border-white/70 transition-colors group-hover:border-white" />
-            </span>
-          </a>
         </div>
       </section>
 
@@ -765,7 +1019,7 @@ export function BodyClockCaseStudy() {
 
       <section id="brief" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.015),transparent_34%,rgba(0,0,0,0.18))]" />
-        <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-16">
+        <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-12 md:gap-16">
           <div className="grid gap-5">
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.34em] text-white/25">
               The Brief
@@ -886,98 +1140,115 @@ export function BodyClockCaseStudy() {
             </h2>
           </div>
 
-          <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-20">
-            <div className="order-1 lg:order-2">
-              <PrincipleWatch
-                label={activePrinciple.title}
-                accent={activePrinciple.accent}
-                index={principleIndex}
-                total={principles.length}
-              />
+          <div className="grid gap-7">
+            <div className="flex items-center justify-between gap-5">
+              <div className="flex items-center gap-4">
+                <p className="flex items-center gap-3 font-mono text-[11px] font-medium tracking-[0.08em] text-white/46 md:text-[12px]">
+                  Swipe or drag to explore
+                  <span className="principle-carousel-cue inline-flex items-center gap-0.5 text-white/60" aria-hidden="true">
+                    <span>←</span>
+                    <span>→</span>
+                  </span>
+                </p>
+                <span className="hidden h-px w-10 bg-white/10 sm:block" aria-hidden="true" />
+                <p className="hidden font-mono text-[11px] font-semibold tracking-[0.22em] text-white/38 sm:block">
+                  {String(principleIndex + 1).padStart(2, "0")} / {String(principles.length).padStart(2, "0")}
+                </p>
+              </div>
+
+              <div className="hidden items-center gap-2 md:flex">
+                <button
+                  type="button"
+                  onClick={() => movePrincipleCarousel(-1)}
+                  aria-label="Previous principle"
+                  className="grid h-10 w-10 place-items-center rounded-full text-white/46 transition hover:bg-white/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/55"
+                >
+                  <ChevronLeft size={19} strokeWidth={1.6} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => movePrincipleCarousel(1)}
+                  aria-label="Next principle"
+                  className="grid h-10 w-10 place-items-center rounded-full text-white/46 transition hover:bg-white/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/55"
+                >
+                  <ChevronRight size={19} strokeWidth={1.6} />
+                </button>
+              </div>
             </div>
 
-            <div className="order-2 grid lg:order-1">
-              <p className="mb-4 flex items-center gap-2 font-mono text-[11px] font-medium tracking-[0.08em] text-white/46 md:text-[12px]">
-                Click to explore each principle
-                <span className="principle-hint-arrow inline-block text-white/60" aria-hidden="true">→</span>
-              </p>
-              {principles.map((principle, index) => {
-                const isActive = principleIndex === index;
-                const chipBackground =
-                  principle.title === "Intent-first"
-                    ? "#FFFFFF"
-                    : principle.title === "Glanceable"
-                      ? "#34f5a6"
-                      : principle.accent;
+            <div
+              ref={principleCarouselRef}
+              role="region"
+              aria-label="AI-native watch face design principles"
+              aria-roledescription="carousel"
+              tabIndex={0}
+              onScroll={handlePrincipleScroll}
+              onKeyDown={(event) => {
+                if (event.key === "ArrowLeft") {
+                  event.preventDefault();
+                  movePrincipleCarousel(-1);
+                } else if (event.key === "ArrowRight") {
+                  event.preventDefault();
+                  movePrincipleCarousel(1);
+                }
+              }}
+              onPointerDown={(event) => {
+                if (event.pointerType !== "mouse" || event.button !== 0) {
+                  return;
+                }
 
-                return (
-                  <button
-                    key={principle.title}
-                    type="button"
-                    onClick={() => handlePrincipleSelect(index)}
-                    aria-pressed={isActive}
-                    className={`group grid w-full cursor-pointer rounded-r-[18px] text-left outline-none transition-[background-color,box-shadow] duration-[250ms] focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-white/55 ${
-                      isActive ? "" : "hover:bg-white/[0.035]"
-                    }`}
-                    style={{
-                      backgroundColor: isActive ? `${principle.accent}0c` : undefined,
-                    }}
-                  >
-                    <div
-                      className="grid min-h-[88px] grid-cols-[48px_minmax(0,1fr)_44px] items-start gap-3 border-t px-4 py-5 transition-[border-color] duration-[250ms] md:min-h-[98px] md:grid-cols-[68px_1fr_48px] md:gap-6 md:px-5 md:py-6"
-                      style={{
-                        borderColor: isActive ? principle.accent : "rgba(255,255,255,0.08)",
-                      }}
-                    >
-                      <span
-                        className="pt-1 font-mono text-[13px] font-semibold tracking-[0.18em] transition-colors duration-[250ms] group-hover:text-white/70"
-                        style={{ color: isActive ? principle.accent : "rgba(255,255,255,0.4)" }}
-                      >
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
+                const carousel = principleCarouselRef.current;
 
-                      <div className="grid gap-3">
-                        <h3
-                          className={`text-[28px] font-normal leading-tight tracking-[-0.035em] text-white transition-[transform,opacity] duration-[250ms] ease-out group-hover:translate-x-2 md:text-[36px] ${
-                            isActive ? "opacity-100" : "opacity-[0.62] group-hover:opacity-100"
-                          }`}
-                        >
-                          {principle.title}
-                        </h3>
-                        <div
-                          className="overflow-hidden transition-[max-height,opacity] duration-500 ease-out"
-                          style={{
-                            maxHeight: isActive ? "160px" : "0px",
-                            opacity: isActive ? 1 : 0,
-                          }}
-                        >
-                          <p className="max-w-[620px] pb-2 text-[17px] leading-relaxed text-white/52 md:text-[19px]">
-                            {principle.body}
-                          </p>
-                        </div>
-                      </div>
+                if (!carousel) {
+                  return;
+                }
 
-                      <span className="flex items-center justify-end gap-3 pt-2" aria-hidden="true">
-                        <span
-                          className="h-2.5 w-2.5 rounded-full transition-[transform,opacity,box-shadow] duration-[250ms] group-hover:scale-125 group-hover:opacity-100"
-                          style={{
-                            backgroundColor: chipBackground,
-                            opacity: isActive ? 1 : 0.55,
-                            transform: isActive ? "scale(1.28)" : undefined,
-                            boxShadow: isActive ? `0 0 22px ${principle.accent}` : "none",
-                          }}
-                        />
-                        <span
-                          className="translate-x-1 font-mono text-[18px] leading-none text-white opacity-0 transition-[transform,opacity] duration-[250ms] group-hover:translate-x-0 group-hover:opacity-80"
-                          style={{ opacity: isActive ? 0.9 : undefined, transform: isActive ? "translateX(0)" : undefined }}
-                        >
-                          →
-                        </span>
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
+                principleDragRef.current = {
+                  active: true,
+                  startX: event.clientX,
+                  startScrollLeft: carousel.scrollLeft,
+                };
+                setIsPrincipleDragging(true);
+                carousel.setPointerCapture(event.pointerId);
+              }}
+              onPointerMove={(event) => {
+                const carousel = principleCarouselRef.current;
+                const drag = principleDragRef.current;
+
+                if (!carousel || !drag.active) {
+                  return;
+                }
+
+                carousel.scrollLeft = drag.startScrollLeft - (event.clientX - drag.startX);
+              }}
+              onPointerUp={(event) => {
+                const carousel = principleCarouselRef.current;
+
+                principleDragRef.current.active = false;
+                setIsPrincipleDragging(false);
+
+                if (carousel?.hasPointerCapture(event.pointerId)) {
+                  carousel.releasePointerCapture(event.pointerId);
+                }
+
+              }}
+              onPointerCancel={() => {
+                principleDragRef.current.active = false;
+                setIsPrincipleDragging(false);
+              }}
+              className={`principle-carousel -mx-5 flex cursor-grab snap-x snap-mandatory overflow-x-auto overflow-y-hidden py-6 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-white/20 md:-mx-10 md:py-8 ${
+                isPrincipleDragging ? "is-dragging" : ""
+              }`}
+            >
+              {loopingPrinciples.map(({ principleIndex: itemIndex, virtualIndex, ...principle }) => (
+                <PrincipleCarouselItem
+                  key={`${principle.title}-${virtualIndex}`}
+                  principle={principle}
+                  principleIndex={itemIndex}
+                  virtualIndex={virtualIndex}
+                  isActive={principleCarouselIndex === virtualIndex}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -985,7 +1256,7 @@ export function BodyClockCaseStudy() {
 
       <section id="architecture" className="relative overflow-hidden bg-[#02040a] px-5 py-24 text-white md:px-10 lg:py-32">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(116,214,255,0.07),transparent_34%),radial-gradient(circle_at_28%_64%,rgba(52,245,166,0.055),transparent_30%)]" />
-        <div className="relative z-10 mx-auto grid w-full max-w-[1280px] items-start gap-14 xl:grid-cols-[minmax(340px,0.35fr)_minmax(0,0.65fr)] xl:gap-14">
+        <div className="relative z-10 mx-auto grid w-full max-w-[1280px] items-start gap-14 xl:grid-cols-[minmax(340px,0.35fr)_minmax(0,0.65fr)] xl:items-stretch xl:gap-14">
           <div className="grid gap-10">
             <div className="grid gap-6">
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.34em] text-white/25">
@@ -1030,17 +1301,8 @@ export function BodyClockCaseStudy() {
             </p>
           </div>
 
-          <div className="relative w-full max-w-[620px] justify-self-start overflow-hidden border-y border-white/[0.08] py-4 xl:mt-[303px] xl:max-w-none xl:justify-self-stretch">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(116,214,255,0.10),transparent_48%)]" />
-            <div className="relative aspect-[8924/7714] w-full overflow-hidden bg-white">
-              <Image
-                src="/projects/generative-watch-face/architecture/ifs-pipeline.jpg"
-                alt="IFS Pipeline overview"
-                fill
-                sizes="(max-width: 1023px) calc(100vw - 40px), 65vw"
-                className="object-contain"
-              />
-            </div>
+          <div className="relative w-full max-w-[680px] justify-self-start xl:flex xl:h-full xl:max-w-none xl:items-center xl:justify-self-stretch">
+            <PublicPipelineDiagram />
           </div>
         </div>
       </section>

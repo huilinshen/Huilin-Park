@@ -30,22 +30,54 @@ export default function AboutPage() {
   return (
     <main className="editorial-about">
       <header className="editorial-about-nav">
-        <Link href="/" className="editorial-brand" aria-label="Back to Huilin Park homepage">
-          Huilin Park
-        </Link>
-        <Link href="/" className="editorial-back-link">
-          Back to park
+        <Link
+          href="/"
+          className="group inline-flex min-h-16 w-fit items-center gap-4 text-[18px] font-black text-black/45 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-black focus-visible:text-black md:text-[22px] xl:text-[28px]"
+          aria-label="Back to Huilin Park homepage"
+        >
+          <span className="opacity-55 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+            <Image
+              className="h-12 w-12 min-w-12 object-contain"
+              src="/assets/huilin-park-mark.png"
+              alt=""
+              width={48}
+              height={48}
+              priority
+            />
+          </span>
+          <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[320px] group-hover:opacity-100 group-focus-visible:max-w-[320px] group-focus-visible:opacity-100">
+            Back to Huilin Park
+          </span>
         </Link>
       </header>
 
-      <section className="editorial-hero" aria-labelledby="about-hero-title">
+      <section
+        className="editorial-hero"
+        aria-labelledby="about-hero-title"
+        style={{ width: "min(1380px, calc(100% - 2.5rem))" }}
+      >
         <div className="hero-editorial-copy">
           <p className="section-label">Welcome Plaza / About</p>
           <h1 id="about-hero-title">Meet Huilin</h1>
-          <p>
+          <p className="hero-intro">
             A Product & UX Designer in London working across AI-native products, future
             interaction concepts and thoughtful digital experiences.
           </p>
+          <a
+            className="hero-cv-link"
+            href="/assets/Huilin-Shen-CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: "#20b6bd",
+              borderBottom: "2px solid #20b6bd",
+            }}
+          >
+            <span>VIEW MY CV</span>
+            <span className="hero-cv-link-icon" aria-hidden="true">
+              ↗
+            </span>
+          </a>
         </div>
 
         <div className="hero-polaroid-feature" aria-label="Interactive Polaroid camera">
@@ -53,25 +85,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="about-quote-section" aria-labelledby="philosophy-title">
-        <div className="quote-meta">
-          <p className="section-label">01 / Philosophy</p>
-        </div>
-        <h2 id="philosophy-title" className="belief-title">
-          I believe AI should make technology feel more human, not more complicated.
-        </h2>
-        <figure className="fastpass-graphic" aria-hidden="true">
-          <Image
-            src="/about/fastpass.png"
-            alt=""
-            fill
-            sizes="(max-width: 980px) 72vw, 34vw"
-          />
-        </figure>
-      </section>
-
       <section className="editorial-section about-profile-section" aria-labelledby="about-title">
-        <p className="section-label">02 / About</p>
+        <p className="section-label">01 / About</p>
 
         <div className="profile-layout">
           <figure className="about-image-frame">
@@ -85,55 +100,46 @@ export default function AboutPage() {
 
           <div className="about-copy-column">
             <div className="editorial-section-heading">
-              <h2 id="about-title">Designing between people, technology and business.</h2>
+              <h2 id="about-title">Designing across disciplines.</h2>
             </div>
 
             <article className="editorial-copy">
               <p>
-                I enjoy turning early ideas into products that people can actually use. My
-                work sits between user needs, emerging technology and business goals, with
-                a strong interest in AI-native product design.
+                During my year at Huawei R&amp;D Innovation Labs, I worked on AI wearables,
+                future interaction concepts and design systems. The fast-paced environment
+                taught me to learn quickly, prototype ideas and turn complex systems into
+                experiences people can understand.
               </p>
               <p>
-                During my year at Huawei R&amp;D Innovation Labs (May 2025-June 2026), I
-                designed AI wearables, future interaction concepts and design systems.
-                Working in a fast-paced innovation environment taught me to learn quickly,
-                prototype rapidly, and turn complex ideas into products that people can
-                actually use.
-              </p>
-              <p>
-                My background combines traditional industrial design with digital product
-                design, so I&apos;m comfortable moving between research, UX, UI,
-                prototyping, visual design and 3D. Recently, I&apos;ve also been embracing
-                AI tools and vibe coding to prototype ideas faster and iterate products in
-                entirely new ways.
-              </p>
-              <p>
-                For me, good design isn&apos;t just about making things look beautiful. It
-                should solve real problems, create value for users, and help businesses
-                build better products.
+                My background combines industrial and digital product design, so I&apos;m
+                comfortable moving between research, UX, UI, visual design and 3D. I also
+                use AI tools and AI-assisted prototyping to explore ideas and iterate
+                faster.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <section className="editorial-section beyond-section" aria-labelledby="beyond-title">
+      <section
+        className="editorial-section beyond-section"
+        aria-labelledby="beyond-title"
+        style={{ width: "min(1380px, calc(100% - 2.5rem))" }}
+      >
         <article className="editorial-copy beyond-copy">
-          <p className="section-label">03 / Beyond Design</p>
-          <h2 id="beyond-title">Conversation is part of the craft.</h2>
+          <p className="section-label">02 / Beyond Design</p>
+          <h2 id="beyond-title">More than a designer</h2>
           <p>
             Outside of design, I&apos;m also a certified Level 3 Personal Trainer in the
             UK.
           </p>
           <p>
-            Coaching has reinforced something I already believed: great products&mdash;and
-            great relationships&mdash;both start with understanding people.
+            Coaching has taught me that both good products and good relationships start
+            with understanding people.
           </p>
           <p>
-            I enjoy building genuine, long-term relationships rather than one-off
-            conversations. Whether it&apos;s discussing AI, product design, fitness, or
-            simply exchanging ideas, I&apos;m always happy to meet new people over coffee.
+            I enjoy sharing ideas and meeting new people, whether we&apos;re talking about
+            design, AI, fitness, or everyday life.
           </p>
         </article>
 
@@ -147,9 +153,13 @@ export default function AboutPage() {
         </figure>
       </section>
 
-      <section className="editorial-section currently-editorial-section" aria-labelledby="currently-title">
+      <section
+        className="editorial-section currently-editorial-section"
+        aria-labelledby="currently-title"
+        style={{ width: "min(1380px, calc(100% - 2.5rem))" }}
+      >
         <div className="editorial-section-heading">
-          <p className="section-label">04 / Currently</p>
+          <p className="section-label">03 / Currently</p>
           <h2 id="currently-title">Current coordinates</h2>
         </div>
 
@@ -174,9 +184,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="connect-editorial-section" aria-labelledby="connect-title">
+      <section
+        className="connect-editorial-section"
+        aria-labelledby="connect-title"
+        style={{ width: "min(1380px, calc(100% - 2.5rem))" }}
+      >
         <div className="connect-copy">
-          <p className="section-label">05 / Let&apos;s Connect</p>
+          <p className="section-label">04 / Let&apos;s Connect</p>
           <h2 id="connect-title">Say Hello.</h2>
           <p>
             If you&apos;re working on AI, product design, future technology, or simply

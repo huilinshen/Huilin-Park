@@ -32,8 +32,8 @@ const internshipCopy = {
         ["Location", "Shanghai"],
       ],
       outcome: "Within six months of launch, Qingxiang Oolong Tea became Suntory’s No.1 new product by GMV.",
-      roleNote: "Brand Research · User Research · Opportunity Definition · Packaging Design",
-      navMetadata: "Brand Research · User Research · Opportunity Definition · Packaging Design",
+      roleNote: "Brand Research · User Research · Packaging Design",
+      navMetadata: "Brand Research · User Research · Packaging Design",
       futureSections: ["Project Brief", "The Challenge", "Target Audience", "My Contribution", "Impact"],
     },
     {
@@ -119,10 +119,24 @@ function SuntoryProjectChapter() {
               </p>
             </div>
 
-            <div className="grid gap-2 border-y border-black/[0.08] py-6 font-mono text-[11px] font-semibold uppercase leading-relaxed tracking-[0.14em] text-black/38 md:text-[12px]">
-              <p>Illuminera, Shanghai · Design Intern, Consumer &amp; Big Health (CBH)</p>
-              <p>Brand Research · User Research · Opportunity Definition · Packaging Design</p>
-            </div>
+            <dl className="grid gap-x-8 gap-y-6 border-y border-black/[0.08] py-7 sm:grid-cols-2">
+              {[
+                ["Role", "UI/UX Design Intern"],
+                ["Timeline", "Jan 2023 — Jun 2023"],
+                ["Location", "Shanghai"],
+                [
+                  "Scope",
+                  "Brand Research · User Research · Packaging Design",
+                ],
+              ].map(([label, value]) => (
+                <div key={label} className="grid content-start gap-2">
+                  <dt className={sectionLabelClass}>{label}</dt>
+                  <dd className="text-[16px] leading-relaxed text-black/58 md:text-[17px]">
+                    {value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
 
             <div className="grid max-w-[640px] gap-5">
               <p className={sectionLabelClass}>Project Brief</p>

@@ -2039,26 +2039,9 @@ a {
   color: var(--ea-navy);
 }
 
-.editorial-brand,
 .editorial-back-link {
   color: inherit;
   font-weight: 700;
-}
-
-.editorial-brand {
-  font-size: 1rem;
-  letter-spacing: 0.02em;
-}
-
-.editorial-brand::before {
-  display: inline-block;
-  width: 0.75rem;
-  height: 0.75rem;
-  margin-right: 0.6rem;
-  border-radius: 50%;
-  background: var(--ea-orange);
-  box-shadow: 0.55rem 0 0 var(--ea-turquoise), 1.1rem 0 0 var(--ea-coral);
-  content: "";
 }
 
 .editorial-back-link {
@@ -2573,13 +2556,12 @@ a {
 
 .editorial-hero {
   display: grid;
-  min-height: calc(100svh - 5.5rem);
   grid-template-columns: minmax(18rem, 0.36fr) minmax(38rem, 0.64fr);
   align-items: start;
   gap: clamp(2rem, 4.5vw, 4.5rem);
   width: min(1440px, calc(100% - 2.5rem));
-  margin: 0 auto;
-  padding: clamp(1.3rem, 3vw, 3.2rem) 0 clamp(2rem, 3.8vw, 4rem);
+  margin: 0 auto clamp(3rem, 5vw, 5rem);
+  padding: clamp(1.3rem, 3vw, 3.2rem) 0 clamp(2.5rem, 5vw, 4.5rem);
 }
 
 .section-label {
@@ -2601,12 +2583,49 @@ a {
   line-height: 0.88;
 }
 
-.hero-editorial-copy p:last-child {
+.hero-editorial-copy .hero-intro {
   max-width: 28rem;
   margin-top: 1.7rem;
   color: var(--ea-muted-navy);
   font-size: clamp(1.05rem, 1.35vw, 1.24rem);
   line-height: 1.65;
+}
+
+.hero-cv-link {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: max-content;
+  margin-top: clamp(1.25rem, 1.6vw, 1.75rem);
+  padding-bottom: 0.1rem;
+  border-bottom: 2px solid currentColor;
+  color: var(--ea-turquoise);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: normal;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero-cv-link-icon {
+  flex: none;
+  color: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  transition: transform 180ms ease;
+}
+
+.hero-cv-link:hover .hero-cv-link-icon {
+  transform: translate(0.16rem, -0.12rem);
+}
+
+.hero-cv-link:focus-visible {
+  border-radius: 0.2rem;
+  outline: 2px solid var(--ea-terracotta);
+  outline-offset: 0.35rem;
 }
 
 .hero-polaroid-feature {
@@ -2833,7 +2852,12 @@ a {
 }
 
 .about-quote-section,
-.editorial-section,
+.editorial-section {
+  width: min(1240px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+}
+
 .connect-editorial-section {
   width: min(1240px, calc(100% - 2.5rem));
   margin: 0 auto;
@@ -3131,7 +3155,7 @@ a {
   order: 2;
   aspect-ratio: 1448 / 1086;
   width: min(100%, 850px);
-  margin: 0;
+  margin: 0 0 0 auto;
   overflow: hidden;
   background: var(--ea-cream);
   box-shadow: 0 30px 80px rgba(27, 34, 48, 0.12);
@@ -3222,6 +3246,7 @@ a {
   max-width: 26rem;
   margin-top: 0;
   margin-bottom: clamp(2rem, 3.2vw, 3rem);
+  padding-top: clamp(1.25rem, 1.8vw, 1.75rem);
   font-size: clamp(2.625rem, 4vw, 4rem);
   line-height: 0.95;
 }
@@ -3509,6 +3534,14 @@ a {
 }
 
 @media (max-width: 640px) {
+  .editorial-hero {
+    margin-bottom: 2rem;
+  }
+
+  .hero-cv-link {
+    margin-top: 1.25rem;
+  }
+
   .editorial-about-nav {
     display: grid;
     justify-content: start;
@@ -3573,7 +3606,7 @@ a {
     font-size: clamp(3.7rem, 18vw, 5.8rem);
   }
 
-  .hero-editorial-copy p:last-child {
+  .hero-editorial-copy .hero-intro {
     max-width: 21rem;
   }
 

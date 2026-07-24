@@ -324,20 +324,27 @@ function PrincipleCarouselItem({
   principleIndex,
   virtualIndex,
   isActive,
+  onSelect,
 }: {
   principle: (typeof principles)[number];
   principleIndex: number;
   virtualIndex: number;
   isActive: boolean;
+  onSelect: (virtualIndex: number) => void;
 }) {
   return (
     <article
       data-carousel-index={virtualIndex}
       aria-hidden={!isActive}
+      onClick={() => {
+        if (!isActive) {
+          onSelect(virtualIndex);
+        }
+      }}
       className={`principle-carousel-item relative grid shrink-0 snap-center justify-items-center content-start text-center transition-[opacity,transform,filter] duration-500 ease-out ${
         isActive
-          ? "z-10 scale-100 opacity-100 blur-0"
-          : "scale-[0.84] opacity-35 blur-[0.35px] md:scale-[0.82]"
+          ? "z-10 scale-100 cursor-default opacity-100 blur-0"
+          : "cursor-pointer scale-[0.84] opacity-35 blur-[0.35px] hover:opacity-55 md:scale-[0.82]"
       }`}
     >
       <div
@@ -711,10 +718,8 @@ export function BodyClockCaseStudy() {
   const principleCarouselRef = useRef<HTMLDivElement | null>(null);
   const principleScrollFrameRef = useRef<number | null>(null);
   const principleSettleTimerRef = useRef<number | null>(null);
-  const principleDragRef = useRef({ active: false, startX: 0, startScrollLeft: 0 });
   const principleCarouselIndexRef = useRef(principles.length);
   const [principleCarouselIndex, setPrincipleCarouselIndex] = useState(principles.length);
-  const [isPrincipleDragging, setIsPrincipleDragging] = useState(false);
   const [activeChapter, setActiveChapter] = useState("hero");
   const [openChallengeIndexes, setOpenChallengeIndexes] = useState<Set<number>>(
     () => new Set(challenges.map((_, index) => index)),
@@ -907,17 +912,12 @@ export function BodyClockCaseStudy() {
           from { opacity: 0.42; transform: scale(0.975); }
           to { opacity: 1; transform: scale(1); }
         }
-        @keyframes principleCarouselCue {
-          0%, 100% { transform: translateX(0); opacity: 0.45; }
-          50% { transform: translateX(7px); opacity: 0.9; }
-        }
         @keyframes heroBubblePulse {
           0%, 100% { opacity: 0.62; }
           50% { opacity: 1; }
         }
         .body-clock-reveal { animation: bodyClockReveal 720ms ease-out both; }
         .watch-flow-frame { animation: watchFlowFrameIn 360ms ease-out both; }
-        .principle-carousel-cue { animation: principleCarouselCue 1.6s ease-in-out infinite; }
         .principle-carousel {
           --principle-card-width: min(78vw, 420px);
           gap: clamp(12px, 4vw, 56px);
@@ -928,11 +928,6 @@ export function BodyClockCaseStudy() {
         }
         .principle-carousel::-webkit-scrollbar { display: none; }
         .principle-carousel-item { width: var(--principle-card-width); }
-        .principle-carousel.is-dragging {
-          cursor: grabbing;
-          scroll-snap-type: none;
-          user-select: none;
-        }
         @media (min-width: 768px) {
           .principle-carousel { --principle-card-width: min(46vw, 400px); }
         }
@@ -941,7 +936,7 @@ export function BodyClockCaseStudy() {
         }
         .hero-bubble-pulse { animation: heroBubblePulse 2.8s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
-          .watch-flow-frame, .principle-carousel-cue, .hero-bubble-pulse { animation: none; }
+          .watch-flow-frame, .hero-bubble-pulse { animation: none; }
         }
       `}</style>
 
@@ -1143,16 +1138,8 @@ export function BodyClockCaseStudy() {
           <div className="grid gap-7">
             <div className="flex items-center justify-between gap-5">
               <div className="flex items-center gap-4">
-                <p className="flex items-center gap-3 font-mono text-[11px] font-medium tracking-[0.08em] text-white/46 md:text-[12px]">
-                  Swipe or drag to explore
-                  <span className="principle-carousel-cue inline-flex items-center gap-0.5 text-white/60" aria-hidden="true">
-                    <span>←</span>
-                    <span>→</span>
-                  </span>
-                </p>
-                <span className="hidden h-px w-10 bg-white/10 sm:block" aria-hidden="true" />
-                <p className="hidden font-mono text-[11px] font-semibold tracking-[0.22em] text-white/38 sm:block">
-                  {String(principleIndex + 1).padStart(2, "0")} / {String(principles.length).padStart(2, "0")}
+                <p className="flex items-center gap-3 font-mono text-[11px] font-medium tracking-[0.06em] text-white/62 md:text-[12px]">
+                  Click the left or right watch face to explore
                 </p>
               </div>
 
@@ -1161,17 +1148,17 @@ export function BodyClockCaseStudy() {
                   type="button"
                   onClick={() => movePrincipleCarousel(-1)}
                   aria-label="Previous principle"
-                  className="grid h-10 w-10 place-items-center rounded-full text-white/46 transition hover:bg-white/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/55"
+                  className="grid h-12 w-12 place-items-center rounded-full border border-white/[0.09] bg-white/[0.035] text-white/70 transition hover:border-white/20 hover:bg-white/[0.09] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/55"
                 >
-                  <ChevronLeft size={19} strokeWidth={1.6} />
+                  <ChevronLeft size={25} strokeWidth={1.8} />
                 </button>
                 <button
                   type="button"
                   onClick={() => movePrincipleCarousel(1)}
                   aria-label="Next principle"
-                  className="grid h-10 w-10 place-items-center rounded-full text-white/46 transition hover:bg-white/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/55"
+                  className="grid h-12 w-12 place-items-center rounded-full border border-white/[0.09] bg-white/[0.035] text-white/70 transition hover:border-white/20 hover:bg-white/[0.09] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/55"
                 >
-                  <ChevronRight size={19} strokeWidth={1.6} />
+                  <ChevronRight size={25} strokeWidth={1.8} />
                 </button>
               </div>
             </div>
@@ -1192,53 +1179,7 @@ export function BodyClockCaseStudy() {
                   movePrincipleCarousel(1);
                 }
               }}
-              onPointerDown={(event) => {
-                if (event.pointerType !== "mouse" || event.button !== 0) {
-                  return;
-                }
-
-                const carousel = principleCarouselRef.current;
-
-                if (!carousel) {
-                  return;
-                }
-
-                principleDragRef.current = {
-                  active: true,
-                  startX: event.clientX,
-                  startScrollLeft: carousel.scrollLeft,
-                };
-                setIsPrincipleDragging(true);
-                carousel.setPointerCapture(event.pointerId);
-              }}
-              onPointerMove={(event) => {
-                const carousel = principleCarouselRef.current;
-                const drag = principleDragRef.current;
-
-                if (!carousel || !drag.active) {
-                  return;
-                }
-
-                carousel.scrollLeft = drag.startScrollLeft - (event.clientX - drag.startX);
-              }}
-              onPointerUp={(event) => {
-                const carousel = principleCarouselRef.current;
-
-                principleDragRef.current.active = false;
-                setIsPrincipleDragging(false);
-
-                if (carousel?.hasPointerCapture(event.pointerId)) {
-                  carousel.releasePointerCapture(event.pointerId);
-                }
-
-              }}
-              onPointerCancel={() => {
-                principleDragRef.current.active = false;
-                setIsPrincipleDragging(false);
-              }}
-              className={`principle-carousel -mx-5 flex cursor-grab snap-x snap-mandatory overflow-x-auto overflow-y-hidden py-6 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-white/20 md:-mx-10 md:py-8 ${
-                isPrincipleDragging ? "is-dragging" : ""
-              }`}
+              className="principle-carousel -mx-5 flex select-none snap-x snap-mandatory overflow-x-auto overflow-y-hidden py-6 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-white/20 md:-mx-10 md:py-8"
             >
               {loopingPrinciples.map(({ principleIndex: itemIndex, virtualIndex, ...principle }) => (
                 <PrincipleCarouselItem
@@ -1247,6 +1188,7 @@ export function BodyClockCaseStudy() {
                   principleIndex={itemIndex}
                   virtualIndex={virtualIndex}
                   isActive={principleCarouselIndex === virtualIndex}
+                  onSelect={centrePrincipleItem}
                 />
               ))}
             </div>
